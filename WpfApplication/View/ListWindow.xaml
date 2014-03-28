@@ -1,0 +1,15 @@
+﻿<Window x:Class="WpfApplication.View.ListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        DataContext="{Binding ListeWindowVM, Source={StaticResource Locator}}"
+        Title="ListWindow" Height="300" Width="300">
+    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <ListBox ItemsSource="{Binding ListeClients}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Button Height="24" Width="100" Content="Qui suis-je ?" Command="{Binding Source={StaticResource Locator}, Path=ListeClientsVM.QuiSuisJeCommand}" CommandParameter="{Binding}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

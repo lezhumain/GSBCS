@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BDD_SIO7ModelStoreContainer" CdmEntityContainer="BDD_SIO7Entities">
+    <EntitySetMapping Name="ACTIVITE_COMPLEMENTAIRE">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.ACTIVITE_COMPLEMENTAIRE">
+        <MappingFragment StoreEntitySet="ACTIVITE_COMPLEMENTAIRE">
+          <ScalarProperty Name="num_act" ColumnName="num_act" />
+          <ScalarProperty Name="matricule_col_act" ColumnName="matricule_col_act" />
+          <ScalarProperty Name="theme_act" ColumnName="theme_act" />
+          <ScalarProperty Name="montant_act" ColumnName="montant_act" />
+          <ScalarProperty Name="date_act" ColumnName="date_act" />
+          <ScalarProperty Name="lieu_act" ColumnName="lieu_act" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CALENDRIER">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.CALENDRIER">
+        <MappingFragment StoreEntitySet="CALENDRIER">
+          <ScalarProperty Name="JJMMAAAA_DEB" ColumnName="JJMMAAAA_DEB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COLLABORATEUR">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.COLLABORATEUR">
+        <MappingFragment StoreEntitySet="COLLABORATEUR">
+          <ScalarProperty Name="matricule_col" ColumnName="matricule_col" />
+          <ScalarProperty Name="nom_col" ColumnName="nom_col" />
+          <ScalarProperty Name="prenom_col" ColumnName="prenom_col" />
+          <ScalarProperty Name="adresse_col" ColumnName="adresse_col" />
+          <ScalarProperty Name="cp_col" ColumnName="cp_col" />
+          <ScalarProperty Name="mdp_col" ColumnName="mdp_col" />
+          <ScalarProperty Name="date_embauche" ColumnName="date_embauche" />
+          <ScalarProperty Name="ville_col" ColumnName="ville_col" />
+          <ScalarProperty Name="salt_col" ColumnName="salt_col" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COMMUNE">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.COMMUNE">
+        <MappingFragment StoreEntitySet="COMMUNE">
+          <ScalarProperty Name="code_commune" ColumnName="code_commune" />
+          <ScalarProperty Name="code_dep" ColumnName="code_dep" />
+          <ScalarProperty Name="libelle_commun" ColumnName="libelle_commun" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COMPOSANT">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.COMPOSANT">
+        <MappingFragment StoreEntitySet="COMPOSANT">
+          <ScalarProperty Name="code_comp" ColumnName="code_comp" />
+          <ScalarProperty Name="libelle_comp" ColumnName="libelle_comp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATE">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.DATE">
+        <MappingFragment StoreEntitySet="DATE">
+          <ScalarProperty Name="JJMMAAAA" ColumnName="JJMMAAAA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DEPARTEMENT">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.DEPARTEMENT">
+        <MappingFragment StoreEntitySet="DEPARTEMENT">
+          <ScalarProperty Name="code_dep" ColumnName="code_dep" />
+          <ScalarProperty Name="code_region" ColumnName="code_region" />
+          <ScalarProperty Name="libelle_dep" ColumnName="libelle_dep" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DIRECTEUR_REGIONAL">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.DIRECTEUR_REGIONAL">
+        <MappingFragment StoreEntitySet="DIRECTEUR_REGIONAL">
+          <ScalarProperty Name="matricule_col_dir" ColumnName="matricule_col_dir" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DOSAGE">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.DOSAGE">
+        <MappingFragment StoreEntitySet="DOSAGE">
+          <ScalarProperty Name="code_dosage" ColumnName="code_dosage" />
+          <ScalarProperty Name="unite_dosage" ColumnName="unite_dosage" />
+          <ScalarProperty Name="quantite_dosage" ColumnName="quantite_dosage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ETRE_RESPONSABLE">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.ETRE_RESPONSABLE">
+        <MappingFragment StoreEntitySet="ETRE_RESPONSABLE">
+          <ScalarProperty Name="matricule_col_etr" ColumnName="matricule_col_etr" />
+          <ScalarProperty Name="code_secteur" ColumnName="code_secteur" />
+          <ScalarProperty Name="JJMMAAAA_FIN" ColumnName="JJMMAAAA_FIN" />
+          <ScalarProperty Name="JJMMAAAA_DEB" ColumnName="JJMMAAAA_DEB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FAMILLE">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.FAMILLE">
+        <MappingFragment StoreEntitySet="FAMILLE">
+          <ScalarProperty Name="code_famille" ColumnName="code_famille" />
+          <ScalarProperty Name="libelle_famille" ColumnName="libelle_famille" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FICHE_FRAIS">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.FICHE_FRAIS">
+        <MappingFragment StoreEntitySet="FICHE_FRAIS">
+          <ScalarProperty Name="ff_mois" ColumnName="ff_mois" />
+          <ScalarProperty Name="matricule_col_fic" ColumnName="matricule_col_fic" />
+          <ScalarProperty Name="ff_NBHorsClassif" ColumnName="ff_NBHorsClassif" />
+          <ScalarProperty Name="ff_MontantHorsClassif" ColumnName="ff_MontantHorsClassif" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GERE">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.GERE">
+        <MappingFragment StoreEntitySet="GERE">
+          <ScalarProperty Name="matricule_col_ger" ColumnName="matricule_col_ger" />
+          <ScalarProperty Name="code_region" ColumnName="code_region" />
+          <ScalarProperty Name="JJMMAAAA_FIN" ColumnName="JJMMAAAA_FIN" />
+          <ScalarProperty Name="JJMMAAAA_DEB" ColumnName="JJMMAAAA_DEB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MEDICAMENT">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.MEDICAMENT">
+        <MappingFragment StoreEntitySet="MEDICAMENT">
+          <ScalarProperty Name="depot_legal" ColumnName="depot_legal" />
+          <ScalarProperty Name="code_famille" ColumnName="code_famille" />
+          <ScalarProperty Name="code_present" ColumnName="code_present" />
+          <ScalarProperty Name="composition" ColumnName="composition" />
+          <ScalarProperty Name="effet" ColumnName="effet" />
+          <ScalarProperty Name="contreindic" ColumnName="contreindic" />
+          <ScalarProperty Name="prixechantillon" ColumnName="prixechantillon" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MOTIF">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.MOTIF">
+        <MappingFragment StoreEntitySet="MOTIF">
+          <ScalarProperty Name="code_motif" ColumnName="code_motif" />
+          <ScalarProperty Name="libelle_motif" ColumnName="libelle_motif" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRATICIEN">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.PRATICIEN">
+        <MappingFragment StoreEntitySet="PRATICIEN">
+          <ScalarProperty Name="matricule_praticien" ColumnName="matricule_praticien" />
+          <ScalarProperty Name="code_type" ColumnName="code_type" />
+          <ScalarProperty Name="prenom_praticien" ColumnName="prenom_praticien" />
+          <ScalarProperty Name="nom_praticien" ColumnName="nom_praticien" />
+          <ScalarProperty Name="adresse_praticien" ColumnName="adresse_praticien" />
+          <ScalarProperty Name="cp_praticien" ColumnName="cp_praticien" />
+          <ScalarProperty Name="ville_praticien" ColumnName="ville_praticien" />
+          <ScalarProperty Name="coefnotoriete_praticien" ColumnName="coefnotoriete_praticien" />
+          <ScalarProperty Name="titulaire_praticien" ColumnName="titulaire_praticien" />
+          <ScalarProperty Name="numTel" ColumnName="numTel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRESCRIRE">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.PRESCRIRE">
+        <MappingFragment StoreEntitySet="PRESCRIRE">
+          <ScalarProperty Name="depot_legal_prescr" ColumnName="depot_legal_prescr" />
+          <ScalarProperty Name="code_dosage" ColumnName="code_dosage" />
+          <ScalarProperty Name="code_individu" ColumnName="code_individu" />
+          <ScalarProperty Name="posologie" ColumnName="posologie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRESENTATION">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.PRESENTATION">
+        <MappingFragment StoreEntitySet="PRESENTATION">
+          <ScalarProperty Name="code_present" ColumnName="code_present" />
+          <ScalarProperty Name="libelle_present" ColumnName="libelle_present" />
+          <ScalarProperty Name="depot_legal_present" ColumnName="depot_legal_present" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RAPPORT_DE_VISITE">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.RAPPORT_DE_VISITE">
+        <MappingFragment StoreEntitySet="RAPPORT_DE_VISITE">
+          <ScalarProperty Name="num_rapport" ColumnName="num_rapport" />
+          <ScalarProperty Name="code_motif" ColumnName="code_motif" />
+          <ScalarProperty Name="matricule_praticien" ColumnName="matricule_praticien" />
+          <ScalarProperty Name="date_rapport" ColumnName="date_rapport" />
+          <ScalarProperty Name="date_visite" ColumnName="date_visite" />
+          <ScalarProperty Name="bilan_visite" ColumnName="bilan_visite" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="REGION">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.REGION">
+        <MappingFragment StoreEntitySet="REGION">
+          <ScalarProperty Name="code_region" ColumnName="code_region" />
+          <ScalarProperty Name="code_secteur" ColumnName="code_secteur" />
+          <ScalarProperty Name="nom_region" ColumnName="nom_region" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="REMPLACE">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.REMPLACE">
+        <MappingFragment StoreEntitySet="REMPLACE">
+          <ScalarProperty Name="matricule_praticien_remplace" ColumnName="matricule_praticien_remplace" />
+          <ScalarProperty Name="matricule_praticien_remplacant" ColumnName="matricule_praticien_remplacant" />
+          <ScalarProperty Name="JJMMAAAA" ColumnName="JJMMAAAA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RESPONSABLE_DE_SECTEUR">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.RESPONSABLE_DE_SECTEUR">
+        <MappingFragment StoreEntitySet="RESPONSABLE_DE_SECTEUR">
+          <ScalarProperty Name="matricule_col_res" ColumnName="matricule_col_res" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SECTEUR">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.SECTEUR">
+        <MappingFragment StoreEntitySet="SECTEUR">
+          <ScalarProperty Name="code_secteur" ColumnName="code_secteur" />
+          <ScalarProperty Name="libelle_secteur" ColumnName="libelle_secteur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SPECIALITE">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.SPECIALITE">
+        <MappingFragment StoreEntitySet="SPECIALITE">
+          <ScalarProperty Name="code_spec" ColumnName="code_spec" />
+          <ScalarProperty Name="libelle_spec" ColumnName="libelle_spec" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TYPE_FRAIS">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.TYPE_FRAIS">
+        <MappingFragment StoreEntitySet="TYPE_FRAIS">
+          <ScalarProperty Name="tf_Code" ColumnName="tf_Code" />
+          <ScalarProperty Name="tf_libelle" ColumnName="tf_libelle" />
+          <ScalarProperty Name="tf_forfait" ColumnName="tf_forfait" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TYPE_INDIVIDU">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.TYPE_INDIVIDU">
+        <MappingFragment StoreEntitySet="TYPE_INDIVIDU">
+          <ScalarProperty Name="code_individu" ColumnName="code_individu" />
+          <ScalarProperty Name="libelle_individu" ColumnName="libelle_individu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TYPE_PRATICIEN">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.TYPE_PRATICIEN">
+        <MappingFragment StoreEntitySet="TYPE_PRATICIEN">
+          <ScalarProperty Name="code_type" ColumnName="code_type" />
+          <ScalarProperty Name="type_lieu" ColumnName="type_lieu" />
+          <ScalarProperty Name="libelle_type" ColumnName="libelle_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VISITEUR">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.VISITEUR">
+        <MappingFragment StoreEntitySet="VISITEUR">
+          <ScalarProperty Name="matricule_col_vis" ColumnName="matricule_col_vis" />
+          <ScalarProperty Name="code_region" ColumnName="code_region" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="avoir" TypeName="BDD_SIO7Model.avoir" StoreEntitySet="avoir">
+      <EndProperty Name="MEDICAMENT">
+        <ScalarProperty Name="depot_legal" ColumnName="depot_legal_avoir" />
+      </EndProperty>
+      <EndProperty Name="COLLABORATEUR">
+        <ScalarProperty Name="matricule_col" ColumnName="matricule_col_avo" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="constituer" TypeName="BDD_SIO7Model.constituer" StoreEntitySet="constituer">
+      <EndProperty Name="MEDICAMENT">
+        <ScalarProperty Name="depot_legal" ColumnName="depot_legal_constituer" />
+      </EndProperty>
+      <EndProperty Name="COMPOSANT">
+        <ScalarProperty Name="code_comp" ColumnName="code_comp" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="inclure" TypeName="BDD_SIO7Model.inclure" StoreEntitySet="inclure">
+      <EndProperty Name="TYPE_FRAIS">
+        <ScalarProperty Name="tf_Code" ColumnName="tf_Code" />
+      </EndProperty>
+      <EndProperty Name="FICHE_FRAIS">
+        <ScalarProperty Name="ff_mois" ColumnName="ff_mois" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="offre" TypeName="BDD_SIO7Model.offre" StoreEntitySet="offre">
+      <EndProperty Name="RAPPORT_DE_VISITE">
+        <ScalarProperty Name="num_rapport" ColumnName="num_rapport_offre" />
+      </EndProperty>
+      <EndProperty Name="MEDICAMENT">
+        <ScalarProperty Name="depot_legal" ColumnName="depot_legal_offre" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="organise" TypeName="BDD_SIO7Model.organise" StoreEntitySet="organise">
+      <EndProperty Name="COLLABORATEUR">
+        <ScalarProperty Name="matricule_col" ColumnName="matricule_col_org" />
+      </EndProperty>
+      <EndProperty Name="ACTIVITE_COMPLEMENTAIRE">
+        <ScalarProperty Name="num_act" ColumnName="num_act" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="participe" TypeName="BDD_SIO7Model.participe" StoreEntitySet="participe">
+      <EndProperty Name="ACTIVITE_COMPLEMENTAIRE">
+        <ScalarProperty Name="num_act" ColumnName="num_act" />
+      </EndProperty>
+      <EndProperty Name="PRATICIEN">
+        <ScalarProperty Name="matricule_praticien" ColumnName="matricule_praticien" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="perturbe" TypeName="BDD_SIO7Model.perturbe" StoreEntitySet="perturbe">
+      <EndProperty Name="MEDICAMENT">
+        <ScalarProperty Name="depot_legal" ColumnName="depot_legal_perturbant" />
+      </EndProperty>
+      <EndProperty Name="MEDICAMENT1">
+        <ScalarProperty Name="depot_legal" ColumnName="depot_legal_perturbe" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="posseder" TypeName="BDD_SIO7Model.posseder" StoreEntitySet="posseder">
+      <EndProperty Name="PRATICIEN">
+        <ScalarProperty Name="matricule_praticien" ColumnName="matricule_praticien" />
+      </EndProperty>
+      <EndProperty Name="SPECIALITE">
+        <ScalarProperty Name="code_spec" ColumnName="code_spec" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="presente" TypeName="BDD_SIO7Model.presente" StoreEntitySet="presente">
+      <EndProperty Name="MEDICAMENT">
+        <ScalarProperty Name="depot_legal" ColumnName="depot_legal_pres" />
+      </EndProperty>
+      <EndProperty Name="RAPPORT_DE_VISITE">
+        <ScalarProperty Name="num_rapport" ColumnName="num_rapport_presente" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

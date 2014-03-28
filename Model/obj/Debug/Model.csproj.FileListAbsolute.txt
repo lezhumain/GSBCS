@@ -1,0 +1,9 @@
+c:\users\dju\documents\visual studio 2012\Projects\PPE\PPE3\Model\bin\Debug\Model.dll.config
+c:\users\dju\documents\visual studio 2012\Projects\PPE\PPE3\Model\bin\Debug\Model.dll
+c:\users\dju\documents\visual studio 2012\Projects\PPE\PPE3\Model\bin\Debug\Model.pdb
+c:\users\dju\documents\visual studio 2012\Projects\PPE\PPE3\Model\bin\Debug\EntityFramework.dll
+c:\users\dju\documents\visual studio 2012\Projects\PPE\PPE3\Model\bin\Debug\EntityFramework.xml
+c:\users\dju\documents\visual studio 2012\Projects\PPE\PPE3\Model\bin\Debug\fr\EntityFramework.resources.dll
+c:\users\dju\documents\visual studio 2012\Projects\PPE\PPE3\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+c:\users\dju\documents\visual studio 2012\Projects\PPE\PPE3\Model\obj\Debug\Model.dll
+c:\users\dju\documents\visual studio 2012\Projects\PPE\PPE3\Model\obj\Debug\Model.pdb

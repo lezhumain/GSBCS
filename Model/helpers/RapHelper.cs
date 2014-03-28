@@ -1,0 +1,119 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Model.helpers
+{
+    public class RapHelper
+    {
+        // region Fields
+        private BDD_SIO7Entities _db;
+        // endregion
+
+        // region Thread-safe, lazy Singleton
+        /// <summary>
+        /// This is a thread-safe, lazy singleton. See
+        /// http://www.yoda.arachsys.com/csharp/singleton.html
+        /// for more details about its implementation.
+        /// </summary>
+        public static RapHelper Current
+        {
+            get{ return Nested.rapHelper; }
+        }
+        
+        class Nested
+        {
+            // Explicit static constructor to tell C# compiler
+            // not to mark type as beforefieldinit
+            static Nested()
+            {
+            }
+            internal static readonly RapHelper rapHelper = new RapHelper();
+        }
+        // endregion
+        
+        // region Constructeur
+        public RapHelper()
+        {
+               
+        }
+        // endregion
+        // region Fonctions publiques utiles
+        public List<COLLABORATEUR> GetList()
+		{
+            using (_db =  new BDD_SIO7Entities())
+		    {
+                return _db.COLLABORATEUR.ToList();
+            }
+        }
+
+        public void Insert(COLLABORATEUR rapport)
+		{
+            using (_db = new BDD_SIO7Entities())
+    		{
+                _db.AddToCOLLABORATEUR(rapport);
+                _db.SaveChanges();
+            }
+        }
+
+        public void Update(COLLABORATEUR rapport)
+		{
+            using (_db = new BDD_SIO7Entities())
+            {
+                _db.COLLABORATEUR.Attach(rapport);
+                _db.ObjectStateManager.ChangeObjectState(rapport, System.Data.EntityState.Modified);
+                _db.SaveChanges();
+            }
+            /*
+            using (_db = new BDD_SIO7Entities())
+			{
+                _db.Refresh(System.Data.Objects.RefreshMode.StoreWins, rapport);
+                _db.SaveChanges();
+            }
+            */
+        }
+
+        public void Delete(COLLABORATEUR rapport)
+		{
+            using (_db = new BDD_SIO7Entities())
+		    {
+                _db.DeleteObject(rapport);
+                _db.SaveChanges();
+            }
+        }
+        /*
+        public void DeleteCascade(COLLABORATEUR rapport)
+        {
+            using (_db = new BDD_SIO7Entities())
+	        {
+		        _db.COLLABORATEUR.Attach(rapport);
+
+		        //cascade
+                List<COLLABORATEURCertifies> pc = rapport.COLLABORATEURCertifie.ToList();
+		        foreach(COLLABORATEURCertifie pp in pc)
+		        {
+			        _db.DeleteObject(pp)
+		        }
+                
+		        _db.DeleteObject(rapport);
+		        _db.SaveChanges();
+	        }
+        }
+        
+        public getItemFromId(int id)
+        {
+	        using(_db = new BDDContext())
+	        {
+		        return 	(from profils in _db.Profil
+				        where profils.id == id
+				        select profils).FirstOnDefault(); 
+	        }
+        }
+        */
+
+
+        // endregion
+      }
+}

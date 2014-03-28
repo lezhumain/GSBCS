@@ -1,0 +1,1 @@
+http://dotnetnews.fr/design-pattern-mvvm

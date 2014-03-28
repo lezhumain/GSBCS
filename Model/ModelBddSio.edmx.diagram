@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c749b9850c6b47f0a5e2b04a95396fff" Name="Diagramme1" ZoomLevel="74">
+        <EntityTypeShape EntityType="BDD_SIO7Model.ACTIVITE_COMPLEMENTAIRE" Width="1.5" PointX="14.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.CALENDRIER" Width="1.5" PointX="16.875" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.COLLABORATEUR" Width="1.5" PointX="12.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.COMMUNE" Width="1.5" PointX="20" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.COMPOSANT" Width="1.5" PointX="12.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.DATE" Width="1.5" PointX="5.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.DEPARTEMENT" Width="1.5" PointX="17.75" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.DIRECTEUR_REGIONAL" Width="1.5" PointX="14.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.DOSAGE" Width="1.5" PointX="15.25" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.ETRE_RESPONSABLE" Width="1.5" PointX="17.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.FAMILLE" Width="1.5" PointX="8" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.FICHE_FRAIS" Width="1.5" PointX="12.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.GERE" Width="1.5" PointX="14.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.MEDICAMENT" Width="1.5" PointX="10.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.MOTIF" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.PRATICIEN" Width="1.5" PointX="2.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.PRESCRIRE" Width="1.5" PointX="17.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.PRESENTATION" Width="1.5" PointX="8" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.RAPPORT_DE_VISITE" Width="1.5" PointX="5" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.REGION" Width="1.5" PointX="15.5" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.REMPLACE" Width="1.5" PointX="8" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.RESPONSABLE_DE_SECTEUR" Width="1.5" PointX="14.75" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.SECTEUR" Width="1.5" PointX="15.5" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.SPECIALITE" Width="1.5" PointX="5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.TYPE_FRAIS" Width="1.5" PointX="14.75" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.TYPE_INDIVIDU" Width="1.5" PointX="15.25" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.TYPE_PRATICIEN" Width="1.5" PointX="0.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.VISITEUR" Width="1.5" PointX="17.75" PointY="9.5" IsExpanded="true" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_A6C0FC196CB7C209" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_2087271E8602054F" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_DFED7A7A8602054F" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_1386290DBAE9ED05" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_2087271E875E4B76" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_707672BD79F04D5D" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_88961BF411550AD5" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_D56F317910C4B9C1" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_DFED7A7AD703BC08" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_DDA72FF41030639A" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_92BF0EDE94E879DC" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_4C75C98B70E4A9D4" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_905658D261B89203" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_2087271EB8E26183" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_91036F051CD4B68F" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_DFED7A7A70E4A9D4" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_905658D21C5F7A71" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_91036F05C51BEA8B" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_72BDCB1B6B866EF7" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_4958393CBA353DE8" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_72BDCB1BD3000B9" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_92BF0EDE4509622E" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_92BF0EDE8A7617B8" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_905658D2A76557E5" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_88961BF470E4A9D4" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_FF9A36F0B8E26183" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.avoir" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.constituer" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.inclure" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.offre" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.organise" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.participe" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.perturbe" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.posseder" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.presente" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

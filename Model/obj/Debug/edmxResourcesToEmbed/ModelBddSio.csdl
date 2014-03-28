@@ -1,0 +1,847 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BDD_SIO7Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BDD_SIO7Entities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="ACTIVITE_COMPLEMENTAIRE" EntityType="BDD_SIO7Model.ACTIVITE_COMPLEMENTAIRE" />
+    <EntitySet Name="CALENDRIER" EntityType="BDD_SIO7Model.CALENDRIER" />
+    <EntitySet Name="COLLABORATEUR" EntityType="BDD_SIO7Model.COLLABORATEUR" />
+    <EntitySet Name="COMMUNE" EntityType="BDD_SIO7Model.COMMUNE" />
+    <EntitySet Name="COMPOSANT" EntityType="BDD_SIO7Model.COMPOSANT" />
+    <EntitySet Name="DATE" EntityType="BDD_SIO7Model.DATE" />
+    <EntitySet Name="DEPARTEMENT" EntityType="BDD_SIO7Model.DEPARTEMENT" />
+    <EntitySet Name="DIRECTEUR_REGIONAL" EntityType="BDD_SIO7Model.DIRECTEUR_REGIONAL" />
+    <EntitySet Name="DOSAGE" EntityType="BDD_SIO7Model.DOSAGE" />
+    <EntitySet Name="ETRE_RESPONSABLE" EntityType="BDD_SIO7Model.ETRE_RESPONSABLE" />
+    <EntitySet Name="FAMILLE" EntityType="BDD_SIO7Model.FAMILLE" />
+    <EntitySet Name="FICHE_FRAIS" EntityType="BDD_SIO7Model.FICHE_FRAIS" />
+    <EntitySet Name="GERE" EntityType="BDD_SIO7Model.GERE" />
+    <EntitySet Name="MEDICAMENT" EntityType="BDD_SIO7Model.MEDICAMENT" />
+    <EntitySet Name="MOTIF" EntityType="BDD_SIO7Model.MOTIF" />
+    <EntitySet Name="PRATICIEN" EntityType="BDD_SIO7Model.PRATICIEN" />
+    <EntitySet Name="PRESCRIRE" EntityType="BDD_SIO7Model.PRESCRIRE" />
+    <EntitySet Name="PRESENTATION" EntityType="BDD_SIO7Model.PRESENTATION" />
+    <EntitySet Name="RAPPORT_DE_VISITE" EntityType="BDD_SIO7Model.RAPPORT_DE_VISITE" />
+    <EntitySet Name="REGION" EntityType="BDD_SIO7Model.REGION" />
+    <EntitySet Name="REMPLACE" EntityType="BDD_SIO7Model.REMPLACE" />
+    <EntitySet Name="RESPONSABLE_DE_SECTEUR" EntityType="BDD_SIO7Model.RESPONSABLE_DE_SECTEUR" />
+    <EntitySet Name="SECTEUR" EntityType="BDD_SIO7Model.SECTEUR" />
+    <EntitySet Name="SPECIALITE" EntityType="BDD_SIO7Model.SPECIALITE" />
+    <EntitySet Name="sysdiagrams" EntityType="BDD_SIO7Model.sysdiagrams" />
+    <EntitySet Name="TYPE_FRAIS" EntityType="BDD_SIO7Model.TYPE_FRAIS" />
+    <EntitySet Name="TYPE_INDIVIDU" EntityType="BDD_SIO7Model.TYPE_INDIVIDU" />
+    <EntitySet Name="TYPE_PRATICIEN" EntityType="BDD_SIO7Model.TYPE_PRATICIEN" />
+    <EntitySet Name="VISITEUR" EntityType="BDD_SIO7Model.VISITEUR" />
+    <AssociationSet Name="FK_A6C0FC196CB7C209" Association="BDD_SIO7Model.FK_A6C0FC196CB7C209">
+      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
+      <End Role="ACTIVITE_COMPLEMENTAIRE" EntitySet="ACTIVITE_COMPLEMENTAIRE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_2087271E8602054F" Association="BDD_SIO7Model.FK_2087271E8602054F">
+      <End Role="CALENDRIER" EntitySet="CALENDRIER" />
+      <End Role="ETRE_RESPONSABLE" EntitySet="ETRE_RESPONSABLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DFED7A7A8602054F" Association="BDD_SIO7Model.FK_DFED7A7A8602054F">
+      <End Role="CALENDRIER" EntitySet="CALENDRIER" />
+      <End Role="GERE" EntitySet="GERE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_1386290DBAE9ED05" Association="BDD_SIO7Model.FK_1386290DBAE9ED05">
+      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
+      <End Role="RESPONSABLE_DE_SECTEUR" EntitySet="RESPONSABLE_DE_SECTEUR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_2087271E875E4B76" Association="BDD_SIO7Model.FK_2087271E875E4B76">
+      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
+      <End Role="ETRE_RESPONSABLE" EntitySet="ETRE_RESPONSABLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_707672BD79F04D5D" Association="BDD_SIO7Model.FK_707672BD79F04D5D">
+      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
+      <End Role="DIRECTEUR_REGIONAL" EntitySet="DIRECTEUR_REGIONAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_88961BF411550AD5" Association="BDD_SIO7Model.FK_88961BF411550AD5">
+      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
+      <End Role="VISITEUR" EntitySet="VISITEUR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_D56F317910C4B9C1" Association="BDD_SIO7Model.FK_D56F317910C4B9C1">
+      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
+      <End Role="FICHE_FRAIS" EntitySet="FICHE_FRAIS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DFED7A7AD703BC08" Association="BDD_SIO7Model.FK_DFED7A7AD703BC08">
+      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
+      <End Role="GERE" EntitySet="GERE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DDA72FF41030639A" Association="BDD_SIO7Model.FK_DDA72FF41030639A">
+      <End Role="DEPARTEMENT" EntitySet="DEPARTEMENT" />
+      <End Role="COMMUNE" EntitySet="COMMUNE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_92BF0EDE94E879DC" Association="BDD_SIO7Model.FK_92BF0EDE94E879DC">
+      <End Role="DATE" EntitySet="DATE" />
+      <End Role="REMPLACE" EntitySet="REMPLACE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_4C75C98B70E4A9D4" Association="BDD_SIO7Model.FK_4C75C98B70E4A9D4">
+      <End Role="REGION" EntitySet="REGION" />
+      <End Role="DEPARTEMENT" EntitySet="DEPARTEMENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_905658D261B89203" Association="BDD_SIO7Model.FK_905658D261B89203">
+      <End Role="DOSAGE" EntitySet="DOSAGE" />
+      <End Role="PRESCRIRE" EntitySet="PRESCRIRE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_2087271EB8E26183" Association="BDD_SIO7Model.FK_2087271EB8E26183">
+      <End Role="SECTEUR" EntitySet="SECTEUR" />
+      <End Role="ETRE_RESPONSABLE" EntitySet="ETRE_RESPONSABLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_91036F051CD4B68F" Association="BDD_SIO7Model.FK_91036F051CD4B68F">
+      <End Role="FAMILLE" EntitySet="FAMILLE" />
+      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DFED7A7A70E4A9D4" Association="BDD_SIO7Model.FK_DFED7A7A70E4A9D4">
+      <End Role="REGION" EntitySet="REGION" />
+      <End Role="GERE" EntitySet="GERE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_905658D21C5F7A71" Association="BDD_SIO7Model.FK_905658D21C5F7A71">
+      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+      <End Role="PRESCRIRE" EntitySet="PRESCRIRE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_91036F05C51BEA8B" Association="BDD_SIO7Model.FK_91036F05C51BEA8B">
+      <End Role="PRESENTATION" EntitySet="PRESENTATION" />
+      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_72BDCB1B6B866EF7" Association="BDD_SIO7Model.FK_72BDCB1B6B866EF7">
+      <End Role="MOTIF" EntitySet="MOTIF" />
+      <End Role="RAPPORT_DE_VISITE" EntitySet="RAPPORT_DE_VISITE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_4958393CBA353DE8" Association="BDD_SIO7Model.FK_4958393CBA353DE8">
+      <End Role="TYPE_PRATICIEN" EntitySet="TYPE_PRATICIEN" />
+      <End Role="PRATICIEN" EntitySet="PRATICIEN" />
+    </AssociationSet>
+    <AssociationSet Name="FK_72BDCB1BD3000B9" Association="BDD_SIO7Model.FK_72BDCB1BD3000B9">
+      <End Role="PRATICIEN" EntitySet="PRATICIEN" />
+      <End Role="RAPPORT_DE_VISITE" EntitySet="RAPPORT_DE_VISITE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_92BF0EDE4509622E" Association="BDD_SIO7Model.FK_92BF0EDE4509622E">
+      <End Role="PRATICIEN" EntitySet="PRATICIEN" />
+      <End Role="REMPLACE" EntitySet="REMPLACE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_92BF0EDE8A7617B8" Association="BDD_SIO7Model.FK_92BF0EDE8A7617B8">
+      <End Role="PRATICIEN" EntitySet="PRATICIEN" />
+      <End Role="REMPLACE" EntitySet="REMPLACE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_905658D2A76557E5" Association="BDD_SIO7Model.FK_905658D2A76557E5">
+      <End Role="TYPE_INDIVIDU" EntitySet="TYPE_INDIVIDU" />
+      <End Role="PRESCRIRE" EntitySet="PRESCRIRE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_88961BF470E4A9D4" Association="BDD_SIO7Model.FK_88961BF470E4A9D4">
+      <End Role="REGION" EntitySet="REGION" />
+      <End Role="VISITEUR" EntitySet="VISITEUR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FF9A36F0B8E26183" Association="BDD_SIO7Model.FK_FF9A36F0B8E26183">
+      <End Role="SECTEUR" EntitySet="SECTEUR" />
+      <End Role="REGION" EntitySet="REGION" />
+    </AssociationSet>
+    <AssociationSet Name="avoir" Association="BDD_SIO7Model.avoir">
+      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
+    </AssociationSet>
+    <AssociationSet Name="constituer" Association="BDD_SIO7Model.constituer">
+      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+      <End Role="COMPOSANT" EntitySet="COMPOSANT" />
+    </AssociationSet>
+    <AssociationSet Name="inclure" Association="BDD_SIO7Model.inclure">
+      <End Role="TYPE_FRAIS" EntitySet="TYPE_FRAIS" />
+      <End Role="FICHE_FRAIS" EntitySet="FICHE_FRAIS" />
+    </AssociationSet>
+    <AssociationSet Name="offre" Association="BDD_SIO7Model.offre">
+      <End Role="RAPPORT_DE_VISITE" EntitySet="RAPPORT_DE_VISITE" />
+      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+    </AssociationSet>
+    <AssociationSet Name="organise" Association="BDD_SIO7Model.organise">
+      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
+      <End Role="ACTIVITE_COMPLEMENTAIRE" EntitySet="ACTIVITE_COMPLEMENTAIRE" />
+    </AssociationSet>
+    <AssociationSet Name="participe" Association="BDD_SIO7Model.participe">
+      <End Role="ACTIVITE_COMPLEMENTAIRE" EntitySet="ACTIVITE_COMPLEMENTAIRE" />
+      <End Role="PRATICIEN" EntitySet="PRATICIEN" />
+    </AssociationSet>
+    <AssociationSet Name="perturbe" Association="BDD_SIO7Model.perturbe">
+      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+      <End Role="MEDICAMENT1" EntitySet="MEDICAMENT" />
+    </AssociationSet>
+    <AssociationSet Name="posseder" Association="BDD_SIO7Model.posseder">
+      <End Role="PRATICIEN" EntitySet="PRATICIEN" />
+      <End Role="SPECIALITE" EntitySet="SPECIALITE" />
+    </AssociationSet>
+    <AssociationSet Name="presente" Association="BDD_SIO7Model.presente">
+      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+      <End Role="RAPPORT_DE_VISITE" EntitySet="RAPPORT_DE_VISITE" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ACTIVITE_COMPLEMENTAIRE">
+    <Key>
+      <PropertyRef Name="num_act" />
+    </Key>
+    <Property Name="num_act" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="matricule_col_act" Type="Int32" />
+    <Property Name="theme_act" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="montant_act" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+    <Property Name="date_act" Type="DateTime" Nullable="false" Precision="6" />
+    <Property Name="lieu_act" Type="String" Nullable="false" MaxLength="300" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="COLLABORATEUR" Relationship="BDD_SIO7Model.FK_A6C0FC196CB7C209" FromRole="ACTIVITE_COMPLEMENTAIRE" ToRole="COLLABORATEUR" />
+    <NavigationProperty Name="COLLABORATEUR1" Relationship="BDD_SIO7Model.organise" FromRole="ACTIVITE_COMPLEMENTAIRE" ToRole="COLLABORATEUR" />
+    <NavigationProperty Name="PRATICIEN" Relationship="BDD_SIO7Model.participe" FromRole="ACTIVITE_COMPLEMENTAIRE" ToRole="PRATICIEN" />
+  </EntityType>
+  <EntityType Name="CALENDRIER">
+    <Key>
+      <PropertyRef Name="JJMMAAAA_DEB" />
+    </Key>
+    <Property Name="JJMMAAAA_DEB" Type="DateTime" Nullable="false" Precision="6" />
+    <NavigationProperty Name="ETRE_RESPONSABLE" Relationship="BDD_SIO7Model.FK_2087271E8602054F" FromRole="CALENDRIER" ToRole="ETRE_RESPONSABLE" />
+    <NavigationProperty Name="GERE" Relationship="BDD_SIO7Model.FK_DFED7A7A8602054F" FromRole="CALENDRIER" ToRole="GERE" />
+  </EntityType>
+  <EntityType Name="COLLABORATEUR">
+    <Key>
+      <PropertyRef Name="matricule_col" />
+    </Key>
+    <Property Name="matricule_col" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="nom_col" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+    <Property Name="prenom_col" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+    <Property Name="adresse_col" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="cp_col" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="mdp_col" Type="String" Nullable="false" MaxLength="350" Unicode="true" FixedLength="false" />
+    <Property Name="date_embauche" Type="DateTime" Nullable="false" Precision="6" />
+    <Property Name="ville_col" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="salt_col" Type="String" MaxLength="350" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="ACTIVITE_COMPLEMENTAIRE" Relationship="BDD_SIO7Model.FK_A6C0FC196CB7C209" FromRole="COLLABORATEUR" ToRole="ACTIVITE_COMPLEMENTAIRE" />
+    <NavigationProperty Name="RESPONSABLE_DE_SECTEUR" Relationship="BDD_SIO7Model.FK_1386290DBAE9ED05" FromRole="COLLABORATEUR" ToRole="RESPONSABLE_DE_SECTEUR" />
+    <NavigationProperty Name="ETRE_RESPONSABLE" Relationship="BDD_SIO7Model.FK_2087271E875E4B76" FromRole="COLLABORATEUR" ToRole="ETRE_RESPONSABLE" />
+    <NavigationProperty Name="DIRECTEUR_REGIONAL" Relationship="BDD_SIO7Model.FK_707672BD79F04D5D" FromRole="COLLABORATEUR" ToRole="DIRECTEUR_REGIONAL" />
+    <NavigationProperty Name="VISITEUR" Relationship="BDD_SIO7Model.FK_88961BF411550AD5" FromRole="COLLABORATEUR" ToRole="VISITEUR" />
+    <NavigationProperty Name="FICHE_FRAIS" Relationship="BDD_SIO7Model.FK_D56F317910C4B9C1" FromRole="COLLABORATEUR" ToRole="FICHE_FRAIS" />
+    <NavigationProperty Name="GERE" Relationship="BDD_SIO7Model.FK_DFED7A7AD703BC08" FromRole="COLLABORATEUR" ToRole="GERE" />
+    <NavigationProperty Name="MEDICAMENT" Relationship="BDD_SIO7Model.avoir" FromRole="COLLABORATEUR" ToRole="MEDICAMENT" />
+    <NavigationProperty Name="ACTIVITE_COMPLEMENTAIRE1" Relationship="BDD_SIO7Model.organise" FromRole="COLLABORATEUR" ToRole="ACTIVITE_COMPLEMENTAIRE" />
+  </EntityType>
+  <EntityType Name="COMMUNE">
+    <Key>
+      <PropertyRef Name="code_commune" />
+    </Key>
+    <Property Name="code_commune" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+    <Property Name="code_dep" Type="String" MaxLength="4" Unicode="true" FixedLength="false" />
+    <Property Name="libelle_commun" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="DEPARTEMENT" Relationship="BDD_SIO7Model.FK_DDA72FF41030639A" FromRole="COMMUNE" ToRole="DEPARTEMENT" />
+  </EntityType>
+  <EntityType Name="COMPOSANT">
+    <Key>
+      <PropertyRef Name="code_comp" />
+    </Key>
+    <Property Name="code_comp" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="libelle_comp" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="MEDICAMENT" Relationship="BDD_SIO7Model.constituer" FromRole="COMPOSANT" ToRole="MEDICAMENT" />
+  </EntityType>
+  <EntityType Name="DATE">
+    <Key>
+      <PropertyRef Name="JJMMAAAA" />
+    </Key>
+    <Property Name="JJMMAAAA" Type="DateTime" Nullable="false" Precision="6" />
+    <NavigationProperty Name="REMPLACE" Relationship="BDD_SIO7Model.FK_92BF0EDE94E879DC" FromRole="DATE" ToRole="REMPLACE" />
+  </EntityType>
+  <EntityType Name="DEPARTEMENT">
+    <Key>
+      <PropertyRef Name="code_dep" />
+    </Key>
+    <Property Name="code_dep" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="false" />
+    <Property Name="code_region" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="libelle_dep" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="COMMUNE" Relationship="BDD_SIO7Model.FK_DDA72FF41030639A" FromRole="DEPARTEMENT" ToRole="COMMUNE" />
+    <NavigationProperty Name="REGION" Relationship="BDD_SIO7Model.FK_4C75C98B70E4A9D4" FromRole="DEPARTEMENT" ToRole="REGION" />
+  </EntityType>
+  <EntityType Name="DIRECTEUR_REGIONAL">
+    <Key>
+      <PropertyRef Name="matricule_col_dir" />
+    </Key>
+    <Property Name="matricule_col_dir" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="COLLABORATEUR" Relationship="BDD_SIO7Model.FK_707672BD79F04D5D" FromRole="DIRECTEUR_REGIONAL" ToRole="COLLABORATEUR" />
+  </EntityType>
+  <EntityType Name="DOSAGE">
+    <Key>
+      <PropertyRef Name="code_dosage" />
+    </Key>
+    <Property Name="code_dosage" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="unite_dosage" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+    <Property Name="quantite_dosage" Type="Double" Nullable="false" />
+    <NavigationProperty Name="PRESCRIRE" Relationship="BDD_SIO7Model.FK_905658D261B89203" FromRole="DOSAGE" ToRole="PRESCRIRE" />
+  </EntityType>
+  <EntityType Name="ETRE_RESPONSABLE">
+    <Key>
+      <PropertyRef Name="matricule_col_etr" />
+      <PropertyRef Name="code_secteur" />
+      <PropertyRef Name="JJMMAAAA_DEB" />
+    </Key>
+    <Property Name="matricule_col_etr" Type="Int32" Nullable="false" />
+    <Property Name="code_secteur" Type="String" Nullable="false" MaxLength="1" Unicode="true" FixedLength="false" />
+    <Property Name="JJMMAAAA_FIN" Type="DateTime" Nullable="false" Precision="6" />
+    <Property Name="JJMMAAAA_DEB" Type="DateTime" Nullable="false" Precision="6" />
+    <NavigationProperty Name="CALENDRIER" Relationship="BDD_SIO7Model.FK_2087271E8602054F" FromRole="ETRE_RESPONSABLE" ToRole="CALENDRIER" />
+    <NavigationProperty Name="COLLABORATEUR" Relationship="BDD_SIO7Model.FK_2087271E875E4B76" FromRole="ETRE_RESPONSABLE" ToRole="COLLABORATEUR" />
+    <NavigationProperty Name="SECTEUR" Relationship="BDD_SIO7Model.FK_2087271EB8E26183" FromRole="ETRE_RESPONSABLE" ToRole="SECTEUR" />
+  </EntityType>
+  <EntityType Name="FAMILLE">
+    <Key>
+      <PropertyRef Name="code_famille" />
+    </Key>
+    <Property Name="code_famille" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="libelle_famille" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="MEDICAMENT" Relationship="BDD_SIO7Model.FK_91036F051CD4B68F" FromRole="FAMILLE" ToRole="MEDICAMENT" />
+  </EntityType>
+  <EntityType Name="FICHE_FRAIS">
+    <Key>
+      <PropertyRef Name="ff_mois" />
+    </Key>
+    <Property Name="ff_mois" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+    <Property Name="matricule_col_fic" Type="Int32" />
+    <Property Name="ff_NBHorsClassif" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+    <Property Name="ff_MontantHorsClassif" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="COLLABORATEUR" Relationship="BDD_SIO7Model.FK_D56F317910C4B9C1" FromRole="FICHE_FRAIS" ToRole="COLLABORATEUR" />
+    <NavigationProperty Name="TYPE_FRAIS" Relationship="BDD_SIO7Model.inclure" FromRole="FICHE_FRAIS" ToRole="TYPE_FRAIS" />
+  </EntityType>
+  <EntityType Name="GERE">
+    <Key>
+      <PropertyRef Name="matricule_col_ger" />
+      <PropertyRef Name="code_region" />
+      <PropertyRef Name="JJMMAAAA_DEB" />
+    </Key>
+    <Property Name="matricule_col_ger" Type="Int32" Nullable="false" />
+    <Property Name="code_region" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="JJMMAAAA_FIN" Type="DateTime" Nullable="false" Precision="6" />
+    <Property Name="JJMMAAAA_DEB" Type="DateTime" Nullable="false" Precision="6" />
+    <NavigationProperty Name="CALENDRIER" Relationship="BDD_SIO7Model.FK_DFED7A7A8602054F" FromRole="GERE" ToRole="CALENDRIER" />
+    <NavigationProperty Name="COLLABORATEUR" Relationship="BDD_SIO7Model.FK_DFED7A7AD703BC08" FromRole="GERE" ToRole="COLLABORATEUR" />
+    <NavigationProperty Name="REGION" Relationship="BDD_SIO7Model.FK_DFED7A7A70E4A9D4" FromRole="GERE" ToRole="REGION" />
+  </EntityType>
+  <EntityType Name="MEDICAMENT">
+    <Key>
+      <PropertyRef Name="depot_legal" />
+    </Key>
+    <Property Name="depot_legal" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+    <Property Name="code_famille" Type="Int32" />
+    <Property Name="code_present" Type="Int32" />
+    <Property Name="composition" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="effet" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="contreindic" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="prixechantillon" Type="Double" Nullable="false" />
+    <Property Name="nom" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="FAMILLE" Relationship="BDD_SIO7Model.FK_91036F051CD4B68F" FromRole="MEDICAMENT" ToRole="FAMILLE" />
+    <NavigationProperty Name="PRESCRIRE" Relationship="BDD_SIO7Model.FK_905658D21C5F7A71" FromRole="MEDICAMENT" ToRole="PRESCRIRE" />
+    <NavigationProperty Name="PRESENTATION" Relationship="BDD_SIO7Model.FK_91036F05C51BEA8B" FromRole="MEDICAMENT" ToRole="PRESENTATION" />
+    <NavigationProperty Name="COLLABORATEUR" Relationship="BDD_SIO7Model.avoir" FromRole="MEDICAMENT" ToRole="COLLABORATEUR" />
+    <NavigationProperty Name="COMPOSANT" Relationship="BDD_SIO7Model.constituer" FromRole="MEDICAMENT" ToRole="COMPOSANT" />
+    <NavigationProperty Name="RAPPORT_DE_VISITE" Relationship="BDD_SIO7Model.offre" FromRole="MEDICAMENT" ToRole="RAPPORT_DE_VISITE" />
+    <NavigationProperty Name="MEDICAMENT1" Relationship="BDD_SIO7Model.perturbe" FromRole="MEDICAMENT" ToRole="MEDICAMENT1" />
+    <NavigationProperty Name="MEDICAMENT2" Relationship="BDD_SIO7Model.perturbe" FromRole="MEDICAMENT1" ToRole="MEDICAMENT" />
+    <NavigationProperty Name="RAPPORT_DE_VISITE1" Relationship="BDD_SIO7Model.presente" FromRole="MEDICAMENT" ToRole="RAPPORT_DE_VISITE" />
+  </EntityType>
+  <EntityType Name="MOTIF">
+    <Key>
+      <PropertyRef Name="code_motif" />
+    </Key>
+    <Property Name="code_motif" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="libelle_motif" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="RAPPORT_DE_VISITE" Relationship="BDD_SIO7Model.FK_72BDCB1B6B866EF7" FromRole="MOTIF" ToRole="RAPPORT_DE_VISITE" />
+  </EntityType>
+  <EntityType Name="PRATICIEN">
+    <Key>
+      <PropertyRef Name="matricule_praticien" />
+    </Key>
+    <Property Name="matricule_praticien" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="code_type" Type="Int32" />
+    <Property Name="prenom_praticien" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="nom_praticien" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="adresse_praticien" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="cp_praticien" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="ville_praticien" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="coefnotoriete_praticien" Type="Double" Nullable="false" />
+    <Property Name="titulaire_praticien" Type="Boolean" Nullable="false" />
+    <Property Name="numTel" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="TYPE_PRATICIEN" Relationship="BDD_SIO7Model.FK_4958393CBA353DE8" FromRole="PRATICIEN" ToRole="TYPE_PRATICIEN" />
+    <NavigationProperty Name="RAPPORT_DE_VISITE" Relationship="BDD_SIO7Model.FK_72BDCB1BD3000B9" FromRole="PRATICIEN" ToRole="RAPPORT_DE_VISITE" />
+    <NavigationProperty Name="REMPLACE" Relationship="BDD_SIO7Model.FK_92BF0EDE4509622E" FromRole="PRATICIEN" ToRole="REMPLACE" />
+    <NavigationProperty Name="REMPLACE1" Relationship="BDD_SIO7Model.FK_92BF0EDE8A7617B8" FromRole="PRATICIEN" ToRole="REMPLACE" />
+    <NavigationProperty Name="ACTIVITE_COMPLEMENTAIRE" Relationship="BDD_SIO7Model.participe" FromRole="PRATICIEN" ToRole="ACTIVITE_COMPLEMENTAIRE" />
+    <NavigationProperty Name="SPECIALITE" Relationship="BDD_SIO7Model.posseder" FromRole="PRATICIEN" ToRole="SPECIALITE" />
+  </EntityType>
+  <EntityType Name="PRESCRIRE">
+    <Key>
+      <PropertyRef Name="depot_legal_prescr" />
+      <PropertyRef Name="code_dosage" />
+      <PropertyRef Name="code_individu" />
+    </Key>
+    <Property Name="depot_legal_prescr" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+    <Property Name="code_dosage" Type="Int32" Nullable="false" />
+    <Property Name="code_individu" Type="Int32" Nullable="false" />
+    <Property Name="posologie" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="DOSAGE" Relationship="BDD_SIO7Model.FK_905658D261B89203" FromRole="PRESCRIRE" ToRole="DOSAGE" />
+    <NavigationProperty Name="MEDICAMENT" Relationship="BDD_SIO7Model.FK_905658D21C5F7A71" FromRole="PRESCRIRE" ToRole="MEDICAMENT" />
+    <NavigationProperty Name="TYPE_INDIVIDU" Relationship="BDD_SIO7Model.FK_905658D2A76557E5" FromRole="PRESCRIRE" ToRole="TYPE_INDIVIDU" />
+  </EntityType>
+  <EntityType Name="PRESENTATION">
+    <Key>
+      <PropertyRef Name="code_present" />
+    </Key>
+    <Property Name="code_present" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="libelle_present" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+    <Property Name="depot_legal_present" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="MEDICAMENT" Relationship="BDD_SIO7Model.FK_91036F05C51BEA8B" FromRole="PRESENTATION" ToRole="MEDICAMENT" />
+  </EntityType>
+  <EntityType Name="RAPPORT_DE_VISITE">
+    <Key>
+      <PropertyRef Name="num_rapport" />
+    </Key>
+    <Property Name="num_rapport" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="code_motif" Type="Int32" />
+    <Property Name="matricule_praticien" Type="Int32" />
+    <Property Name="date_rapport" Type="DateTime" Nullable="false" Precision="6" />
+    <Property Name="date_visite" Type="DateTime" Nullable="false" Precision="6" />
+    <Property Name="bilan_visite" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="MOTIF" Relationship="BDD_SIO7Model.FK_72BDCB1B6B866EF7" FromRole="RAPPORT_DE_VISITE" ToRole="MOTIF" />
+    <NavigationProperty Name="PRATICIEN" Relationship="BDD_SIO7Model.FK_72BDCB1BD3000B9" FromRole="RAPPORT_DE_VISITE" ToRole="PRATICIEN" />
+    <NavigationProperty Name="MEDICAMENT" Relationship="BDD_SIO7Model.offre" FromRole="RAPPORT_DE_VISITE" ToRole="MEDICAMENT" />
+    <NavigationProperty Name="MEDICAMENT1" Relationship="BDD_SIO7Model.presente" FromRole="RAPPORT_DE_VISITE" ToRole="MEDICAMENT" />
+  </EntityType>
+  <EntityType Name="REGION">
+    <Key>
+      <PropertyRef Name="code_region" />
+    </Key>
+    <Property Name="code_region" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="code_secteur" Type="String" MaxLength="1" Unicode="true" FixedLength="false" />
+    <Property Name="nom_region" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="DEPARTEMENT" Relationship="BDD_SIO7Model.FK_4C75C98B70E4A9D4" FromRole="REGION" ToRole="DEPARTEMENT" />
+    <NavigationProperty Name="GERE" Relationship="BDD_SIO7Model.FK_DFED7A7A70E4A9D4" FromRole="REGION" ToRole="GERE" />
+    <NavigationProperty Name="VISITEUR" Relationship="BDD_SIO7Model.FK_88961BF470E4A9D4" FromRole="REGION" ToRole="VISITEUR" />
+    <NavigationProperty Name="SECTEUR" Relationship="BDD_SIO7Model.FK_FF9A36F0B8E26183" FromRole="REGION" ToRole="SECTEUR" />
+  </EntityType>
+  <EntityType Name="REMPLACE">
+    <Key>
+      <PropertyRef Name="matricule_praticien_remplace" />
+      <PropertyRef Name="matricule_praticien_remplacant" />
+      <PropertyRef Name="JJMMAAAA" />
+    </Key>
+    <Property Name="matricule_praticien_remplace" Type="Int32" Nullable="false" />
+    <Property Name="matricule_praticien_remplacant" Type="Int32" Nullable="false" />
+    <Property Name="JJMMAAAA" Type="DateTime" Nullable="false" Precision="6" />
+    <NavigationProperty Name="DATE" Relationship="BDD_SIO7Model.FK_92BF0EDE94E879DC" FromRole="REMPLACE" ToRole="DATE" />
+    <NavigationProperty Name="PRATICIEN" Relationship="BDD_SIO7Model.FK_92BF0EDE4509622E" FromRole="REMPLACE" ToRole="PRATICIEN" />
+    <NavigationProperty Name="PRATICIEN1" Relationship="BDD_SIO7Model.FK_92BF0EDE8A7617B8" FromRole="REMPLACE" ToRole="PRATICIEN" />
+  </EntityType>
+  <EntityType Name="RESPONSABLE_DE_SECTEUR">
+    <Key>
+      <PropertyRef Name="matricule_col_res" />
+    </Key>
+    <Property Name="matricule_col_res" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="COLLABORATEUR" Relationship="BDD_SIO7Model.FK_1386290DBAE9ED05" FromRole="RESPONSABLE_DE_SECTEUR" ToRole="COLLABORATEUR" />
+  </EntityType>
+  <EntityType Name="SECTEUR">
+    <Key>
+      <PropertyRef Name="code_secteur" />
+    </Key>
+    <Property Name="code_secteur" Type="String" Nullable="false" MaxLength="1" Unicode="true" FixedLength="false" />
+    <Property Name="libelle_secteur" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="ETRE_RESPONSABLE" Relationship="BDD_SIO7Model.FK_2087271EB8E26183" FromRole="SECTEUR" ToRole="ETRE_RESPONSABLE" />
+    <NavigationProperty Name="REGION" Relationship="BDD_SIO7Model.FK_FF9A36F0B8E26183" FromRole="SECTEUR" ToRole="REGION" />
+  </EntityType>
+  <EntityType Name="SPECIALITE">
+    <Key>
+      <PropertyRef Name="code_spec" />
+    </Key>
+    <Property Name="code_spec" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="libelle_spec" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="PRATICIEN" Relationship="BDD_SIO7Model.posseder" FromRole="SPECIALITE" ToRole="PRATICIEN" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TYPE_FRAIS">
+    <Key>
+      <PropertyRef Name="tf_Code" />
+    </Key>
+    <Property Name="tf_Code" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+    <Property Name="tf_libelle" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+    <Property Name="tf_forfait" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="FICHE_FRAIS" Relationship="BDD_SIO7Model.inclure" FromRole="TYPE_FRAIS" ToRole="FICHE_FRAIS" />
+  </EntityType>
+  <EntityType Name="TYPE_INDIVIDU">
+    <Key>
+      <PropertyRef Name="code_individu" />
+    </Key>
+    <Property Name="code_individu" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="libelle_individu" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="PRESCRIRE" Relationship="BDD_SIO7Model.FK_905658D2A76557E5" FromRole="TYPE_INDIVIDU" ToRole="PRESCRIRE" />
+  </EntityType>
+  <EntityType Name="TYPE_PRATICIEN">
+    <Key>
+      <PropertyRef Name="code_type" />
+    </Key>
+    <Property Name="code_type" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="type_lieu" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="libelle_type" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="PRATICIEN" Relationship="BDD_SIO7Model.FK_4958393CBA353DE8" FromRole="TYPE_PRATICIEN" ToRole="PRATICIEN" />
+  </EntityType>
+  <EntityType Name="VISITEUR">
+    <Key>
+      <PropertyRef Name="matricule_col_vis" />
+    </Key>
+    <Property Name="matricule_col_vis" Type="Int32" Nullable="false" />
+    <Property Name="code_region" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="COLLABORATEUR" Relationship="BDD_SIO7Model.FK_88961BF411550AD5" FromRole="VISITEUR" ToRole="COLLABORATEUR" />
+    <NavigationProperty Name="REGION" Relationship="BDD_SIO7Model.FK_88961BF470E4A9D4" FromRole="VISITEUR" ToRole="REGION" />
+  </EntityType>
+  <Association Name="FK_A6C0FC196CB7C209">
+    <End Role="COLLABORATEUR" Type="BDD_SIO7Model.COLLABORATEUR" Multiplicity="0..1" />
+    <End Role="ACTIVITE_COMPLEMENTAIRE" Type="BDD_SIO7Model.ACTIVITE_COMPLEMENTAIRE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COLLABORATEUR">
+        <PropertyRef Name="matricule_col" />
+      </Principal>
+      <Dependent Role="ACTIVITE_COMPLEMENTAIRE">
+        <PropertyRef Name="matricule_col_act" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_2087271E8602054F">
+    <End Role="CALENDRIER" Type="BDD_SIO7Model.CALENDRIER" Multiplicity="1" />
+    <End Role="ETRE_RESPONSABLE" Type="BDD_SIO7Model.ETRE_RESPONSABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CALENDRIER">
+        <PropertyRef Name="JJMMAAAA_DEB" />
+      </Principal>
+      <Dependent Role="ETRE_RESPONSABLE">
+        <PropertyRef Name="JJMMAAAA_DEB" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DFED7A7A8602054F">
+    <End Role="CALENDRIER" Type="BDD_SIO7Model.CALENDRIER" Multiplicity="1" />
+    <End Role="GERE" Type="BDD_SIO7Model.GERE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CALENDRIER">
+        <PropertyRef Name="JJMMAAAA_DEB" />
+      </Principal>
+      <Dependent Role="GERE">
+        <PropertyRef Name="JJMMAAAA_DEB" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_1386290DBAE9ED05">
+    <End Role="COLLABORATEUR" Type="BDD_SIO7Model.COLLABORATEUR" Multiplicity="1" />
+    <End Role="RESPONSABLE_DE_SECTEUR" Type="BDD_SIO7Model.RESPONSABLE_DE_SECTEUR" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="COLLABORATEUR">
+        <PropertyRef Name="matricule_col" />
+      </Principal>
+      <Dependent Role="RESPONSABLE_DE_SECTEUR">
+        <PropertyRef Name="matricule_col_res" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_2087271E875E4B76">
+    <End Role="COLLABORATEUR" Type="BDD_SIO7Model.COLLABORATEUR" Multiplicity="1" />
+    <End Role="ETRE_RESPONSABLE" Type="BDD_SIO7Model.ETRE_RESPONSABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COLLABORATEUR">
+        <PropertyRef Name="matricule_col" />
+      </Principal>
+      <Dependent Role="ETRE_RESPONSABLE">
+        <PropertyRef Name="matricule_col_etr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_707672BD79F04D5D">
+    <End Role="COLLABORATEUR" Type="BDD_SIO7Model.COLLABORATEUR" Multiplicity="1" />
+    <End Role="DIRECTEUR_REGIONAL" Type="BDD_SIO7Model.DIRECTEUR_REGIONAL" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="COLLABORATEUR">
+        <PropertyRef Name="matricule_col" />
+      </Principal>
+      <Dependent Role="DIRECTEUR_REGIONAL">
+        <PropertyRef Name="matricule_col_dir" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_88961BF411550AD5">
+    <End Role="COLLABORATEUR" Type="BDD_SIO7Model.COLLABORATEUR" Multiplicity="1" />
+    <End Role="VISITEUR" Type="BDD_SIO7Model.VISITEUR" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="COLLABORATEUR">
+        <PropertyRef Name="matricule_col" />
+      </Principal>
+      <Dependent Role="VISITEUR">
+        <PropertyRef Name="matricule_col_vis" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_D56F317910C4B9C1">
+    <End Role="COLLABORATEUR" Type="BDD_SIO7Model.COLLABORATEUR" Multiplicity="0..1" />
+    <End Role="FICHE_FRAIS" Type="BDD_SIO7Model.FICHE_FRAIS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COLLABORATEUR">
+        <PropertyRef Name="matricule_col" />
+      </Principal>
+      <Dependent Role="FICHE_FRAIS">
+        <PropertyRef Name="matricule_col_fic" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DFED7A7AD703BC08">
+    <End Role="COLLABORATEUR" Type="BDD_SIO7Model.COLLABORATEUR" Multiplicity="1" />
+    <End Role="GERE" Type="BDD_SIO7Model.GERE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COLLABORATEUR">
+        <PropertyRef Name="matricule_col" />
+      </Principal>
+      <Dependent Role="GERE">
+        <PropertyRef Name="matricule_col_ger" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DDA72FF41030639A">
+    <End Role="DEPARTEMENT" Type="BDD_SIO7Model.DEPARTEMENT" Multiplicity="0..1" />
+    <End Role="COMMUNE" Type="BDD_SIO7Model.COMMUNE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DEPARTEMENT">
+        <PropertyRef Name="code_dep" />
+      </Principal>
+      <Dependent Role="COMMUNE">
+        <PropertyRef Name="code_dep" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_92BF0EDE94E879DC">
+    <End Role="DATE" Type="BDD_SIO7Model.DATE" Multiplicity="1" />
+    <End Role="REMPLACE" Type="BDD_SIO7Model.REMPLACE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DATE">
+        <PropertyRef Name="JJMMAAAA" />
+      </Principal>
+      <Dependent Role="REMPLACE">
+        <PropertyRef Name="JJMMAAAA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_4C75C98B70E4A9D4">
+    <End Role="REGION" Type="BDD_SIO7Model.REGION" Multiplicity="0..1" />
+    <End Role="DEPARTEMENT" Type="BDD_SIO7Model.DEPARTEMENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REGION">
+        <PropertyRef Name="code_region" />
+      </Principal>
+      <Dependent Role="DEPARTEMENT">
+        <PropertyRef Name="code_region" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_905658D261B89203">
+    <End Role="DOSAGE" Type="BDD_SIO7Model.DOSAGE" Multiplicity="1" />
+    <End Role="PRESCRIRE" Type="BDD_SIO7Model.PRESCRIRE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DOSAGE">
+        <PropertyRef Name="code_dosage" />
+      </Principal>
+      <Dependent Role="PRESCRIRE">
+        <PropertyRef Name="code_dosage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_2087271EB8E26183">
+    <End Role="SECTEUR" Type="BDD_SIO7Model.SECTEUR" Multiplicity="1" />
+    <End Role="ETRE_RESPONSABLE" Type="BDD_SIO7Model.ETRE_RESPONSABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SECTEUR">
+        <PropertyRef Name="code_secteur" />
+      </Principal>
+      <Dependent Role="ETRE_RESPONSABLE">
+        <PropertyRef Name="code_secteur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_91036F051CD4B68F">
+    <End Role="FAMILLE" Type="BDD_SIO7Model.FAMILLE" Multiplicity="0..1" />
+    <End Role="MEDICAMENT" Type="BDD_SIO7Model.MEDICAMENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FAMILLE">
+        <PropertyRef Name="code_famille" />
+      </Principal>
+      <Dependent Role="MEDICAMENT">
+        <PropertyRef Name="code_famille" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DFED7A7A70E4A9D4">
+    <End Role="REGION" Type="BDD_SIO7Model.REGION" Multiplicity="1" />
+    <End Role="GERE" Type="BDD_SIO7Model.GERE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REGION">
+        <PropertyRef Name="code_region" />
+      </Principal>
+      <Dependent Role="GERE">
+        <PropertyRef Name="code_region" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_905658D21C5F7A71">
+    <End Role="MEDICAMENT" Type="BDD_SIO7Model.MEDICAMENT" Multiplicity="1" />
+    <End Role="PRESCRIRE" Type="BDD_SIO7Model.PRESCRIRE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDICAMENT">
+        <PropertyRef Name="depot_legal" />
+      </Principal>
+      <Dependent Role="PRESCRIRE">
+        <PropertyRef Name="depot_legal_prescr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_91036F05C51BEA8B">
+    <End Role="PRESENTATION" Type="BDD_SIO7Model.PRESENTATION" Multiplicity="0..1" />
+    <End Role="MEDICAMENT" Type="BDD_SIO7Model.MEDICAMENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRESENTATION">
+        <PropertyRef Name="code_present" />
+      </Principal>
+      <Dependent Role="MEDICAMENT">
+        <PropertyRef Name="code_present" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_72BDCB1B6B866EF7">
+    <End Role="MOTIF" Type="BDD_SIO7Model.MOTIF" Multiplicity="0..1" />
+    <End Role="RAPPORT_DE_VISITE" Type="BDD_SIO7Model.RAPPORT_DE_VISITE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MOTIF">
+        <PropertyRef Name="code_motif" />
+      </Principal>
+      <Dependent Role="RAPPORT_DE_VISITE">
+        <PropertyRef Name="code_motif" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_4958393CBA353DE8">
+    <End Role="TYPE_PRATICIEN" Type="BDD_SIO7Model.TYPE_PRATICIEN" Multiplicity="0..1" />
+    <End Role="PRATICIEN" Type="BDD_SIO7Model.PRATICIEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TYPE_PRATICIEN">
+        <PropertyRef Name="code_type" />
+      </Principal>
+      <Dependent Role="PRATICIEN">
+        <PropertyRef Name="code_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_72BDCB1BD3000B9">
+    <End Role="PRATICIEN" Type="BDD_SIO7Model.PRATICIEN" Multiplicity="0..1" />
+    <End Role="RAPPORT_DE_VISITE" Type="BDD_SIO7Model.RAPPORT_DE_VISITE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRATICIEN">
+        <PropertyRef Name="matricule_praticien" />
+      </Principal>
+      <Dependent Role="RAPPORT_DE_VISITE">
+        <PropertyRef Name="matricule_praticien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_92BF0EDE4509622E">
+    <End Role="PRATICIEN" Type="BDD_SIO7Model.PRATICIEN" Multiplicity="1" />
+    <End Role="REMPLACE" Type="BDD_SIO7Model.REMPLACE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRATICIEN">
+        <PropertyRef Name="matricule_praticien" />
+      </Principal>
+      <Dependent Role="REMPLACE">
+        <PropertyRef Name="matricule_praticien_remplacant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_92BF0EDE8A7617B8">
+    <End Role="PRATICIEN" Type="BDD_SIO7Model.PRATICIEN" Multiplicity="1" />
+    <End Role="REMPLACE" Type="BDD_SIO7Model.REMPLACE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRATICIEN">
+        <PropertyRef Name="matricule_praticien" />
+      </Principal>
+      <Dependent Role="REMPLACE">
+        <PropertyRef Name="matricule_praticien_remplace" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_905658D2A76557E5">
+    <End Role="TYPE_INDIVIDU" Type="BDD_SIO7Model.TYPE_INDIVIDU" Multiplicity="1" />
+    <End Role="PRESCRIRE" Type="BDD_SIO7Model.PRESCRIRE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TYPE_INDIVIDU">
+        <PropertyRef Name="code_individu" />
+      </Principal>
+      <Dependent Role="PRESCRIRE">
+        <PropertyRef Name="code_individu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_88961BF470E4A9D4">
+    <End Role="REGION" Type="BDD_SIO7Model.REGION" Multiplicity="0..1" />
+    <End Role="VISITEUR" Type="BDD_SIO7Model.VISITEUR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="REGION">
+        <PropertyRef Name="code_region" />
+      </Principal>
+      <Dependent Role="VISITEUR">
+        <PropertyRef Name="code_region" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FF9A36F0B8E26183">
+    <End Role="SECTEUR" Type="BDD_SIO7Model.SECTEUR" Multiplicity="0..1" />
+    <End Role="REGION" Type="BDD_SIO7Model.REGION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SECTEUR">
+        <PropertyRef Name="code_secteur" />
+      </Principal>
+      <Dependent Role="REGION">
+        <PropertyRef Name="code_secteur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="avoir">
+    <End Role="MEDICAMENT" Type="BDD_SIO7Model.MEDICAMENT" Multiplicity="*" />
+    <End Role="COLLABORATEUR" Type="BDD_SIO7Model.COLLABORATEUR" Multiplicity="*" />
+  </Association>
+  <Association Name="constituer">
+    <End Role="MEDICAMENT" Type="BDD_SIO7Model.MEDICAMENT" Multiplicity="*" />
+    <End Role="COMPOSANT" Type="BDD_SIO7Model.COMPOSANT" Multiplicity="*" />
+  </Association>
+  <Association Name="inclure">
+    <End Role="TYPE_FRAIS" Type="BDD_SIO7Model.TYPE_FRAIS" Multiplicity="*" />
+    <End Role="FICHE_FRAIS" Type="BDD_SIO7Model.FICHE_FRAIS" Multiplicity="*" />
+  </Association>
+  <Association Name="offre">
+    <End Role="RAPPORT_DE_VISITE" Type="BDD_SIO7Model.RAPPORT_DE_VISITE" Multiplicity="*" />
+    <End Role="MEDICAMENT" Type="BDD_SIO7Model.MEDICAMENT" Multiplicity="*" />
+  </Association>
+  <Association Name="organise">
+    <End Role="COLLABORATEUR" Type="BDD_SIO7Model.COLLABORATEUR" Multiplicity="*" />
+    <End Role="ACTIVITE_COMPLEMENTAIRE" Type="BDD_SIO7Model.ACTIVITE_COMPLEMENTAIRE" Multiplicity="*" />
+  </Association>
+  <Association Name="participe">
+    <End Role="ACTIVITE_COMPLEMENTAIRE" Type="BDD_SIO7Model.ACTIVITE_COMPLEMENTAIRE" Multiplicity="*" />
+    <End Role="PRATICIEN" Type="BDD_SIO7Model.PRATICIEN" Multiplicity="*" />
+  </Association>
+  <Association Name="perturbe">
+    <End Role="MEDICAMENT" Type="BDD_SIO7Model.MEDICAMENT" Multiplicity="*" />
+    <End Role="MEDICAMENT1" Type="BDD_SIO7Model.MEDICAMENT" Multiplicity="*" />
+  </Association>
+  <Association Name="posseder">
+    <End Role="PRATICIEN" Type="BDD_SIO7Model.PRATICIEN" Multiplicity="*" />
+    <End Role="SPECIALITE" Type="BDD_SIO7Model.SPECIALITE" Multiplicity="*" />
+  </Association>
+  <Association Name="presente">
+    <End Role="MEDICAMENT" Type="BDD_SIO7Model.MEDICAMENT" Multiplicity="*" />
+    <End Role="RAPPORT_DE_VISITE" Type="BDD_SIO7Model.RAPPORT_DE_VISITE" Multiplicity="*" />
+  </Association>
+</Schema>
