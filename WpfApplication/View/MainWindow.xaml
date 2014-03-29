@@ -140,31 +140,38 @@ Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(
         <Button Content="Excel" HorizontalAlignment="Left" Margin="630,40,0,0" VerticalAlignment="Top" Width="75" />
         <Button Content="Nouveau" HorizontalAlignment="Left" Margin="493,87,0,0" VerticalAlignment="Top" Width="100" />
         <Button Content="Supression" HorizontalAlignment="Left" Margin="628,87,0,0" VerticalAlignment="Top" Width="100"/>
-        <!---->
-        <Grid x:Name="ContentPanel" Height="auto" Margin="14,157,10,424" Background="{Binding BonClient}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Prénom : " />
-            <TextBlock Grid.Row="1" Text="{Binding Prenom}" />
-            <TextBlock Grid.Column="1" Text="Age : " />
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Age}" />
-        </Grid>
-        <ListBox ItemsSource="{Binding ListeClients}" Margin="20,230,20,70">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Prenom}" /> 
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-            <!---->
-        <!--
-        <DataGrid x:Name="MaGrid" AlternationCount="2" VerticalAlignment="Top" MaxHeight="396" Margin="0,151,0,0" ItemsSource="{Binding Path=listeAff}"/>
+
+        <DataGrid x:Name="ContentPanel" Margin="15,160,0,70" Width="auto" ItemsSource="{Binding ListeCol}" AutoGenerateColumns="False" HorizontalAlignment="Left">
+            <DataGrid.Columns>
+                
+                <DataGridTemplateColumn Header="Matricule" Width="auto" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding matricule_col}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Prénom" Width="auto" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding prenom_col}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Nom" Width="auto" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding nom_col}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            
+            </DataGrid.Columns>
+        </DataGrid>
+        <!-- 
+        <DataGrid x:Name="MaGrid" AlternationCount="2" VerticalAlignment="Top" MaxHeight="396" Margin="0,151,0,0" ItemsSource="{Binding ListeCol}"/>
         -->
         <DockPanel Height="30" Margin="0,0,0,10" VerticalAlignment="Bottom">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -173,7 +180,7 @@ Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(
                 <Button x:Name="btrapp" Content="Rapports" Width="90"  />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                <Button x:Name="btrefresh" Content="Refresh" Width="90"  />
+                <Button x:Name="btrefresh" Content="Refresh" Width="90" Command="{Binding TestCommand}" />
                 <Button x:Name="btquit" Content="Quitter" Width="90" Command="{Binding ExitCommand}"/>
             </StackPanel>
         </DockPanel>

@@ -55,6 +55,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelBddSio.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PartialCol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
