@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         DataContext="{Binding MainWindowVM, Source={StaticResource Locator}}"
-        Title="MainWindow" Height="650.746" Width="800">
+        Title="MainWindow" Height="651" Width="800">
     <Window.Resources>
         <Style TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -143,7 +143,6 @@ Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(
 
         <DataGrid x:Name="ContentPanel" Margin="15,160,0,70" Width="auto" ItemsSource="{Binding ListeCol}" AutoGenerateColumns="False" HorizontalAlignment="Left">
             <DataGrid.Columns>
-                
                 <DataGridTemplateColumn Header="Matricule" Width="auto" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -167,7 +166,7 @@ Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-            
+                
             </DataGrid.Columns>
         </DataGrid>
         <!-- 

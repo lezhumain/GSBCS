@@ -81,6 +81,13 @@ namespace WpfApplication.ViewModel
             set { NotifyPropertyChanged(ref listeClients, value); }
         }
 
+        private List<string> listeHead;
+        public List<string> ListeHead
+        {
+            get { return listeHead; }
+            set { NotifyPropertyChanged(ref listeHead, value); }
+        }
+
         /* Entites */
         private List<COLLABORATEUR> listeCol;
         public List<COLLABORATEUR> ListeCol
@@ -88,6 +95,8 @@ namespace WpfApplication.ViewModel
             get { return listeCol; }
             set { NotifyPropertyChanged(ref listeCol, value); }
         }
+
+
         /*
         private List<RAPPORT_DE_VISITE> listeRap;
         public List<RAPPORT_DE_VISITE> ListeRap
@@ -134,6 +143,10 @@ namespace WpfApplication.ViewModel
 
             Client client = serviceClient.Charger();
             ListeClients = service.ChargerTout();
+            ListeHead = new List<string>();
+            ListeHead.Add("Test");
+            ListeHead.Add("coco");
+
             ListeCol = ColHelper.Current.GetList().ToList<COLLABORATEUR>();
             /*
             ListeVis = null;

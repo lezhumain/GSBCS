@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ServiceBdd.cs" />
     <Compile Include="helpers\ColHelper.cs" />
     <Compile Include="helpers\PraHelper.cs" />
     <Compile Include="helpers\RapHelper.cs" />
