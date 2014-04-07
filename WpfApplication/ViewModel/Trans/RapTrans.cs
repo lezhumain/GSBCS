@@ -24,6 +24,11 @@ namespace WpfApplication.ViewModel.Trans
             return "<RapTrans>n°" + this.numero + " prat:" + this.praticien + " date:" + this.date;
         }
 
+        public string ToCsvRow()
+        {
+            return this.numero + ";" + this.praticien + ";" + this.date + "\n";
+        }
+
         public override string getClass()
         {
             return "WpfApplication.ViewModel.Trans.RapTrans";

@@ -195,11 +195,24 @@ Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(
             </TabItem>
             <TabItem Header="Praticiens">
                 <DataGrid x:Name="pratPanel" ItemsSource="{Binding ListePrat}" Margin="0" Width="auto"
-                          IsReadOnly="True" HorizontalAlignment="Left" Height="auto"/>
+                          IsReadOnly="True" HorizontalAlignment="Left" Height="auto">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged" >
+                            <cmd:EventToCommand Command="{Binding SelectedItemsCommand}"
+                                                PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </DataGrid>
             </TabItem>
             <TabItem Header="Rapports">
                 <DataGrid x:Name="rapPanel" ItemsSource="{Binding ListeRap}" Margin="0" Width="auto"
                           IsReadOnly="True" HorizontalAlignment="Left" Height="auto">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged" >
+                            <cmd:EventToCommand Command="{Binding SelectedItemsCommand}"
+                                                PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <!--
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="N°" Width="auto" IsReadOnly="True">

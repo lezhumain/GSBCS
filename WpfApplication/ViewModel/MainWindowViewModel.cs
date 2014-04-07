@@ -84,8 +84,8 @@ namespace WpfApplication.ViewModel
 
         #endregion
 
-        private List<ColTrans> listeSel;
-        public List<ColTrans> ListeSel
+        private List<object> listeSel;
+        public List<object> ListeSel
         {
             get { return listeSel; }
             set { NotifyPropertyChanged(ref listeSel, value); }
@@ -183,7 +183,7 @@ namespace WpfApplication.ViewModel
             ListeCol = convertCol( ColHelper.Current.GetList() );            
             ListeRap = convertRap( RapHelper.Current.GetList() );
             ListePrat = convertPrat(PraHelper.Current.GetList());
-            ListeSel = new List<ColTrans>();
+            ListeSel = new List<object>();
 
             SelectedItemsCommand = new RelayCommand<SelectionChangedEventArgs>(SelectedItems);
         }
@@ -221,23 +221,42 @@ namespace WpfApplication.ViewModel
             else
             {
                 var lbi = ((args.Source as DataGrid).SelectedItems);
+
                 if (lbi == null || lbi.Count == 0)
                 {
                     msg = "listeSel nule ou vide";
                 }
                 else
                 {
+                    // on recup la classe des donnees selectionnees
+                    string classe = (lbi[0].GetType().ToString()).Split('.').ToList<string>().Last();
+                    
                     if (this.listeSel == null)
-                        this.listeSel = new List<ColTrans>();
+                        this.listeSel = new List<object>();
                     else
                         listeSel.Clear();
-
-                    foreach (ColTrans ct in lbi)
+                    
+                    switch (classe)
                     {
-                        listeSel.Add(ct);
+                        case "ColTrans":
+                            foreach (ColTrans ct in lbi)
+                            {
+                                listeSel.Add(ct);
+                            }
+                            break;
+                        case "RapTrans":
+                            foreach (RapTrans ct in lbi)
+                            {
+                                listeSel.Add(ct);
+                            }
+                            break;
+                        default:
+                            MessageBox.Show("Défaut");
+                            break;
                     }
-                    msg = "You selected " + lbi.ToString() + ".";   
-                }        
+                    msg = "class: " + classe;
+
+                }
                 //MessageBox.Show(msg);
             }
         }
@@ -250,13 +269,15 @@ namespace WpfApplication.ViewModel
         private void Excel()
         {
             string content = "";
+            bool skip = false; // tant que c'est pas fini
 
             if (listeSel == null || listeSel.Count() == 0)
                 MessageBox.Show("vide");
             else
             {
                 Type t = listeSel[0].GetType();
-                
+                string classe = t.Name;
+
                 // on rempli les headers qui sont les noms des propriete
                 foreach (MemberInfo mi in t.GetMembers())
                 {
@@ -267,17 +288,31 @@ namespace WpfApplication.ViewModel
                 }
                 content += "\n"; // fin des headers
 
-                // on rempli les valeurs
-                foreach (ColTrans ct in listeSel)
+                switch(classe)
                 {
-                    content += ct.matricule + ";" + ct.nom + ";" + ct.prenom + "\n";
+                    case "ColTrans":
+                        // on rempli les valeurs
+                        foreach (ColTrans ct in listeSel)
+                            content += ct.ToCsvRow();
+                        break;
+                    case "RapTrans":
+                        // on rempli les valeurs
+                        foreach (RapTrans ct in listeSel)
+                            content += ct.ToCsvRow();
+                        break;
+                    default:
+                        MessageBox.Show("default, a faire");
+                        skip = true;
+                        break;
                 }
-
                 // on fait péter dans le fichier
-                if( toFic(content) )
-                    MessageBox.Show("Données exportées avec succès !");
-                else
-                    MessageBox.Show("Export interrompu");
+                if(!skip)
+                {
+                    if(toFic(content))
+                        MessageBox.Show("Données exportées avec succès !");
+                    else
+                        MessageBox.Show("Export interrompu");
+                }
             }
         }
 

@@ -24,6 +24,11 @@ namespace WpfApplication.ViewModel.Trans
             return "<PratTrans>" + this.prenom + " " + this.nom;
         }
 
+        public string ToCsvRow()
+        {
+            return this.matricule + ";" + this.nom + ";" + this.prenom + "\n";
+        }
+
         public override string getClass()
         {
             return "WpfApplication.ViewModel.Trans.PratTrans";

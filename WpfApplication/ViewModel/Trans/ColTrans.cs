@@ -31,6 +31,11 @@ namespace WpfApplication.ViewModel.Trans
             return "<ColTrans>" + this.prenom + " " + this.nom;
         }
 
+        public string ToCsvRow()
+        {
+            return this.matricule + ";" + this.nom + ";" + this.prenom + "\n";
+        }
+
         public override string getClass()
         {
             return "WpfApplication.ViewModel.Trans.ColTrans";
