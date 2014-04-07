@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PartialPrat.cs" />
     <Compile Include="ServiceBdd.cs" />
     <Compile Include="helpers\ColHelper.cs" />
     <Compile Include="helpers\PraHelper.cs" />

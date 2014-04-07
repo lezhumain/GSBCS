@@ -101,17 +101,17 @@ namespace Model.helpers
 		        _db.SaveChanges();
 	        }
         }
-        
-        public getItemFromId(int id)
+        */
+        public PRATICIEN getById(int id)
         {
-	        using(_db = new BDDContext())
+	        using(_db = new BDD_SIO7Entities())
 	        {
-		        return 	(from profils in _db.Profil
-				        where profils.id == id
-				        select profils).FirstOnDefault(); 
+		        return 	(from prat in _db.PRATICIEN
+				        where prat.matricule_praticien == id
+				        select prat).FirstOrDefault(); 
 	        }
         }
-        */
+        
 
 
         // endregion

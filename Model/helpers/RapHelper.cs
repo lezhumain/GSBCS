@@ -41,28 +41,42 @@ namespace Model.helpers
         }
         // endregion
         // region Fonctions publiques utiles
-        public List<COLLABORATEUR> GetList()
+        public List<RAPPORT_DE_VISITE> GetList()
 		{
             using (_db =  new BDD_SIO7Entities())
 		    {
-                return _db.COLLABORATEUR.ToList();
+                return _db.RAPPORT_DE_VISITE.ToList();
             }
         }
+        /*
+        public string getRedacName()
+        {
+            using (_db = new BDD_SIO7Entities())
+            {
+                return _db.RAPPORT_DE_VISITE.ToList();
+            }
+        }
+        */
+        /*
+        public List<RAPPORT_DE_VISITE> GetViewList()
+        {
+        }
+         */
 
-        public void Insert(COLLABORATEUR rapport)
+        public void Insert(RAPPORT_DE_VISITE rapport)
 		{
             using (_db = new BDD_SIO7Entities())
     		{
-                _db.AddToCOLLABORATEUR(rapport);
+                _db.AddToRAPPORT_DE_VISITE(rapport);
                 _db.SaveChanges();
             }
         }
 
-        public void Update(COLLABORATEUR rapport)
+        public void Update(RAPPORT_DE_VISITE rapport)
 		{
             using (_db = new BDD_SIO7Entities())
             {
-                _db.COLLABORATEUR.Attach(rapport);
+                _db.RAPPORT_DE_VISITE.Attach(rapport);
                 _db.ObjectStateManager.ChangeObjectState(rapport, System.Data.EntityState.Modified);
                 _db.SaveChanges();
             }
@@ -75,7 +89,7 @@ namespace Model.helpers
             */
         }
 
-        public void Delete(COLLABORATEUR rapport)
+        public void Delete(RAPPORT_DE_VISITE rapport)
 		{
             using (_db = new BDD_SIO7Entities())
 		    {

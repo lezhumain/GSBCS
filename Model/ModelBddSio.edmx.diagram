@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c749b9850c6b47f0a5e2b04a95396fff" Name="Diagramme1" ZoomLevel="74">
+      <Diagram DiagramId="c749b9850c6b47f0a5e2b04a95396fff" Name="Diagramme1" ZoomLevel="63">
         <EntityTypeShape EntityType="BDD_SIO7Model.ACTIVITE_COMPLEMENTAIRE" Width="1.5" PointX="14.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BDD_SIO7Model.CALENDRIER" Width="1.5" PointX="16.875" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="BDD_SIO7Model.COLLABORATEUR" Width="1.5" PointX="12.5" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BDD_SIO7Model.COMMUNE" Width="1.5" PointX="20" PointY="21.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDD_SIO7Model.COMPOSANT" Width="1.5" PointX="12.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.COMPOSANT" Width="1.5" PointX="12" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BDD_SIO7Model.DATE" Width="1.5" PointX="5.75" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BDD_SIO7Model.DEPARTEMENT" Width="1.5" PointX="17.75" PointY="21.375" IsExpanded="true" />
         <EntityTypeShape EntityType="BDD_SIO7Model.DIRECTEUR_REGIONAL" Width="1.5" PointX="14.75" PointY="7.375" IsExpanded="true" />
@@ -28,7 +28,7 @@
         <EntityTypeShape EntityType="BDD_SIO7Model.REMPLACE" Width="1.5" PointX="8" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BDD_SIO7Model.RESPONSABLE_DE_SECTEUR" Width="1.5" PointX="14.75" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="BDD_SIO7Model.SECTEUR" Width="1.5" PointX="15.5" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDD_SIO7Model.SPECIALITE" Width="1.5" PointX="5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.SPECIALITE" Width="1.5" PointX="1.25" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="BDD_SIO7Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BDD_SIO7Model.TYPE_FRAIS" Width="1.5" PointX="14.75" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="BDD_SIO7Model.TYPE_INDIVIDU" Width="1.5" PointX="15.25" PointY="27" IsExpanded="true" />
@@ -60,15 +60,22 @@
         <AssociationConnector Association="BDD_SIO7Model.FK_905658D2A76557E5" ManuallyRouted="false" />
         <AssociationConnector Association="BDD_SIO7Model.FK_88961BF470E4A9D4" ManuallyRouted="false" />
         <AssociationConnector Association="BDD_SIO7Model.FK_FF9A36F0B8E26183" ManuallyRouted="false" />
-        <AssociationConnector Association="BDD_SIO7Model.avoir" ManuallyRouted="false" />
         <AssociationConnector Association="BDD_SIO7Model.constituer" ManuallyRouted="false" />
         <AssociationConnector Association="BDD_SIO7Model.inclure" ManuallyRouted="false" />
-        <AssociationConnector Association="BDD_SIO7Model.offre" ManuallyRouted="false" />
         <AssociationConnector Association="BDD_SIO7Model.organise" ManuallyRouted="false" />
         <AssociationConnector Association="BDD_SIO7Model.participe" ManuallyRouted="false" />
         <AssociationConnector Association="BDD_SIO7Model.perturbe" ManuallyRouted="false" />
         <AssociationConnector Association="BDD_SIO7Model.posseder" ManuallyRouted="false" />
-        <AssociationConnector Association="BDD_SIO7Model.presente" ManuallyRouted="false" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_72BDCB1B895C0B0" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.OFFRE1" Width="1.5" PointX="6.125" PointY="12.25" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.PRESENTE" Width="1.5" PointX="8.125" PointY="13.375" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_OFFRE_depot_legal_offre" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_PRESENTE_depot_legal_presente" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_OFFRE_num_rapport_offre" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_PRESENTE_num_rapport_presente" />
+        <EntityTypeShape EntityType="BDD_SIO7Model.AVOIR1" Width="1.5" PointX="12.25" PointY="10.75" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_AVOIR_depot_legal_avoir" />
+        <AssociationConnector Association="BDD_SIO7Model.FK_AVOIR_matricule_col_avo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

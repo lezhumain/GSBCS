@@ -134,10 +134,6 @@
       <End Role="SECTEUR" EntitySet="SECTEUR" />
       <End Role="REGION" EntitySet="REGION" />
     </AssociationSet>
-    <AssociationSet Name="avoir" Association="BDD_SIO7Model.avoir">
-      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
-      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
-    </AssociationSet>
     <AssociationSet Name="constituer" Association="BDD_SIO7Model.constituer">
       <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
       <End Role="COMPOSANT" EntitySet="COMPOSANT" />
@@ -145,10 +141,6 @@
     <AssociationSet Name="inclure" Association="BDD_SIO7Model.inclure">
       <End Role="TYPE_FRAIS" EntitySet="TYPE_FRAIS" />
       <End Role="FICHE_FRAIS" EntitySet="FICHE_FRAIS" />
-    </AssociationSet>
-    <AssociationSet Name="offre" Association="BDD_SIO7Model.offre">
-      <End Role="RAPPORT_DE_VISITE" EntitySet="RAPPORT_DE_VISITE" />
-      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
     </AssociationSet>
     <AssociationSet Name="organise" Association="BDD_SIO7Model.organise">
       <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
@@ -166,9 +158,36 @@
       <End Role="PRATICIEN" EntitySet="PRATICIEN" />
       <End Role="SPECIALITE" EntitySet="SPECIALITE" />
     </AssociationSet>
-    <AssociationSet Name="presente" Association="BDD_SIO7Model.presente">
-      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+    <AssociationSet Name="FK_72BDCB1B895C0B0" Association="BDD_SIO7Model.FK_72BDCB1B895C0B0">
+      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
       <End Role="RAPPORT_DE_VISITE" EntitySet="RAPPORT_DE_VISITE" />
+    </AssociationSet>
+    <EntitySet Name="OFFRE1Jeu" EntityType="BDD_SIO7Model.OFFRE1" />
+    <EntitySet Name="PRESENTE" EntityType="BDD_SIO7Model.PRESENTE" />
+    <AssociationSet Name="FK_OFFRE_depot_legal_offre" Association="BDD_SIO7Model.FK_OFFRE_depot_legal_offre">
+      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+      <End Role="OFFRE1" EntitySet="OFFRE1Jeu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRESENTE_depot_legal_presente" Association="BDD_SIO7Model.FK_PRESENTE_depot_legal_presente">
+      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+      <End Role="PRESENTE" EntitySet="PRESENTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OFFRE_num_rapport_offre" Association="BDD_SIO7Model.FK_OFFRE_num_rapport_offre">
+      <End Role="RAPPORT_DE_VISITE" EntitySet="RAPPORT_DE_VISITE" />
+      <End Role="OFFRE1" EntitySet="OFFRE1Jeu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRESENTE_num_rapport_presente" Association="BDD_SIO7Model.FK_PRESENTE_num_rapport_presente">
+      <End Role="RAPPORT_DE_VISITE" EntitySet="RAPPORT_DE_VISITE" />
+      <End Role="PRESENTE" EntitySet="PRESENTE" />
+    </AssociationSet>
+    <EntitySet Name="AVOIR1Jeu" EntityType="BDD_SIO7Model.AVOIR1" />
+    <AssociationSet Name="FK_AVOIR_depot_legal_avoir" Association="BDD_SIO7Model.FK_AVOIR_depot_legal_avoir">
+      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+      <End Role="AVOIR1" EntitySet="AVOIR1Jeu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AVOIR_matricule_col_avo" Association="BDD_SIO7Model.FK_AVOIR_matricule_col_avo">
+      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
+      <End Role="AVOIR1" EntitySet="AVOIR1Jeu" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="ACTIVITE_COMPLEMENTAIRE">
@@ -205,7 +224,7 @@
     <Property Name="mdp_col" Type="String" Nullable="false" MaxLength="350" Unicode="true" FixedLength="false" />
     <Property Name="date_embauche" Type="DateTime" Nullable="false" Precision="6" />
     <Property Name="ville_col" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-    <Property Name="salt_col" Type="String" MaxLength="350" Unicode="true" FixedLength="false" />
+    <Property Name="salt_col" Type="String" MaxLength="350" Unicode="true" FixedLength="false" Nullable="false" />
     <NavigationProperty Name="ACTIVITE_COMPLEMENTAIRE" Relationship="BDD_SIO7Model.FK_A6C0FC196CB7C209" FromRole="COLLABORATEUR" ToRole="ACTIVITE_COMPLEMENTAIRE" />
     <NavigationProperty Name="RESPONSABLE_DE_SECTEUR" Relationship="BDD_SIO7Model.FK_1386290DBAE9ED05" FromRole="COLLABORATEUR" ToRole="RESPONSABLE_DE_SECTEUR" />
     <NavigationProperty Name="ETRE_RESPONSABLE" Relationship="BDD_SIO7Model.FK_2087271E875E4B76" FromRole="COLLABORATEUR" ToRole="ETRE_RESPONSABLE" />
@@ -213,8 +232,9 @@
     <NavigationProperty Name="VISITEUR" Relationship="BDD_SIO7Model.FK_88961BF411550AD5" FromRole="COLLABORATEUR" ToRole="VISITEUR" />
     <NavigationProperty Name="FICHE_FRAIS" Relationship="BDD_SIO7Model.FK_D56F317910C4B9C1" FromRole="COLLABORATEUR" ToRole="FICHE_FRAIS" />
     <NavigationProperty Name="GERE" Relationship="BDD_SIO7Model.FK_DFED7A7AD703BC08" FromRole="COLLABORATEUR" ToRole="GERE" />
-    <NavigationProperty Name="MEDICAMENT" Relationship="BDD_SIO7Model.avoir" FromRole="COLLABORATEUR" ToRole="MEDICAMENT" />
     <NavigationProperty Name="ACTIVITE_COMPLEMENTAIRE1" Relationship="BDD_SIO7Model.organise" FromRole="COLLABORATEUR" ToRole="ACTIVITE_COMPLEMENTAIRE" />
+    <NavigationProperty Name="RAPPORT_DE_VISITE" Relationship="BDD_SIO7Model.FK_72BDCB1B895C0B0" FromRole="COLLABORATEUR" ToRole="RAPPORT_DE_VISITE" />
+    <NavigationProperty Name="AVOIR" Relationship="BDD_SIO7Model.FK_AVOIR_matricule_col_avo" FromRole="COLLABORATEUR" ToRole="AVOIR1" />
   </EntityType>
   <EntityType Name="COMMUNE">
     <Key>
@@ -324,16 +344,16 @@
     <Property Name="effet" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
     <Property Name="contreindic" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
     <Property Name="prixechantillon" Type="Double" Nullable="false" />
-    <Property Name="nom" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="nom" Type="String" MaxLength="250" Unicode="true" FixedLength="true" />
     <NavigationProperty Name="FAMILLE" Relationship="BDD_SIO7Model.FK_91036F051CD4B68F" FromRole="MEDICAMENT" ToRole="FAMILLE" />
     <NavigationProperty Name="PRESCRIRE" Relationship="BDD_SIO7Model.FK_905658D21C5F7A71" FromRole="MEDICAMENT" ToRole="PRESCRIRE" />
     <NavigationProperty Name="PRESENTATION" Relationship="BDD_SIO7Model.FK_91036F05C51BEA8B" FromRole="MEDICAMENT" ToRole="PRESENTATION" />
-    <NavigationProperty Name="COLLABORATEUR" Relationship="BDD_SIO7Model.avoir" FromRole="MEDICAMENT" ToRole="COLLABORATEUR" />
     <NavigationProperty Name="COMPOSANT" Relationship="BDD_SIO7Model.constituer" FromRole="MEDICAMENT" ToRole="COMPOSANT" />
-    <NavigationProperty Name="RAPPORT_DE_VISITE" Relationship="BDD_SIO7Model.offre" FromRole="MEDICAMENT" ToRole="RAPPORT_DE_VISITE" />
     <NavigationProperty Name="MEDICAMENT1" Relationship="BDD_SIO7Model.perturbe" FromRole="MEDICAMENT" ToRole="MEDICAMENT1" />
     <NavigationProperty Name="MEDICAMENT2" Relationship="BDD_SIO7Model.perturbe" FromRole="MEDICAMENT1" ToRole="MEDICAMENT" />
-    <NavigationProperty Name="RAPPORT_DE_VISITE1" Relationship="BDD_SIO7Model.presente" FromRole="MEDICAMENT" ToRole="RAPPORT_DE_VISITE" />
+    <NavigationProperty Name="OFFRE" Relationship="BDD_SIO7Model.FK_OFFRE_depot_legal_offre" FromRole="MEDICAMENT" ToRole="OFFRE1" />
+    <NavigationProperty Name="PRESENTE" Relationship="BDD_SIO7Model.FK_PRESENTE_depot_legal_presente" FromRole="MEDICAMENT" ToRole="PRESENTE" />
+    <NavigationProperty Name="AVOIR" Relationship="BDD_SIO7Model.FK_AVOIR_depot_legal_avoir" FromRole="MEDICAMENT" ToRole="AVOIR1" />
   </EntityType>
   <EntityType Name="MOTIF">
     <Key>
@@ -399,8 +419,10 @@
     <Property Name="bilan_visite" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="MOTIF" Relationship="BDD_SIO7Model.FK_72BDCB1B6B866EF7" FromRole="RAPPORT_DE_VISITE" ToRole="MOTIF" />
     <NavigationProperty Name="PRATICIEN" Relationship="BDD_SIO7Model.FK_72BDCB1BD3000B9" FromRole="RAPPORT_DE_VISITE" ToRole="PRATICIEN" />
-    <NavigationProperty Name="MEDICAMENT" Relationship="BDD_SIO7Model.offre" FromRole="RAPPORT_DE_VISITE" ToRole="MEDICAMENT" />
-    <NavigationProperty Name="MEDICAMENT1" Relationship="BDD_SIO7Model.presente" FromRole="RAPPORT_DE_VISITE" ToRole="MEDICAMENT" />
+    <Property Type="Int32" Name="matricule_col" />
+    <NavigationProperty Name="COLLABORATEUR" Relationship="BDD_SIO7Model.FK_72BDCB1B895C0B0" FromRole="RAPPORT_DE_VISITE" ToRole="COLLABORATEUR" />
+    <NavigationProperty Name="OFFRE" Relationship="BDD_SIO7Model.FK_OFFRE_num_rapport_offre" FromRole="RAPPORT_DE_VISITE" ToRole="OFFRE1" />
+    <NavigationProperty Name="PRESENTE" Relationship="BDD_SIO7Model.FK_PRESENTE_num_rapport_presente" FromRole="RAPPORT_DE_VISITE" ToRole="PRESENTE" />
   </EntityType>
   <EntityType Name="REGION">
     <Key>
@@ -808,10 +830,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="avoir">
-    <End Role="MEDICAMENT" Type="BDD_SIO7Model.MEDICAMENT" Multiplicity="*" />
-    <End Role="COLLABORATEUR" Type="BDD_SIO7Model.COLLABORATEUR" Multiplicity="*" />
-  </Association>
   <Association Name="constituer">
     <End Role="MEDICAMENT" Type="BDD_SIO7Model.MEDICAMENT" Multiplicity="*" />
     <End Role="COMPOSANT" Type="BDD_SIO7Model.COMPOSANT" Multiplicity="*" />
@@ -819,10 +837,6 @@
   <Association Name="inclure">
     <End Role="TYPE_FRAIS" Type="BDD_SIO7Model.TYPE_FRAIS" Multiplicity="*" />
     <End Role="FICHE_FRAIS" Type="BDD_SIO7Model.FICHE_FRAIS" Multiplicity="*" />
-  </Association>
-  <Association Name="offre">
-    <End Role="RAPPORT_DE_VISITE" Type="BDD_SIO7Model.RAPPORT_DE_VISITE" Multiplicity="*" />
-    <End Role="MEDICAMENT" Type="BDD_SIO7Model.MEDICAMENT" Multiplicity="*" />
   </Association>
   <Association Name="organise">
     <End Role="COLLABORATEUR" Type="BDD_SIO7Model.COLLABORATEUR" Multiplicity="*" />
@@ -840,8 +854,121 @@
     <End Role="PRATICIEN" Type="BDD_SIO7Model.PRATICIEN" Multiplicity="*" />
     <End Role="SPECIALITE" Type="BDD_SIO7Model.SPECIALITE" Multiplicity="*" />
   </Association>
-  <Association Name="presente">
-    <End Role="MEDICAMENT" Type="BDD_SIO7Model.MEDICAMENT" Multiplicity="*" />
-    <End Role="RAPPORT_DE_VISITE" Type="BDD_SIO7Model.RAPPORT_DE_VISITE" Multiplicity="*" />
+  <Association Name="FK_72BDCB1B895C0B0">
+    <End Type="BDD_SIO7Model.COLLABORATEUR" Role="COLLABORATEUR" Multiplicity="0..1" />
+    <End Type="BDD_SIO7Model.RAPPORT_DE_VISITE" Role="RAPPORT_DE_VISITE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COLLABORATEUR">
+        <PropertyRef Name="matricule_col" />
+      </Principal>
+      <Dependent Role="RAPPORT_DE_VISITE">
+        <PropertyRef Name="matricule_col" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OFFRE1">
+    <Key>
+      <PropertyRef Name="num_rapport_offre" />
+      <PropertyRef Name="depot_legal_offre" />
+    </Key>
+    <Property Type="Int32" Name="quantite_offre" />
+    <Property Type="Int32" Name="num_rapport_offre" Nullable="false" />
+    <Property Type="String" Name="depot_legal_offre" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MEDICAMENT" Relationship="BDD_SIO7Model.FK_OFFRE_depot_legal_offre" FromRole="OFFRE1" ToRole="MEDICAMENT" />
+    <NavigationProperty Name="RAPPORT_DE_VISITE" Relationship="BDD_SIO7Model.FK_OFFRE_num_rapport_offre" FromRole="OFFRE1" ToRole="RAPPORT_DE_VISITE" />
+  </EntityType>
+  <EntityType Name="PRESENTE">
+    <Key>
+      <PropertyRef Name="num_rapport_presente" />
+      <PropertyRef Name="depot_legal_presente" />
+    </Key>
+    <Property Type="Int32" Name="quantite_presente" />
+    <Property Type="Int32" Name="num_rapport_presente" Nullable="false" />
+    <Property Type="String" Name="depot_legal_presente" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MEDICAMENT" Relationship="BDD_SIO7Model.FK_PRESENTE_depot_legal_presente" FromRole="PRESENTE" ToRole="MEDICAMENT" />
+    <NavigationProperty Name="RAPPORT_DE_VISITE" Relationship="BDD_SIO7Model.FK_PRESENTE_num_rapport_presente" FromRole="PRESENTE" ToRole="RAPPORT_DE_VISITE" />
+  </EntityType>
+  <Association Name="FK_OFFRE_depot_legal_offre">
+    <End Type="BDD_SIO7Model.MEDICAMENT" Role="MEDICAMENT" Multiplicity="1" />
+    <End Type="BDD_SIO7Model.OFFRE1" Role="OFFRE1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDICAMENT">
+        <PropertyRef Name="depot_legal" />
+      </Principal>
+      <Dependent Role="OFFRE1">
+        <PropertyRef Name="depot_legal_offre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRESENTE_depot_legal_presente">
+    <End Type="BDD_SIO7Model.MEDICAMENT" Role="MEDICAMENT" Multiplicity="1" />
+    <End Type="BDD_SIO7Model.PRESENTE" Role="PRESENTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDICAMENT">
+        <PropertyRef Name="depot_legal" />
+      </Principal>
+      <Dependent Role="PRESENTE">
+        <PropertyRef Name="depot_legal_presente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OFFRE_num_rapport_offre">
+    <End Type="BDD_SIO7Model.RAPPORT_DE_VISITE" Role="RAPPORT_DE_VISITE" Multiplicity="1" />
+    <End Type="BDD_SIO7Model.OFFRE1" Role="OFFRE1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RAPPORT_DE_VISITE">
+        <PropertyRef Name="num_rapport" />
+      </Principal>
+      <Dependent Role="OFFRE1">
+        <PropertyRef Name="num_rapport_offre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRESENTE_num_rapport_presente">
+    <End Type="BDD_SIO7Model.RAPPORT_DE_VISITE" Role="RAPPORT_DE_VISITE" Multiplicity="1" />
+    <End Type="BDD_SIO7Model.PRESENTE" Role="PRESENTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RAPPORT_DE_VISITE">
+        <PropertyRef Name="num_rapport" />
+      </Principal>
+      <Dependent Role="PRESENTE">
+        <PropertyRef Name="num_rapport_presente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AVOIR1">
+    <Key>
+      <PropertyRef Name="depot_legal_avoir" />
+      <PropertyRef Name="matricule_col_avoir" />
+    </Key>
+    <Property Type="Int32" Name="quantite_avoir" />
+    <Property Type="String" Name="depot_legal_avoir" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="matricule_col_avoir" Nullable="false" />
+    <NavigationProperty Name="MEDICAMENT" Relationship="BDD_SIO7Model.FK_AVOIR_depot_legal_avoir" FromRole="AVOIR1" ToRole="MEDICAMENT" />
+    <NavigationProperty Name="COLLABORATEUR" Relationship="BDD_SIO7Model.FK_AVOIR_matricule_col_avo" FromRole="AVOIR1" ToRole="COLLABORATEUR" />
+  </EntityType>
+  <Association Name="FK_AVOIR_depot_legal_avoir">
+    <End Type="BDD_SIO7Model.MEDICAMENT" Role="MEDICAMENT" Multiplicity="1" />
+    <End Type="BDD_SIO7Model.AVOIR1" Role="AVOIR1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDICAMENT">
+        <PropertyRef Name="depot_legal" />
+      </Principal>
+      <Dependent Role="AVOIR1">
+        <PropertyRef Name="depot_legal_avoir" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AVOIR_matricule_col_avo">
+    <End Type="BDD_SIO7Model.COLLABORATEUR" Role="COLLABORATEUR" Multiplicity="1" />
+    <End Type="BDD_SIO7Model.AVOIR1" Role="AVOIR1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COLLABORATEUR">
+        <PropertyRef Name="matricule_col" />
+      </Principal>
+      <Dependent Role="AVOIR1">
+        <PropertyRef Name="matricule_col_avoir" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

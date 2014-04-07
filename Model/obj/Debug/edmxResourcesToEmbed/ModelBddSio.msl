@@ -182,6 +182,7 @@
     <EntitySetMapping Name="RAPPORT_DE_VISITE">
       <EntityTypeMapping TypeName="BDD_SIO7Model.RAPPORT_DE_VISITE">
         <MappingFragment StoreEntitySet="RAPPORT_DE_VISITE">
+          <ScalarProperty Name="matricule_col" ColumnName="matricule_col" />
           <ScalarProperty Name="num_rapport" ColumnName="num_rapport" />
           <ScalarProperty Name="code_motif" ColumnName="code_motif" />
           <ScalarProperty Name="matricule_praticien" ColumnName="matricule_praticien" />
@@ -277,14 +278,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="avoir" TypeName="BDD_SIO7Model.avoir" StoreEntitySet="avoir">
-      <EndProperty Name="MEDICAMENT">
-        <ScalarProperty Name="depot_legal" ColumnName="depot_legal_avoir" />
-      </EndProperty>
-      <EndProperty Name="COLLABORATEUR">
-        <ScalarProperty Name="matricule_col" ColumnName="matricule_col_avo" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="constituer" TypeName="BDD_SIO7Model.constituer" StoreEntitySet="constituer">
       <EndProperty Name="MEDICAMENT">
         <ScalarProperty Name="depot_legal" ColumnName="depot_legal_constituer" />
@@ -299,14 +292,6 @@
       </EndProperty>
       <EndProperty Name="FICHE_FRAIS">
         <ScalarProperty Name="ff_mois" ColumnName="ff_mois" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="offre" TypeName="BDD_SIO7Model.offre" StoreEntitySet="offre">
-      <EndProperty Name="RAPPORT_DE_VISITE">
-        <ScalarProperty Name="num_rapport" ColumnName="num_rapport_offre" />
-      </EndProperty>
-      <EndProperty Name="MEDICAMENT">
-        <ScalarProperty Name="depot_legal" ColumnName="depot_legal_offre" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="organise" TypeName="BDD_SIO7Model.organise" StoreEntitySet="organise">
@@ -341,13 +326,32 @@
         <ScalarProperty Name="code_spec" ColumnName="code_spec" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="presente" TypeName="BDD_SIO7Model.presente" StoreEntitySet="presente">
-      <EndProperty Name="MEDICAMENT">
-        <ScalarProperty Name="depot_legal" ColumnName="depot_legal_pres" />
-      </EndProperty>
-      <EndProperty Name="RAPPORT_DE_VISITE">
-        <ScalarProperty Name="num_rapport" ColumnName="num_rapport_presente" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="OFFRE1Jeu">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.OFFRE1">
+        <MappingFragment StoreEntitySet="OFFRE">
+          <ScalarProperty Name="depot_legal_offre" ColumnName="depot_legal_offre" />
+          <ScalarProperty Name="num_rapport_offre" ColumnName="num_rapport_offre" />
+          <ScalarProperty Name="quantite_offre" ColumnName="quantite_offre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRESENTE">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.PRESENTE">
+        <MappingFragment StoreEntitySet="PRESENTE">
+          <ScalarProperty Name="depot_legal_presente" ColumnName="depot_legal_presente" />
+          <ScalarProperty Name="num_rapport_presente" ColumnName="num_rapport_presente" />
+          <ScalarProperty Name="quantite_presente" ColumnName="quantite_presente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AVOIR1Jeu">
+      <EntityTypeMapping TypeName="BDD_SIO7Model.AVOIR1">
+        <MappingFragment StoreEntitySet="AVOIR">
+          <ScalarProperty Name="matricule_col_avoir" ColumnName="matricule_col_avoir" />
+          <ScalarProperty Name="depot_legal_avoir" ColumnName="depot_legal_avoir" />
+          <ScalarProperty Name="quantite_avoir" ColumnName="quantite_avoir" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

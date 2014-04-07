@@ -84,6 +84,10 @@
     <Compile Include="Model\Design\DesignServiceClient.cs" />
     <Compile Include="Model\IServiceClient.cs" />
     <Compile Include="Model\ServiceClient.cs" />
+    <Compile Include="ViewModel\Trans\ColTrans.cs" />
+    <Compile Include="ViewModel\Trans\BaseTrans.cs" />
+    <Compile Include="ViewModel\Trans\PratTrans.cs" />
+    <Compile Include="ViewModel\Trans\RapTrans.cs" />
     <Compile Include="ViewModel\ListWindowViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

@@ -39,6 +39,7 @@ namespace Model.helpers
         {
                
         }
+
         // endregion
         // region Fonctions publiques utiles
         public List<COLLABORATEUR> GetList()

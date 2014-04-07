@@ -1,6 +1,8 @@
 ﻿<Window x:Class="WpfApplication.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF45"
         DataContext="{Binding MainWindowVM, Source={StaticResource Locator}}"
         Title="MainWindow" Height="651" Width="800">
     <Window.Resources>
@@ -137,47 +139,89 @@ Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(
             </StackPanel>
         </StackPanel>
         <Button Content="Statistiques" HorizontalAlignment="Left" Margin="517,40,0,0" VerticalAlignment="Top" Width="75" />
-        <Button Content="Excel" HorizontalAlignment="Left" Margin="630,40,0,0" VerticalAlignment="Top" Width="75" />
+        <Button Content="Excel" HorizontalAlignment="Left" Margin="630,40,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ExcelCommand}"/>
         <Button Content="Nouveau" HorizontalAlignment="Left" Margin="493,87,0,0" VerticalAlignment="Top" Width="100" />
         <Button Content="Supression" HorizontalAlignment="Left" Margin="628,87,0,0" VerticalAlignment="Top" Width="100"/>
 
-        <DataGrid x:Name="ContentPanel" Margin="15,160,0,70" Width="auto" ItemsSource="{Binding ListeCol}" AutoGenerateColumns="False" HorizontalAlignment="Left">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Matricule" Width="auto" IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding matricule_col}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+        <TabControl Margin="10,142,10,65" HorizontalAlignment="Stretch" Width="Auto">
+            <TabItem Header="Collaborateurs">
+                <DataGrid x:Name="ContentPanel" ItemsSource="{Binding ListeCol}" Margin="0" Width="auto" IsReadOnly="True" HorizontalAlignment="Left" Height="auto">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged" >
+                            <cmd:EventToCommand Command="{Binding SelectedItemsCommand}"
+                                                PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <!--
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Matricule" Width="auto" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding matricule}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="Prénom" Width="auto" IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding prenom_col}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Prénom" Width="auto" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding prenom}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="Nom" Width="auto" IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding nom_col}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Nom" Width="auto" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding nom}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                 
-            </DataGrid.Columns>
-        </DataGrid>
+                    </DataGrid.Columns>
+                    -->
+                    <!--
+                    <DataGrid.Columns>
+                        <DataGridTextColumn >
+                            <DataGridTextColumn.HeaderTemplate>
+                                <DataTemplate Resources="{Binding Headers}">
+                                    <TextBlock Text="{Binding ''}"/>
+                                </DataTemplate>
+                            </DataGridTextColumn.HeaderTemplate>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                    -->
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Praticiens">
+                <DataGrid x:Name="pratPanel" ItemsSource="{Binding ListePrat}" Margin="0" Width="auto"
+                          IsReadOnly="True" HorizontalAlignment="Left" Height="auto"/>
+            </TabItem>
+            <TabItem Header="Rapports">
+                <DataGrid x:Name="rapPanel" ItemsSource="{Binding ListeRap}" Margin="0" Width="auto"
+                          IsReadOnly="True" HorizontalAlignment="Left" Height="auto">
+                    <!--
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="N°" Width="auto" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding num_rapport}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                </DataGrid.Columns> -->
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+
+        <!--        <DataGrid x:Name="ContentPanel" Margin="15,160,0,70" Width="auto" ItemsSource="{Binding ListeCol}"
+                  IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Left">
+-->
         <!-- 
         <DataGrid x:Name="MaGrid" AlternationCount="2" VerticalAlignment="Top" MaxHeight="396" Margin="0,151,0,0" ItemsSource="{Binding ListeCol}"/>
         -->
         <DockPanel Height="30" Margin="0,0,0,10" VerticalAlignment="Bottom">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button x:Name="btprat" Content="Praticiens" Width="90"  />
-                <Button x:Name="btcolla" Content="Collaborateurs" Width="90"  />
-                <Button x:Name="btrapp" Content="Rapports" Width="90"  />
-            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                 <Button x:Name="btrefresh" Content="Refresh" Width="90" Command="{Binding TestCommand}" />
                 <Button x:Name="btquit" Content="Quitter" Width="90" Command="{Binding ExitCommand}"/>

@@ -2,7 +2,7 @@
 <Schema Namespace="BDD_SIO7Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="BDD_SIO7ModelStoreContainer">
     <EntitySet Name="ACTIVITE_COMPLEMENTAIRE" EntityType="BDD_SIO7Model.Store.ACTIVITE_COMPLEMENTAIRE" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="avoir" EntityType="BDD_SIO7Model.Store.avoir" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AVOIR" EntityType="BDD_SIO7Model.Store.AVOIR" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CALENDRIER" EntityType="BDD_SIO7Model.Store.CALENDRIER" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="COLLABORATEUR" EntityType="BDD_SIO7Model.Store.COLLABORATEUR" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="COMMUNE" EntityType="BDD_SIO7Model.Store.COMMUNE" store:Type="Tables" Schema="dbo" />
@@ -19,7 +19,7 @@
     <EntitySet Name="inclure" EntityType="BDD_SIO7Model.Store.inclure" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MEDICAMENT" EntityType="BDD_SIO7Model.Store.MEDICAMENT" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MOTIF" EntityType="BDD_SIO7Model.Store.MOTIF" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="offre" EntityType="BDD_SIO7Model.Store.offre" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OFFRE" EntityType="BDD_SIO7Model.Store.OFFRE" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="organise" EntityType="BDD_SIO7Model.Store.organise" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="participe" EntityType="BDD_SIO7Model.Store.participe" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="perturbe" EntityType="BDD_SIO7Model.Store.perturbe" store:Type="Tables" Schema="dbo" />
@@ -27,7 +27,7 @@
     <EntitySet Name="PRATICIEN" EntityType="BDD_SIO7Model.Store.PRATICIEN" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PRESCRIRE" EntityType="BDD_SIO7Model.Store.PRESCRIRE" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PRESENTATION" EntityType="BDD_SIO7Model.Store.PRESENTATION" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="presente" EntityType="BDD_SIO7Model.Store.presente" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PRESENTE" EntityType="BDD_SIO7Model.Store.PRESENTE" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="RAPPORT_DE_VISITE" EntityType="BDD_SIO7Model.Store.RAPPORT_DE_VISITE" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="REGION" EntityType="BDD_SIO7Model.Store.REGION" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="REMPLACE" EntityType="BDD_SIO7Model.Store.REMPLACE" store:Type="Tables" Schema="dbo" />
@@ -95,14 +95,6 @@
       <End Role="SPECIALITE" EntitySet="SPECIALITE" />
       <End Role="posseder" EntitySet="posseder" />
     </AssociationSet>
-    <AssociationSet Name="FK_659B1A433999159F" Association="BDD_SIO7Model.Store.FK_659B1A433999159F">
-      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
-      <End Role="avoir" EntitySet="avoir" />
-    </AssociationSet>
-    <AssociationSet Name="FK_659B1A43D167EDF1" Association="BDD_SIO7Model.Store.FK_659B1A43D167EDF1">
-      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
-      <End Role="avoir" EntitySet="avoir" />
-    </AssociationSet>
     <AssociationSet Name="FK_6C35D95C17C6DFA1" Association="BDD_SIO7Model.Store.FK_6C35D95C17C6DFA1">
       <End Role="TYPE_FRAIS" EntitySet="TYPE_FRAIS" />
       <End Role="inclure" EntitySet="inclure" />
@@ -111,20 +103,16 @@
       <End Role="FICHE_FRAIS" EntitySet="FICHE_FRAIS" />
       <End Role="inclure" EntitySet="inclure" />
     </AssociationSet>
-    <AssociationSet Name="FK_6CF443337DEDA461" Association="BDD_SIO7Model.Store.FK_6CF443337DEDA461">
-      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
-      <End Role="presente" EntitySet="presente" />
-    </AssociationSet>
-    <AssociationSet Name="FK_6CF44333B3172C78" Association="BDD_SIO7Model.Store.FK_6CF44333B3172C78">
-      <End Role="RAPPORT_DE_VISITE" EntitySet="RAPPORT_DE_VISITE" />
-      <End Role="presente" EntitySet="presente" />
-    </AssociationSet>
     <AssociationSet Name="FK_707672BD79F04D5D" Association="BDD_SIO7Model.Store.FK_707672BD79F04D5D">
       <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
       <End Role="DIRECTEUR_REGIONAL" EntitySet="DIRECTEUR_REGIONAL" />
     </AssociationSet>
     <AssociationSet Name="FK_72BDCB1B6B866EF7" Association="BDD_SIO7Model.Store.FK_72BDCB1B6B866EF7">
       <End Role="MOTIF" EntitySet="MOTIF" />
+      <End Role="RAPPORT_DE_VISITE" EntitySet="RAPPORT_DE_VISITE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_72BDCB1B895C0B0" Association="BDD_SIO7Model.Store.FK_72BDCB1B895C0B0">
+      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
       <End Role="RAPPORT_DE_VISITE" EntitySet="RAPPORT_DE_VISITE" />
     </AssociationSet>
     <AssociationSet Name="FK_72BDCB1BD3000B9" Association="BDD_SIO7Model.Store.FK_72BDCB1BD3000B9">
@@ -183,13 +171,13 @@
       <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
       <End Role="ACTIVITE_COMPLEMENTAIRE" EntitySet="ACTIVITE_COMPLEMENTAIRE" />
     </AssociationSet>
-    <AssociationSet Name="FK_AF86866F117EA19D" Association="BDD_SIO7Model.Store.FK_AF86866F117EA19D">
-      <End Role="RAPPORT_DE_VISITE" EntitySet="RAPPORT_DE_VISITE" />
-      <End Role="offre" EntitySet="offre" />
-    </AssociationSet>
-    <AssociationSet Name="FK_AF86866FF38489B3" Association="BDD_SIO7Model.Store.FK_AF86866FF38489B3">
+    <AssociationSet Name="FK_AVOIR_depot_legal_avoir" Association="BDD_SIO7Model.Store.FK_AVOIR_depot_legal_avoir">
       <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
-      <End Role="offre" EntitySet="offre" />
+      <End Role="AVOIR" EntitySet="AVOIR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AVOIR_matricule_col_avo" Association="BDD_SIO7Model.Store.FK_AVOIR_matricule_col_avo">
+      <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
+      <End Role="AVOIR" EntitySet="AVOIR" />
     </AssociationSet>
     <AssociationSet Name="FK_D56F317910C4B9C1" Association="BDD_SIO7Model.Store.FK_D56F317910C4B9C1">
       <End Role="COLLABORATEUR" EntitySet="COLLABORATEUR" />
@@ -215,6 +203,22 @@
       <End Role="SECTEUR" EntitySet="SECTEUR" />
       <End Role="REGION" EntitySet="REGION" />
     </AssociationSet>
+    <AssociationSet Name="FK_OFFRE_depot_legal_offre" Association="BDD_SIO7Model.Store.FK_OFFRE_depot_legal_offre">
+      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+      <End Role="OFFRE" EntitySet="OFFRE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OFFRE_num_rapport_offre" Association="BDD_SIO7Model.Store.FK_OFFRE_num_rapport_offre">
+      <End Role="RAPPORT_DE_VISITE" EntitySet="RAPPORT_DE_VISITE" />
+      <End Role="OFFRE" EntitySet="OFFRE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRESENTE_depot_legal_presente" Association="BDD_SIO7Model.Store.FK_PRESENTE_depot_legal_presente">
+      <End Role="MEDICAMENT" EntitySet="MEDICAMENT" />
+      <End Role="PRESENTE" EntitySet="PRESENTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRESENTE_num_rapport_presente" Association="BDD_SIO7Model.Store.FK_PRESENTE_num_rapport_presente">
+      <End Role="RAPPORT_DE_VISITE" EntitySet="RAPPORT_DE_VISITE" />
+      <End Role="PRESENTE" EntitySet="PRESENTE" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ACTIVITE_COMPLEMENTAIRE">
     <Key>
@@ -227,13 +231,14 @@
     <Property Name="date_act" Type="datetime2" Nullable="false" Precision="6" />
     <Property Name="lieu_act" Type="nvarchar" Nullable="false" MaxLength="300" />
   </EntityType>
-  <EntityType Name="avoir">
+  <EntityType Name="AVOIR">
     <Key>
       <PropertyRef Name="depot_legal_avoir" />
-      <PropertyRef Name="matricule_col_avo" />
+      <PropertyRef Name="matricule_col_avoir" />
     </Key>
+    <Property Name="quantite_avoir" Type="int" />
     <Property Name="depot_legal_avoir" Type="nvarchar" Nullable="false" MaxLength="25" />
-    <Property Name="matricule_col_avo" Type="int" Nullable="false" />
+    <Property Name="matricule_col_avoir" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CALENDRIER">
     <Key>
@@ -253,7 +258,7 @@
     <Property Name="mdp_col" Type="nvarchar" Nullable="false" MaxLength="350" />
     <Property Name="date_embauche" Type="datetime2" Nullable="false" Precision="6" />
     <Property Name="ville_col" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="salt_col" Type="nvarchar" MaxLength="350" />
+    <Property Name="salt_col" Type="nvarchar" Nullable="false" MaxLength="350" />
   </EntityType>
   <EntityType Name="COMMUNE">
     <Key>
@@ -363,7 +368,7 @@
     <Property Name="effet" Type="varchar(max)" Nullable="false" />
     <Property Name="contreindic" Type="varchar(max)" Nullable="false" />
     <Property Name="prixechantillon" Type="float" Nullable="false" />
-    <Property Name="nom" Type="varchar(max)" Nullable="false" />
+    <Property Name="nom" Type="nchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="MOTIF">
     <Key>
@@ -372,11 +377,12 @@
     <Property Name="code_motif" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="libelle_motif" Type="nvarchar" Nullable="false" MaxLength="250" />
   </EntityType>
-  <EntityType Name="offre">
+  <EntityType Name="OFFRE">
     <Key>
       <PropertyRef Name="num_rapport_offre" />
       <PropertyRef Name="depot_legal_offre" />
     </Key>
+    <Property Name="quantite_offre" Type="int" />
     <Property Name="num_rapport_offre" Type="int" Nullable="false" />
     <Property Name="depot_legal_offre" Type="nvarchar" Nullable="false" MaxLength="25" />
   </EntityType>
@@ -446,13 +452,14 @@
     <Property Name="libelle_present" Type="nvarchar" Nullable="false" MaxLength="25" />
     <Property Name="depot_legal_present" Type="varchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="presente">
+  <EntityType Name="PRESENTE">
     <Key>
       <PropertyRef Name="num_rapport_presente" />
-      <PropertyRef Name="depot_legal_pres" />
+      <PropertyRef Name="depot_legal_presente" />
     </Key>
+    <Property Name="quantite_presente" Type="int" />
     <Property Name="num_rapport_presente" Type="int" Nullable="false" />
-    <Property Name="depot_legal_pres" Type="nvarchar" Nullable="false" MaxLength="25" />
+    <Property Name="depot_legal_presente" Type="nvarchar" Nullable="false" MaxLength="25" />
   </EntityType>
   <EntityType Name="RAPPORT_DE_VISITE">
     <Key>
@@ -464,6 +471,7 @@
     <Property Name="date_rapport" Type="datetime2" Nullable="false" Precision="6" />
     <Property Name="date_visite" Type="datetime2" Nullable="false" Precision="6" />
     <Property Name="bilan_visite" Type="varchar(max)" Nullable="false" />
+    <Property Name="matricule_col" Type="int" />
   </EntityType>
   <EntityType Name="REGION">
     <Key>
@@ -711,30 +719,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_659B1A433999159F">
-    <End Role="MEDICAMENT" Type="BDD_SIO7Model.Store.MEDICAMENT" Multiplicity="1" />
-    <End Role="avoir" Type="BDD_SIO7Model.Store.avoir" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MEDICAMENT">
-        <PropertyRef Name="depot_legal" />
-      </Principal>
-      <Dependent Role="avoir">
-        <PropertyRef Name="depot_legal_avoir" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_659B1A43D167EDF1">
-    <End Role="COLLABORATEUR" Type="BDD_SIO7Model.Store.COLLABORATEUR" Multiplicity="1" />
-    <End Role="avoir" Type="BDD_SIO7Model.Store.avoir" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="COLLABORATEUR">
-        <PropertyRef Name="matricule_col" />
-      </Principal>
-      <Dependent Role="avoir">
-        <PropertyRef Name="matricule_col_avo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_6C35D95C17C6DFA1">
     <End Role="TYPE_FRAIS" Type="BDD_SIO7Model.Store.TYPE_FRAIS" Multiplicity="1" />
     <End Role="inclure" Type="BDD_SIO7Model.Store.inclure" Multiplicity="*" />
@@ -759,30 +743,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_6CF443337DEDA461">
-    <End Role="MEDICAMENT" Type="BDD_SIO7Model.Store.MEDICAMENT" Multiplicity="1" />
-    <End Role="presente" Type="BDD_SIO7Model.Store.presente" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MEDICAMENT">
-        <PropertyRef Name="depot_legal" />
-      </Principal>
-      <Dependent Role="presente">
-        <PropertyRef Name="depot_legal_pres" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_6CF44333B3172C78">
-    <End Role="RAPPORT_DE_VISITE" Type="BDD_SIO7Model.Store.RAPPORT_DE_VISITE" Multiplicity="1" />
-    <End Role="presente" Type="BDD_SIO7Model.Store.presente" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RAPPORT_DE_VISITE">
-        <PropertyRef Name="num_rapport" />
-      </Principal>
-      <Dependent Role="presente">
-        <PropertyRef Name="num_rapport_presente" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_707672BD79F04D5D">
     <End Role="COLLABORATEUR" Type="BDD_SIO7Model.Store.COLLABORATEUR" Multiplicity="1" />
     <End Role="DIRECTEUR_REGIONAL" Type="BDD_SIO7Model.Store.DIRECTEUR_REGIONAL" Multiplicity="0..1" />
@@ -804,6 +764,18 @@
       </Principal>
       <Dependent Role="RAPPORT_DE_VISITE">
         <PropertyRef Name="code_motif" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_72BDCB1B895C0B0">
+    <End Role="COLLABORATEUR" Type="BDD_SIO7Model.Store.COLLABORATEUR" Multiplicity="0..1" />
+    <End Role="RAPPORT_DE_VISITE" Type="BDD_SIO7Model.Store.RAPPORT_DE_VISITE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COLLABORATEUR">
+        <PropertyRef Name="matricule_col" />
+      </Principal>
+      <Dependent Role="RAPPORT_DE_VISITE">
+        <PropertyRef Name="matricule_col" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -975,27 +947,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_AF86866F117EA19D">
-    <End Role="RAPPORT_DE_VISITE" Type="BDD_SIO7Model.Store.RAPPORT_DE_VISITE" Multiplicity="1" />
-    <End Role="offre" Type="BDD_SIO7Model.Store.offre" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RAPPORT_DE_VISITE">
-        <PropertyRef Name="num_rapport" />
-      </Principal>
-      <Dependent Role="offre">
-        <PropertyRef Name="num_rapport_offre" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AF86866FF38489B3">
+  <Association Name="FK_AVOIR_depot_legal_avoir">
     <End Role="MEDICAMENT" Type="BDD_SIO7Model.Store.MEDICAMENT" Multiplicity="1" />
-    <End Role="offre" Type="BDD_SIO7Model.Store.offre" Multiplicity="*" />
+    <End Role="AVOIR" Type="BDD_SIO7Model.Store.AVOIR" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MEDICAMENT">
         <PropertyRef Name="depot_legal" />
       </Principal>
-      <Dependent Role="offre">
-        <PropertyRef Name="depot_legal_offre" />
+      <Dependent Role="AVOIR">
+        <PropertyRef Name="depot_legal_avoir" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AVOIR_matricule_col_avo">
+    <End Role="COLLABORATEUR" Type="BDD_SIO7Model.Store.COLLABORATEUR" Multiplicity="1" />
+    <End Role="AVOIR" Type="BDD_SIO7Model.Store.AVOIR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COLLABORATEUR">
+        <PropertyRef Name="matricule_col" />
+      </Principal>
+      <Dependent Role="AVOIR">
+        <PropertyRef Name="matricule_col_avoir" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1068,6 +1040,54 @@
       </Principal>
       <Dependent Role="REGION">
         <PropertyRef Name="code_secteur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OFFRE_depot_legal_offre">
+    <End Role="MEDICAMENT" Type="BDD_SIO7Model.Store.MEDICAMENT" Multiplicity="1" />
+    <End Role="OFFRE" Type="BDD_SIO7Model.Store.OFFRE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDICAMENT">
+        <PropertyRef Name="depot_legal" />
+      </Principal>
+      <Dependent Role="OFFRE">
+        <PropertyRef Name="depot_legal_offre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OFFRE_num_rapport_offre">
+    <End Role="RAPPORT_DE_VISITE" Type="BDD_SIO7Model.Store.RAPPORT_DE_VISITE" Multiplicity="1" />
+    <End Role="OFFRE" Type="BDD_SIO7Model.Store.OFFRE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RAPPORT_DE_VISITE">
+        <PropertyRef Name="num_rapport" />
+      </Principal>
+      <Dependent Role="OFFRE">
+        <PropertyRef Name="num_rapport_offre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRESENTE_depot_legal_presente">
+    <End Role="MEDICAMENT" Type="BDD_SIO7Model.Store.MEDICAMENT" Multiplicity="1" />
+    <End Role="PRESENTE" Type="BDD_SIO7Model.Store.PRESENTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDICAMENT">
+        <PropertyRef Name="depot_legal" />
+      </Principal>
+      <Dependent Role="PRESENTE">
+        <PropertyRef Name="depot_legal_presente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRESENTE_num_rapport_presente">
+    <End Role="RAPPORT_DE_VISITE" Type="BDD_SIO7Model.Store.RAPPORT_DE_VISITE" Multiplicity="1" />
+    <End Role="PRESENTE" Type="BDD_SIO7Model.Store.PRESENTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RAPPORT_DE_VISITE">
+        <PropertyRef Name="num_rapport" />
+      </Principal>
+      <Dependent Role="PRESENTE">
+        <PropertyRef Name="num_rapport_presente" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

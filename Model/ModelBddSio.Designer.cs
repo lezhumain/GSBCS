@@ -45,15 +45,19 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("BDD_SIO7Model", "FK_905658D2A76557E5", "TYPE_INDIVIDU", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Model.TYPE_INDIVIDU), "PRESCRIRE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.PRESCRIRE), true)]
 [assembly: EdmRelationshipAttribute("BDD_SIO7Model", "FK_88961BF470E4A9D4", "REGION", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Model.REGION), "VISITEUR", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.VISITEUR), true)]
 [assembly: EdmRelationshipAttribute("BDD_SIO7Model", "FK_FF9A36F0B8E26183", "SECTEUR", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Model.SECTEUR), "REGION", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.REGION), true)]
-[assembly: EdmRelationshipAttribute("BDD_SIO7Model", "avoir", "MEDICAMENT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.MEDICAMENT), "COLLABORATEUR", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.COLLABORATEUR))]
 [assembly: EdmRelationshipAttribute("BDD_SIO7Model", "constituer", "MEDICAMENT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.MEDICAMENT), "COMPOSANT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.COMPOSANT))]
 [assembly: EdmRelationshipAttribute("BDD_SIO7Model", "inclure", "TYPE_FRAIS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.TYPE_FRAIS), "FICHE_FRAIS", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.FICHE_FRAIS))]
-[assembly: EdmRelationshipAttribute("BDD_SIO7Model", "offre", "RAPPORT_DE_VISITE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.RAPPORT_DE_VISITE), "MEDICAMENT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.MEDICAMENT))]
 [assembly: EdmRelationshipAttribute("BDD_SIO7Model", "organise", "COLLABORATEUR", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.COLLABORATEUR), "ACTIVITE_COMPLEMENTAIRE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.ACTIVITE_COMPLEMENTAIRE))]
 [assembly: EdmRelationshipAttribute("BDD_SIO7Model", "participe", "ACTIVITE_COMPLEMENTAIRE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.ACTIVITE_COMPLEMENTAIRE), "PRATICIEN", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.PRATICIEN))]
 [assembly: EdmRelationshipAttribute("BDD_SIO7Model", "perturbe", "MEDICAMENT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.MEDICAMENT), "MEDICAMENT1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.MEDICAMENT))]
 [assembly: EdmRelationshipAttribute("BDD_SIO7Model", "posseder", "PRATICIEN", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.PRATICIEN), "SPECIALITE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.SPECIALITE))]
-[assembly: EdmRelationshipAttribute("BDD_SIO7Model", "presente", "MEDICAMENT", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.MEDICAMENT), "RAPPORT_DE_VISITE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.RAPPORT_DE_VISITE))]
+[assembly: EdmRelationshipAttribute("BDD_SIO7Model", "FK_72BDCB1B895C0B0", "COLLABORATEUR", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Model.COLLABORATEUR), "RAPPORT_DE_VISITE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.RAPPORT_DE_VISITE), true)]
+[assembly: EdmRelationshipAttribute("BDD_SIO7Model", "FK_OFFRE_depot_legal_offre", "MEDICAMENT", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Model.MEDICAMENT), "OFFRE1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.OFFRE1), true)]
+[assembly: EdmRelationshipAttribute("BDD_SIO7Model", "FK_PRESENTE_depot_legal_presente", "MEDICAMENT", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Model.MEDICAMENT), "PRESENTE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.PRESENTE), true)]
+[assembly: EdmRelationshipAttribute("BDD_SIO7Model", "FK_OFFRE_num_rapport_offre", "RAPPORT_DE_VISITE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Model.RAPPORT_DE_VISITE), "OFFRE1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.OFFRE1), true)]
+[assembly: EdmRelationshipAttribute("BDD_SIO7Model", "FK_PRESENTE_num_rapport_presente", "RAPPORT_DE_VISITE", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Model.RAPPORT_DE_VISITE), "PRESENTE", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.PRESENTE), true)]
+[assembly: EdmRelationshipAttribute("BDD_SIO7Model", "FK_AVOIR_depot_legal_avoir", "MEDICAMENT", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Model.MEDICAMENT), "AVOIR1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.AVOIR1), true)]
+[assembly: EdmRelationshipAttribute("BDD_SIO7Model", "FK_AVOIR_matricule_col_avo", "COLLABORATEUR", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Model.COLLABORATEUR), "AVOIR1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.AVOIR1), true)]
 
 #endregion
 
@@ -568,6 +572,54 @@ namespace Model
             }
         }
         private ObjectSet<VISITEUR> _VISITEUR;
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        public ObjectSet<OFFRE1> OFFRE1Jeu
+        {
+            get
+            {
+                if ((_OFFRE1Jeu == null))
+                {
+                    _OFFRE1Jeu = base.CreateObjectSet<OFFRE1>("OFFRE1Jeu");
+                }
+                return _OFFRE1Jeu;
+            }
+        }
+        private ObjectSet<OFFRE1> _OFFRE1Jeu;
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        public ObjectSet<PRESENTE> PRESENTE
+        {
+            get
+            {
+                if ((_PRESENTE == null))
+                {
+                    _PRESENTE = base.CreateObjectSet<PRESENTE>("PRESENTE");
+                }
+                return _PRESENTE;
+            }
+        }
+        private ObjectSet<PRESENTE> _PRESENTE;
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        public ObjectSet<AVOIR1> AVOIR1Jeu
+        {
+            get
+            {
+                if ((_AVOIR1Jeu == null))
+                {
+                    _AVOIR1Jeu = base.CreateObjectSet<AVOIR1>("AVOIR1Jeu");
+                }
+                return _AVOIR1Jeu;
+            }
+        }
+        private ObjectSet<AVOIR1> _AVOIR1Jeu;
 
         #endregion
 
@@ -803,6 +855,30 @@ namespace Model
         public void AddToVISITEUR(VISITEUR vISITEUR)
         {
             base.AddObject("VISITEUR", vISITEUR);
+        }
+    
+        /// <summary>
+        /// Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet OFFRE1Jeu. Utilisez la méthode .Add de la propriété ObjectSet&lt;T&gt; associée à la place.
+        /// </summary>
+        public void AddToOFFRE1Jeu(OFFRE1 oFFRE1)
+        {
+            base.AddObject("OFFRE1Jeu", oFFRE1);
+        }
+    
+        /// <summary>
+        /// Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet PRESENTE. Utilisez la méthode .Add de la propriété ObjectSet&lt;T&gt; associée à la place.
+        /// </summary>
+        public void AddToPRESENTE(PRESENTE pRESENTE)
+        {
+            base.AddObject("PRESENTE", pRESENTE);
+        }
+    
+        /// <summary>
+        /// Méthode déconseillée pour ajouter un nouvel objet à l'EntitySet AVOIR1Jeu. Utilisez la méthode .Add de la propriété ObjectSet&lt;T&gt; associée à la place.
+        /// </summary>
+        public void AddToAVOIR1Jeu(AVOIR1 aVOIR1)
+        {
+            base.AddObject("AVOIR1Jeu", aVOIR1);
         }
 
         #endregion
@@ -1086,6 +1162,195 @@ namespace Model
     /// <summary>
     /// Aucune documentation sur les métadonnées n'est disponible.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="BDD_SIO7Model", Name="AVOIR1")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class AVOIR1 : EntityObject
+    {
+        #region Méthode de fabrique
+    
+        /// <summary>
+        /// Créez un nouvel objet AVOIR1.
+        /// </summary>
+        /// <param name="depot_legal_avoir">Valeur initiale de la propriété depot_legal_avoir.</param>
+        /// <param name="matricule_col_avoir">Valeur initiale de la propriété matricule_col_avoir.</param>
+        public static AVOIR1 CreateAVOIR1(global::System.String depot_legal_avoir, global::System.Int32 matricule_col_avoir)
+        {
+            AVOIR1 aVOIR1 = new AVOIR1();
+            aVOIR1.depot_legal_avoir = depot_legal_avoir;
+            aVOIR1.matricule_col_avoir = matricule_col_avoir;
+            return aVOIR1;
+        }
+
+        #endregion
+
+        #region Propriétés simples
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> quantite_avoir
+        {
+            get
+            {
+                return _quantite_avoir;
+            }
+            set
+            {
+                Onquantite_avoirChanging(value);
+                ReportPropertyChanging("quantite_avoir");
+                _quantite_avoir = StructuralObject.SetValidValue(value, "quantite_avoir");
+                ReportPropertyChanged("quantite_avoir");
+                Onquantite_avoirChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _quantite_avoir;
+        partial void Onquantite_avoirChanging(Nullable<global::System.Int32> value);
+        partial void Onquantite_avoirChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String depot_legal_avoir
+        {
+            get
+            {
+                return _depot_legal_avoir;
+            }
+            set
+            {
+                if (_depot_legal_avoir != value)
+                {
+                    Ondepot_legal_avoirChanging(value);
+                    ReportPropertyChanging("depot_legal_avoir");
+                    _depot_legal_avoir = StructuralObject.SetValidValue(value, false, "depot_legal_avoir");
+                    ReportPropertyChanged("depot_legal_avoir");
+                    Ondepot_legal_avoirChanged();
+                }
+            }
+        }
+        private global::System.String _depot_legal_avoir;
+        partial void Ondepot_legal_avoirChanging(global::System.String value);
+        partial void Ondepot_legal_avoirChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 matricule_col_avoir
+        {
+            get
+            {
+                return _matricule_col_avoir;
+            }
+            set
+            {
+                if (_matricule_col_avoir != value)
+                {
+                    Onmatricule_col_avoirChanging(value);
+                    ReportPropertyChanging("matricule_col_avoir");
+                    _matricule_col_avoir = StructuralObject.SetValidValue(value, "matricule_col_avoir");
+                    ReportPropertyChanged("matricule_col_avoir");
+                    Onmatricule_col_avoirChanged();
+                }
+            }
+        }
+        private global::System.Int32 _matricule_col_avoir;
+        partial void Onmatricule_col_avoirChanging(global::System.Int32 value);
+        partial void Onmatricule_col_avoirChanged();
+
+        #endregion
+
+        #region Propriétés de navigation
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "FK_AVOIR_depot_legal_avoir", "MEDICAMENT")]
+        public MEDICAMENT MEDICAMENT
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MEDICAMENT>("BDD_SIO7Model.FK_AVOIR_depot_legal_avoir", "MEDICAMENT").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MEDICAMENT>("BDD_SIO7Model.FK_AVOIR_depot_legal_avoir", "MEDICAMENT").Value = value;
+            }
+        }
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<MEDICAMENT> MEDICAMENTReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MEDICAMENT>("BDD_SIO7Model.FK_AVOIR_depot_legal_avoir", "MEDICAMENT");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<MEDICAMENT>("BDD_SIO7Model.FK_AVOIR_depot_legal_avoir", "MEDICAMENT", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "FK_AVOIR_matricule_col_avo", "COLLABORATEUR")]
+        public COLLABORATEUR COLLABORATEUR
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<COLLABORATEUR>("BDD_SIO7Model.FK_AVOIR_matricule_col_avo", "COLLABORATEUR").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<COLLABORATEUR>("BDD_SIO7Model.FK_AVOIR_matricule_col_avo", "COLLABORATEUR").Value = value;
+            }
+        }
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<COLLABORATEUR> COLLABORATEURReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<COLLABORATEUR>("BDD_SIO7Model.FK_AVOIR_matricule_col_avo", "COLLABORATEUR");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<COLLABORATEUR>("BDD_SIO7Model.FK_AVOIR_matricule_col_avo", "COLLABORATEUR", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// Aucune documentation sur les métadonnées n'est disponible.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="BDD_SIO7Model", Name="CALENDRIER")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -1208,7 +1473,8 @@ namespace Model
         /// <param name="mdp_col">Valeur initiale de la propriété mdp_col.</param>
         /// <param name="date_embauche">Valeur initiale de la propriété date_embauche.</param>
         /// <param name="ville_col">Valeur initiale de la propriété ville_col.</param>
-        public static COLLABORATEUR CreateCOLLABORATEUR(global::System.Int32 matricule_col, global::System.String nom_col, global::System.String prenom_col, global::System.String adresse_col, global::System.String cp_col, global::System.String mdp_col, global::System.DateTime date_embauche, global::System.String ville_col)
+        /// <param name="salt_col">Valeur initiale de la propriété salt_col.</param>
+        public static COLLABORATEUR CreateCOLLABORATEUR(global::System.Int32 matricule_col, global::System.String nom_col, global::System.String prenom_col, global::System.String adresse_col, global::System.String cp_col, global::System.String mdp_col, global::System.DateTime date_embauche, global::System.String ville_col, global::System.String salt_col)
         {
             COLLABORATEUR cOLLABORATEUR = new COLLABORATEUR();
             cOLLABORATEUR.matricule_col = matricule_col;
@@ -1219,6 +1485,7 @@ namespace Model
             cOLLABORATEUR.mdp_col = mdp_col;
             cOLLABORATEUR.date_embauche = date_embauche;
             cOLLABORATEUR.ville_col = ville_col;
+            cOLLABORATEUR.salt_col = salt_col;
             return cOLLABORATEUR;
         }
 
@@ -1424,7 +1691,7 @@ namespace Model
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String salt_col
         {
@@ -1436,7 +1703,7 @@ namespace Model
             {
                 Onsalt_colChanging(value);
                 ReportPropertyChanging("salt_col");
-                _salt_col = StructuralObject.SetValidValue(value, true, "salt_col");
+                _salt_col = StructuralObject.SetValidValue(value, false, "salt_col");
                 ReportPropertyChanged("salt_col");
                 Onsalt_colChanged();
             }
@@ -1657,28 +1924,6 @@ namespace Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "avoir", "MEDICAMENT")]
-        public EntityCollection<MEDICAMENT> MEDICAMENT
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MEDICAMENT>("BDD_SIO7Model.avoir", "MEDICAMENT");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MEDICAMENT>("BDD_SIO7Model.avoir", "MEDICAMENT", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// Aucune documentation sur les métadonnées n'est disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "organise", "ACTIVITE_COMPLEMENTAIRE")]
         public EntityCollection<ACTIVITE_COMPLEMENTAIRE> ACTIVITE_COMPLEMENTAIRE1
         {
@@ -1691,6 +1936,50 @@ namespace Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ACTIVITE_COMPLEMENTAIRE>("BDD_SIO7Model.organise", "ACTIVITE_COMPLEMENTAIRE", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "FK_72BDCB1B895C0B0", "RAPPORT_DE_VISITE")]
+        public EntityCollection<RAPPORT_DE_VISITE> RAPPORT_DE_VISITE
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RAPPORT_DE_VISITE>("BDD_SIO7Model.FK_72BDCB1B895C0B0", "RAPPORT_DE_VISITE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RAPPORT_DE_VISITE>("BDD_SIO7Model.FK_72BDCB1B895C0B0", "RAPPORT_DE_VISITE", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "FK_AVOIR_matricule_col_avo", "AVOIR1")]
+        public EntityCollection<AVOIR1> AVOIR
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AVOIR1>("BDD_SIO7Model.FK_AVOIR_matricule_col_avo", "AVOIR1");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AVOIR1>("BDD_SIO7Model.FK_AVOIR_matricule_col_avo", "AVOIR1", value);
                 }
             }
         }
@@ -3273,8 +3562,7 @@ namespace Model
         /// <param name="effet">Valeur initiale de la propriété effet.</param>
         /// <param name="contreindic">Valeur initiale de la propriété contreindic.</param>
         /// <param name="prixechantillon">Valeur initiale de la propriété prixechantillon.</param>
-        /// <param name="nom">Valeur initiale de la propriété nom.</param>
-        public static MEDICAMENT CreateMEDICAMENT(global::System.String depot_legal, global::System.String composition, global::System.String effet, global::System.String contreindic, global::System.Double prixechantillon, global::System.String nom)
+        public static MEDICAMENT CreateMEDICAMENT(global::System.String depot_legal, global::System.String composition, global::System.String effet, global::System.String contreindic, global::System.Double prixechantillon)
         {
             MEDICAMENT mEDICAMENT = new MEDICAMENT();
             mEDICAMENT.depot_legal = depot_legal;
@@ -3282,7 +3570,6 @@ namespace Model
             mEDICAMENT.effet = effet;
             mEDICAMENT.contreindic = contreindic;
             mEDICAMENT.prixechantillon = prixechantillon;
-            mEDICAMENT.nom = nom;
             return mEDICAMENT;
         }
 
@@ -3464,7 +3751,7 @@ namespace Model
         /// <summary>
         /// Aucune documentation sur les métadonnées n'est disponible.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String nom
         {
@@ -3476,7 +3763,7 @@ namespace Model
             {
                 OnnomChanging(value);
                 ReportPropertyChanging("nom");
-                _nom = StructuralObject.SetValidValue(value, false, "nom");
+                _nom = StructuralObject.SetValidValue(value, true, "nom");
                 ReportPropertyChanged("nom");
                 OnnomChanged();
             }
@@ -3593,28 +3880,6 @@ namespace Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "avoir", "COLLABORATEUR")]
-        public EntityCollection<COLLABORATEUR> COLLABORATEUR
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<COLLABORATEUR>("BDD_SIO7Model.avoir", "COLLABORATEUR");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<COLLABORATEUR>("BDD_SIO7Model.avoir", "COLLABORATEUR", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// Aucune documentation sur les métadonnées n'est disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "constituer", "COMPOSANT")]
         public EntityCollection<COMPOSANT> COMPOSANT
         {
@@ -3627,28 +3892,6 @@ namespace Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<COMPOSANT>("BDD_SIO7Model.constituer", "COMPOSANT", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// Aucune documentation sur les métadonnées n'est disponible.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "offre", "RAPPORT_DE_VISITE")]
-        public EntityCollection<RAPPORT_DE_VISITE> RAPPORT_DE_VISITE
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RAPPORT_DE_VISITE>("BDD_SIO7Model.offre", "RAPPORT_DE_VISITE");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RAPPORT_DE_VISITE>("BDD_SIO7Model.offre", "RAPPORT_DE_VISITE", value);
                 }
             }
         }
@@ -3703,18 +3946,62 @@ namespace Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "presente", "RAPPORT_DE_VISITE")]
-        public EntityCollection<RAPPORT_DE_VISITE> RAPPORT_DE_VISITE1
+        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "FK_OFFRE_depot_legal_offre", "OFFRE1")]
+        public EntityCollection<OFFRE1> OFFRE
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RAPPORT_DE_VISITE>("BDD_SIO7Model.presente", "RAPPORT_DE_VISITE");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<OFFRE1>("BDD_SIO7Model.FK_OFFRE_depot_legal_offre", "OFFRE1");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RAPPORT_DE_VISITE>("BDD_SIO7Model.presente", "RAPPORT_DE_VISITE", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<OFFRE1>("BDD_SIO7Model.FK_OFFRE_depot_legal_offre", "OFFRE1", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "FK_PRESENTE_depot_legal_presente", "PRESENTE")]
+        public EntityCollection<PRESENTE> PRESENTE
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PRESENTE>("BDD_SIO7Model.FK_PRESENTE_depot_legal_presente", "PRESENTE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PRESENTE>("BDD_SIO7Model.FK_PRESENTE_depot_legal_presente", "PRESENTE", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "FK_AVOIR_depot_legal_avoir", "AVOIR1")]
+        public EntityCollection<AVOIR1> AVOIR
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AVOIR1>("BDD_SIO7Model.FK_AVOIR_depot_legal_avoir", "AVOIR1");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AVOIR1>("BDD_SIO7Model.FK_AVOIR_depot_legal_avoir", "AVOIR1", value);
                 }
             }
         }
@@ -3823,6 +4110,195 @@ namespace Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RAPPORT_DE_VISITE>("BDD_SIO7Model.FK_72BDCB1B6B866EF7", "RAPPORT_DE_VISITE", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// Aucune documentation sur les métadonnées n'est disponible.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="BDD_SIO7Model", Name="OFFRE1")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class OFFRE1 : EntityObject
+    {
+        #region Méthode de fabrique
+    
+        /// <summary>
+        /// Créez un nouvel objet OFFRE1.
+        /// </summary>
+        /// <param name="num_rapport_offre">Valeur initiale de la propriété num_rapport_offre.</param>
+        /// <param name="depot_legal_offre">Valeur initiale de la propriété depot_legal_offre.</param>
+        public static OFFRE1 CreateOFFRE1(global::System.Int32 num_rapport_offre, global::System.String depot_legal_offre)
+        {
+            OFFRE1 oFFRE1 = new OFFRE1();
+            oFFRE1.num_rapport_offre = num_rapport_offre;
+            oFFRE1.depot_legal_offre = depot_legal_offre;
+            return oFFRE1;
+        }
+
+        #endregion
+
+        #region Propriétés simples
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> quantite_offre
+        {
+            get
+            {
+                return _quantite_offre;
+            }
+            set
+            {
+                Onquantite_offreChanging(value);
+                ReportPropertyChanging("quantite_offre");
+                _quantite_offre = StructuralObject.SetValidValue(value, "quantite_offre");
+                ReportPropertyChanged("quantite_offre");
+                Onquantite_offreChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _quantite_offre;
+        partial void Onquantite_offreChanging(Nullable<global::System.Int32> value);
+        partial void Onquantite_offreChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 num_rapport_offre
+        {
+            get
+            {
+                return _num_rapport_offre;
+            }
+            set
+            {
+                if (_num_rapport_offre != value)
+                {
+                    Onnum_rapport_offreChanging(value);
+                    ReportPropertyChanging("num_rapport_offre");
+                    _num_rapport_offre = StructuralObject.SetValidValue(value, "num_rapport_offre");
+                    ReportPropertyChanged("num_rapport_offre");
+                    Onnum_rapport_offreChanged();
+                }
+            }
+        }
+        private global::System.Int32 _num_rapport_offre;
+        partial void Onnum_rapport_offreChanging(global::System.Int32 value);
+        partial void Onnum_rapport_offreChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String depot_legal_offre
+        {
+            get
+            {
+                return _depot_legal_offre;
+            }
+            set
+            {
+                if (_depot_legal_offre != value)
+                {
+                    Ondepot_legal_offreChanging(value);
+                    ReportPropertyChanging("depot_legal_offre");
+                    _depot_legal_offre = StructuralObject.SetValidValue(value, false, "depot_legal_offre");
+                    ReportPropertyChanged("depot_legal_offre");
+                    Ondepot_legal_offreChanged();
+                }
+            }
+        }
+        private global::System.String _depot_legal_offre;
+        partial void Ondepot_legal_offreChanging(global::System.String value);
+        partial void Ondepot_legal_offreChanged();
+
+        #endregion
+
+        #region Propriétés de navigation
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "FK_OFFRE_depot_legal_offre", "MEDICAMENT")]
+        public MEDICAMENT MEDICAMENT
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MEDICAMENT>("BDD_SIO7Model.FK_OFFRE_depot_legal_offre", "MEDICAMENT").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MEDICAMENT>("BDD_SIO7Model.FK_OFFRE_depot_legal_offre", "MEDICAMENT").Value = value;
+            }
+        }
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<MEDICAMENT> MEDICAMENTReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MEDICAMENT>("BDD_SIO7Model.FK_OFFRE_depot_legal_offre", "MEDICAMENT");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<MEDICAMENT>("BDD_SIO7Model.FK_OFFRE_depot_legal_offre", "MEDICAMENT", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "FK_OFFRE_num_rapport_offre", "RAPPORT_DE_VISITE")]
+        public RAPPORT_DE_VISITE RAPPORT_DE_VISITE
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RAPPORT_DE_VISITE>("BDD_SIO7Model.FK_OFFRE_num_rapport_offre", "RAPPORT_DE_VISITE").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RAPPORT_DE_VISITE>("BDD_SIO7Model.FK_OFFRE_num_rapport_offre", "RAPPORT_DE_VISITE").Value = value;
+            }
+        }
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<RAPPORT_DE_VISITE> RAPPORT_DE_VISITEReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RAPPORT_DE_VISITE>("BDD_SIO7Model.FK_OFFRE_num_rapport_offre", "RAPPORT_DE_VISITE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RAPPORT_DE_VISITE>("BDD_SIO7Model.FK_OFFRE_num_rapport_offre", "RAPPORT_DE_VISITE", value);
                 }
             }
         }
@@ -4666,6 +5142,195 @@ namespace Model
     /// <summary>
     /// Aucune documentation sur les métadonnées n'est disponible.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="BDD_SIO7Model", Name="PRESENTE")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class PRESENTE : EntityObject
+    {
+        #region Méthode de fabrique
+    
+        /// <summary>
+        /// Créez un nouvel objet PRESENTE.
+        /// </summary>
+        /// <param name="num_rapport_presente">Valeur initiale de la propriété num_rapport_presente.</param>
+        /// <param name="depot_legal_presente">Valeur initiale de la propriété depot_legal_presente.</param>
+        public static PRESENTE CreatePRESENTE(global::System.Int32 num_rapport_presente, global::System.String depot_legal_presente)
+        {
+            PRESENTE pRESENTE = new PRESENTE();
+            pRESENTE.num_rapport_presente = num_rapport_presente;
+            pRESENTE.depot_legal_presente = depot_legal_presente;
+            return pRESENTE;
+        }
+
+        #endregion
+
+        #region Propriétés simples
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> quantite_presente
+        {
+            get
+            {
+                return _quantite_presente;
+            }
+            set
+            {
+                Onquantite_presenteChanging(value);
+                ReportPropertyChanging("quantite_presente");
+                _quantite_presente = StructuralObject.SetValidValue(value, "quantite_presente");
+                ReportPropertyChanged("quantite_presente");
+                Onquantite_presenteChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _quantite_presente;
+        partial void Onquantite_presenteChanging(Nullable<global::System.Int32> value);
+        partial void Onquantite_presenteChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 num_rapport_presente
+        {
+            get
+            {
+                return _num_rapport_presente;
+            }
+            set
+            {
+                if (_num_rapport_presente != value)
+                {
+                    Onnum_rapport_presenteChanging(value);
+                    ReportPropertyChanging("num_rapport_presente");
+                    _num_rapport_presente = StructuralObject.SetValidValue(value, "num_rapport_presente");
+                    ReportPropertyChanged("num_rapport_presente");
+                    Onnum_rapport_presenteChanged();
+                }
+            }
+        }
+        private global::System.Int32 _num_rapport_presente;
+        partial void Onnum_rapport_presenteChanging(global::System.Int32 value);
+        partial void Onnum_rapport_presenteChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String depot_legal_presente
+        {
+            get
+            {
+                return _depot_legal_presente;
+            }
+            set
+            {
+                if (_depot_legal_presente != value)
+                {
+                    Ondepot_legal_presenteChanging(value);
+                    ReportPropertyChanging("depot_legal_presente");
+                    _depot_legal_presente = StructuralObject.SetValidValue(value, false, "depot_legal_presente");
+                    ReportPropertyChanged("depot_legal_presente");
+                    Ondepot_legal_presenteChanged();
+                }
+            }
+        }
+        private global::System.String _depot_legal_presente;
+        partial void Ondepot_legal_presenteChanging(global::System.String value);
+        partial void Ondepot_legal_presenteChanged();
+
+        #endregion
+
+        #region Propriétés de navigation
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "FK_PRESENTE_depot_legal_presente", "MEDICAMENT")]
+        public MEDICAMENT MEDICAMENT
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MEDICAMENT>("BDD_SIO7Model.FK_PRESENTE_depot_legal_presente", "MEDICAMENT").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MEDICAMENT>("BDD_SIO7Model.FK_PRESENTE_depot_legal_presente", "MEDICAMENT").Value = value;
+            }
+        }
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<MEDICAMENT> MEDICAMENTReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<MEDICAMENT>("BDD_SIO7Model.FK_PRESENTE_depot_legal_presente", "MEDICAMENT");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<MEDICAMENT>("BDD_SIO7Model.FK_PRESENTE_depot_legal_presente", "MEDICAMENT", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "FK_PRESENTE_num_rapport_presente", "RAPPORT_DE_VISITE")]
+        public RAPPORT_DE_VISITE RAPPORT_DE_VISITE
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RAPPORT_DE_VISITE>("BDD_SIO7Model.FK_PRESENTE_num_rapport_presente", "RAPPORT_DE_VISITE").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RAPPORT_DE_VISITE>("BDD_SIO7Model.FK_PRESENTE_num_rapport_presente", "RAPPORT_DE_VISITE").Value = value;
+            }
+        }
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<RAPPORT_DE_VISITE> RAPPORT_DE_VISITEReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RAPPORT_DE_VISITE>("BDD_SIO7Model.FK_PRESENTE_num_rapport_presente", "RAPPORT_DE_VISITE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RAPPORT_DE_VISITE>("BDD_SIO7Model.FK_PRESENTE_num_rapport_presente", "RAPPORT_DE_VISITE", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// Aucune documentation sur les métadonnées n'est disponible.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="BDD_SIO7Model", Name="RAPPORT_DE_VISITE")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -4840,6 +5505,30 @@ namespace Model
         private global::System.String _bilan_visite;
         partial void Onbilan_visiteChanging(global::System.String value);
         partial void Onbilan_visiteChanged();
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> matricule_col
+        {
+            get
+            {
+                return _matricule_col;
+            }
+            set
+            {
+                Onmatricule_colChanging(value);
+                ReportPropertyChanging("matricule_col");
+                _matricule_col = StructuralObject.SetValidValue(value, "matricule_col");
+                ReportPropertyChanged("matricule_col");
+                Onmatricule_colChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _matricule_col;
+        partial void Onmatricule_colChanging(Nullable<global::System.Int32> value);
+        partial void Onmatricule_colChanged();
 
         #endregion
 
@@ -4927,18 +5616,34 @@ namespace Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "offre", "MEDICAMENT")]
-        public EntityCollection<MEDICAMENT> MEDICAMENT
+        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "FK_72BDCB1B895C0B0", "COLLABORATEUR")]
+        public COLLABORATEUR COLLABORATEUR
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MEDICAMENT>("BDD_SIO7Model.offre", "MEDICAMENT");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<COLLABORATEUR>("BDD_SIO7Model.FK_72BDCB1B895C0B0", "COLLABORATEUR").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<COLLABORATEUR>("BDD_SIO7Model.FK_72BDCB1B895C0B0", "COLLABORATEUR").Value = value;
+            }
+        }
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<COLLABORATEUR> COLLABORATEURReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<COLLABORATEUR>("BDD_SIO7Model.FK_72BDCB1B895C0B0", "COLLABORATEUR");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MEDICAMENT>("BDD_SIO7Model.offre", "MEDICAMENT", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<COLLABORATEUR>("BDD_SIO7Model.FK_72BDCB1B895C0B0", "COLLABORATEUR", value);
                 }
             }
         }
@@ -4949,18 +5654,40 @@ namespace Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "presente", "MEDICAMENT")]
-        public EntityCollection<MEDICAMENT> MEDICAMENT1
+        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "FK_OFFRE_num_rapport_offre", "OFFRE1")]
+        public EntityCollection<OFFRE1> OFFRE
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MEDICAMENT>("BDD_SIO7Model.presente", "MEDICAMENT");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<OFFRE1>("BDD_SIO7Model.FK_OFFRE_num_rapport_offre", "OFFRE1");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MEDICAMENT>("BDD_SIO7Model.presente", "MEDICAMENT", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<OFFRE1>("BDD_SIO7Model.FK_OFFRE_num_rapport_offre", "OFFRE1", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// Aucune documentation sur les métadonnées n'est disponible.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("BDD_SIO7Model", "FK_PRESENTE_num_rapport_presente", "PRESENTE")]
+        public EntityCollection<PRESENTE> PRESENTE
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PRESENTE>("BDD_SIO7Model.FK_PRESENTE_num_rapport_presente", "PRESENTE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PRESENTE>("BDD_SIO7Model.FK_PRESENTE_num_rapport_presente", "PRESENTE", value);
                 }
             }
         }
