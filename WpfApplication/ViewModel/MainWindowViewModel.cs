@@ -19,12 +19,53 @@ using System.Collections;
 using System.Reflection;
 using System.IO;
 using System.Diagnostics;
+using WPFFolderBrowser;
 
 namespace WpfApplication.ViewModel
 {
+    public struct FiltreStruct
+    {
+        private string valeur;
+        public string Valeur
+        {
+            get
+            {
+                return valeur;
+            }
+            set
+            {
+                valeur = value;
+            }
+        }
+
+        private string champ;
+        public string Champ
+        {
+            get
+            {
+                return champ;
+            }
+            set
+            {
+                champ = value;
+            }
+        }
+    }
+    
+
     public class MainWindowViewModel : MainViewModel
     {
+        private COLLABORATEUR sessionCol;
+
         private readonly IServiceClient serviceClient;
+        private string currentList;
+        
+        private FiltreStruct sfiltre;
+        public FiltreStruct Sfiltre
+        {
+            get{ return sfiltre; }
+            set{ sfiltre = value; }
+        }
         
         #region commandes
 
@@ -48,27 +89,11 @@ namespace WpfApplication.ViewModel
             get
             {
                 if (testCommand == null)
-                    testCommand = new DelegateCommand(Test);
+                    testCommand = new DelegateCommand(RefreshLists);
 
                 return testCommand;
             }
         }
-
-        // lien de commande pour selectionChanged
-        public ICommand SelectedItemsCommand { get; set; }
-        /*
-        private DelegateCommand selectedItemsCommand;
-        public ICommand SelectedItemsCommand
-        {
-            get
-            {
-                if (selectedItemsCommand == null)
-                    selectedItemsCommand = new DelegateCommand(SelectedItems);
-
-                return selectedItemsCommand;
-            }
-        }
-        */
 
         private DelegateCommand excelCommand;
         public ICommand ExcelCommand
@@ -82,7 +107,72 @@ namespace WpfApplication.ViewModel
             }
         }
 
+        private DelegateCommand filtreCommand;
+        public ICommand FiltreCommand
+        {
+            get
+            {
+                if (filtreCommand == null)
+                    filtreCommand = new DelegateCommand(Filtre);
+
+                return filtreCommand;
+            }
+        }
+
         #endregion
+        #region evenements
+
+        // lien de commande pour selectionChanged
+        private RelayCommand<SelectionChangedEventArgs> selectedItemsCommand;
+        public ICommand SelectedItemsCommand
+        {
+            get
+            {
+                if (selectedItemsCommand == null)
+                    selectedItemsCommand = new RelayCommand<SelectionChangedEventArgs>(SelectedItems);
+
+                return selectedItemsCommand;
+            }
+        }
+
+        private RelayCommand<SelectionChangedEventArgs> selectChangedCommand;
+        public ICommand SelectChangedCommand
+        {
+            get
+            {
+                if (selectChangedCommand == null)
+                    selectChangedCommand = new RelayCommand<SelectionChangedEventArgs>(Selected);
+
+                return selectChangedCommand;
+            }
+        }
+
+        private RelayCommand<TextChangedEventArgs> textChangedCommand;
+        public ICommand TextChangedCommand
+        {
+            get
+            {
+                if (textChangedCommand == null)
+                    textChangedCommand = new RelayCommand<TextChangedEventArgs>(TextChanged);
+
+                return textChangedCommand;
+            }
+        }
+
+        private RelayCommand<SelectionChangedEventArgs> comboSelChangedCommand;
+        public ICommand ComboSelChangedCommand
+        {
+            get
+            {
+                if (comboSelChangedCommand == null)
+                    comboSelChangedCommand = new RelayCommand<SelectionChangedEventArgs>(ComboSelChanged);
+
+                return comboSelChangedCommand;
+            }
+        }
+
+        #endregion
+        #region Entites
 
         private List<object> listeSel;
         public List<object> ListeSel
@@ -91,28 +181,20 @@ namespace WpfApplication.ViewModel
             set { NotifyPropertyChanged(ref listeSel, value); }
         }
 
-        #region Entites
+        private List<string> listeFiltres;
+        public List<string> ListeFiltres
+        {
+            get { return listeFiltres; }
+            set { NotifyPropertyChanged(ref listeFiltres, value); }
+        }
+
         private List<ColTrans> listeCol;
         public List<ColTrans> ListeCol
         {
             get { return listeCol; }
             set { NotifyPropertyChanged(ref listeCol, value); }
         }
-        /*
-        private List<COLLABORATEUR> listeCole;
-        public List<COLLABORATEUR> ListeCole
-        {
-            get { return listeCole; }
-            set { NotifyPropertyChanged(ref listeCole, value); }
-        }
-
-        private List<RAPPORT_DE_VISITE> listeRape;
-        public List<RAPPORT_DE_VISITE> ListeRape
-        {
-            get { return listeRape; }
-            set { NotifyPropertyChanged(ref listeRape, value); }
-        }
-        */
+        
         private List<RapTrans> listeRap;
         public List<RapTrans> ListeRap
         {
@@ -120,8 +202,8 @@ namespace WpfApplication.ViewModel
             set { NotifyPropertyChanged(ref listeRap, value); }
         }
 
-        private List<PratTrans> listePrat;
-        public List<PratTrans> ListePrat
+        private List<PraTrans> listePrat;
+        public List<PraTrans> ListePrat
         {
             get { return listePrat; }
             set { NotifyPropertyChanged(ref listePrat, value); }
@@ -136,7 +218,6 @@ namespace WpfApplication.ViewModel
             }
             return l;
         }
-        #endregion
 
         public List<RapTrans> convertRap(List<RAPPORT_DE_VISITE> list)
         {
@@ -151,17 +232,19 @@ namespace WpfApplication.ViewModel
             return l;
         }
 
-        public List<PratTrans> convertPrat(List<PRATICIEN> list)
+        public List<PraTrans> convertPrat(List<PRATICIEN> list)
         {
-            List<PratTrans> l = new List<PratTrans>();
+            List<PraTrans> l = new List<PraTrans>();
             foreach (PRATICIEN c in list)
             {
-                l.Add(new PratTrans(c.matricule_praticien,
+                l.Add(new PraTrans(c.matricule_praticien,
                                     c.nom_praticien,
                                     c.prenom_praticien));
             }
             return l;
         }
+
+        #endregion
 
         private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
         {
@@ -180,12 +263,18 @@ namespace WpfApplication.ViewModel
         {
             serviceClient = service;
 
+            //sessionCol = new COLLABORATEUR();
+
             ListeCol = convertCol( ColHelper.Current.GetList() );            
             ListeRap = convertRap( RapHelper.Current.GetList() );
             ListePrat = convertPrat(PraHelper.Current.GetList());
             ListeSel = new List<object>();
+            ListeFiltres = getHeaders(typeof(ColTrans));
+            Sfiltre = new FiltreStruct();
+            currentList = "Collaborateurs";
 
-            SelectedItemsCommand = new RelayCommand<SelectionChangedEventArgs>(SelectedItems);
+            /*SelectedItemsCommand = new RelayCommand<SelectionChangedEventArgs>(SelectedItems);
+            SelectChangedCommand = new RelayCommand<SelectionChangedEventArgs>(Selected);*/
         }
 
         /// <summary>
@@ -197,18 +286,43 @@ namespace WpfApplication.ViewModel
         }
 
         /// <summary>
-        /// Handler pour le clic sur le btn Refresh
+        /// Handler pour le clic sur le btn Refresh.
+        /// Rempli les listes affichees dans la grid
+        /// depuis le modele.
         /// </summary>
-        private void Test()
+        private void RefreshLists()
         {
-            string msg = "aucun test";
+            ListeCol.Clear();
+            ListeRap.Clear();
+            ListePrat.Clear();
 
+            ListeCol = convertCol(ColHelper.Current.GetList());
+            ListeRap = convertRap(RapHelper.Current.GetList());
+            ListePrat = convertPrat(PraHelper.Current.GetList());
 
-            MessageBox.Show(msg);
+            MessageBox.Show("Reloaded");
+            //MessageBox.Show("Fichier: " + chooseFolder());
         }
 
         /// <summary>
-        /// Handler pour l'evnmt SelectionChanged
+        /// Ouvre un dialog permettant de selectionner
+        /// un dossier.
+        /// </summary>
+        /// <returns>Le chemin vers le dossier selectionne ou une chaine vide</returns>
+        private string chooseFolder()
+        {
+            WPFFolderBrowserDialog openFolder = new WPFFolderBrowserDialog();
+            openFolder.InitialDirectory = Directory.GetCurrentDirectory();
+
+            // Get the selected file name and display in a TextBox
+            if (openFolder.ShowDialog() == true)
+                return openFolder.FileName;
+            else
+                return ""; 
+        }
+
+        /// <summary>
+        /// Handler pour la selection de ligne dans la datagrid
         /// Copie les SelectedItems de la grid dans ListeSel
         /// </summary>
         /// <param name="args">Les arguments de l'evnmt</param>
@@ -250,8 +364,14 @@ namespace WpfApplication.ViewModel
                                 listeSel.Add(ct);
                             }
                             break;
+                        case "PratTrans":
+                            foreach (PraTrans ct in lbi)
+                            {
+                                listeSel.Add(ct);
+                            }
+                            break;
                         default:
-                            MessageBox.Show("Défaut");
+                            classe = "(L260)Défaut";
                             break;
                     }
                     msg = "class: " + classe;
@@ -262,6 +382,115 @@ namespace WpfApplication.ViewModel
         }
 
         /// <summary>
+        /// Handler pour le changement d'onglet
+        /// Rempli la liste des filtres avec les nouvelles valeurs
+        /// Met a jour this.currentList
+        /// </summary>
+        /// <param name="args">Les arguments de l'evnmt</param>
+        private void Selected(SelectionChangedEventArgs args)
+        {
+            string name;
+            //MessageBox.Show(((args.Source as TabControl).SelectedItem as TabItem).ToString());
+
+            if (args.Source as TabControl != null)
+            {
+                TabItem ti = ((args.Source as TabControl).SelectedItem) as TabItem;
+                string msg = "un tab a été select\narg type: ";
+
+                // on determine dans quel onglet on est
+                name = ti.Header.ToString();
+                msg += name;
+
+                if (this.ListeFiltres == null)
+                    this.ListeFiltres = new List<string>();
+                else
+                    this.ListeFiltres.Clear();
+
+                switch (name)
+                {
+                    // on recup les header de la classe corresp
+                    case "Collaborateurs":
+                        this.currentList = "Collaborateurs";
+                        this.ListeFiltres = getHeaders(typeof(ColTrans));
+                        break;
+                    case "Rapports":
+                        this.currentList = "Rapports";
+                        this.ListeFiltres = getHeaders(typeof(RapTrans));
+                        break;
+                    case "Praticiens":
+                        this.currentList = "Praticiens";
+                        this.ListeFiltres = getHeaders(typeof(PraTrans));
+                        break;
+                }
+            }
+
+            //MessageBox.Show("Fin de Selected");
+        }
+
+        /// <summary>
+        /// Handler pour selectionChanged de la comboBox
+        /// Met la valeur selectionnee dans sfiltre.Champ
+        /// </summary>
+        /// <param name="args"></param>
+        private void ComboSelChanged(SelectionChangedEventArgs args)
+        {
+            if( (args.Source as ComboBox).SelectedItem != null )
+                this.sfiltre.Champ = (args.Source as ComboBox).SelectedItem.ToString();
+        }
+        
+        /// <summary>
+        /// Handler pour le bouton filtrer
+        /// </summary>
+        private void Filtre()
+        {
+            string msg = "val: " + sfiltre.Valeur + "\nchamp: " + sfiltre.Champ;
+            int lol;
+            var req = from l in this.ListeCol select l;
+
+            if (sfiltre.Valeur.Count() == 0)
+                ListeCol = convertCol( ColHelper.Current.GetList() );
+            else
+                switch( this.sfiltre.Champ.ToLower() ) // pour les collabo
+                {
+                    case "matricule":
+                        if( int.TryParse(sfiltre.Valeur, out lol) )
+                        {
+                            List<ColTrans> l = ListeCol.Where(col => col.matricule == lol).ToList();
+                            if (l.Count != 0)
+                            {
+                                ListeCol = l;
+                                msg = "Matricule, fait.\n" + lToS(ListeCol);
+                            }
+                        }
+                        else
+                            msg = "Le matricule doit être un nombre";
+                        break;
+                    case "nom":
+                        List<ColTrans> ll = ListeCol.Where(col => col.nom == sfiltre.Valeur).ToList();
+                        if (ll.Count != 0)
+                        {
+                            ListeCol = ll;
+                            msg = "Nom, fait.\n" + lToS(ListeCol);
+                        }
+                        break;
+                    case "prenom":
+                        List<ColTrans> lll = ListeCol.Where(col => col.prenom == sfiltre.Valeur).ToList();
+                        if (lll.Count != 0)
+                        {
+                            ListeCol = lll;
+                            msg = "Prénom, fait.\n" + lToS(ListeCol);
+                        }
+                        break;
+                    default:
+                        msg = "Defaut, a faire.";
+                        break;
+                }
+
+            MessageBox.Show( msg );
+        }
+
+        /// <summary>
+        /// Handler pour le bouton excel
         /// Formate les informations necessaires dans une
         /// seule string puis la donne a manger a toFic()
         /// qui nous sort un csv pete sa mere
@@ -272,7 +501,7 @@ namespace WpfApplication.ViewModel
             bool skip = false; // tant que c'est pas fini
 
             if (listeSel == null || listeSel.Count() == 0)
-                MessageBox.Show("vide");
+                MessageBox.Show("Aucun élément sélectionné.");
             else
             {
                 Type t = listeSel[0].GetType();
@@ -288,6 +517,7 @@ namespace WpfApplication.ViewModel
                 }
                 content += "\n"; // fin des headers
 
+                // Pour changer le type dans le foreach :
                 switch(classe)
                 {
                     case "ColTrans":
@@ -300,48 +530,80 @@ namespace WpfApplication.ViewModel
                         foreach (RapTrans ct in listeSel)
                             content += ct.ToCsvRow();
                         break;
+                    case "PratTrans":
+                        // on rempli les valeurs
+                        foreach (PraTrans ct in listeSel)
+                            content += ct.ToCsvRow();
+                        break;
                     default:
-                        MessageBox.Show("default, a faire");
-                        skip = true;
+                        MessageBox.Show("Default, a faire");
+                        skip = true; // permet d'ecrire ou nn le fichier
                         break;
                 }
                 // on fait péter dans le fichier
-                if(!skip)
+                if(!skip) // enlever qd termine
                 {
                     if(toFic(content))
                         MessageBox.Show("Données exportées avec succès !");
                     else
                         MessageBox.Show("Export interrompu");
                 }
+                else
+                    MessageBox.Show("Rien n'a été fait.");
             }
         }
 
         /// <summary>
-        /// Ecrit dans un fichier
+        /// Handler pour la valeur de la textbox des filtres
+        /// Met a jour la valeur de la struct sfiltre.Valeur
+        /// </summary>
+        /// <param name="args"></param>
+        private void TextChanged(TextChangedEventArgs args)
+        {
+            if (sfiltre.Valeur == null)
+                sfiltre.Valeur = "";
+            
+            sfiltre.Valeur = (args.Source as TextBox).Text;
+
+            //MessageBox.Show("cucu : " + sfiltre.Valeur);
+        }
+
+        /// <summary>
+        /// Fait choisir un repertoire puis
+        /// ecrit les donnees dans un fichier
         /// </summary>
         /// <param name="content">Le texte a ecrire dans le fichier</param>
-        /// <returns>true si reussi, false sinon</returns>
+        /// <returns>true si le fichier a ete ecrit, false sinon</returns>
         private bool toFic(string content)
         {
-            string ficPath = Directory.GetCurrentDirectory() + "\\test.csv";
-            try
+            string fold = chooseFolder();
+            if (fold != "")
             {
-                StreamWriter sw = new StreamWriter(ficPath); // WpfApplication\bin\debug
-                sw.WriteLine(content);
-                sw.Close();
-                //Process.Start(ficPath); // lance l'ouverture du fichier cree
-                return true;
-            }
-            catch (IOException e)
-            {
-                string msg = "";
+                string ficPath = chooseFolder() + "\\test.csv";
+                try
+                {
+                    StreamWriter sw = new StreamWriter(ficPath); // WpfApplication\bin\debug
+                    sw.WriteLine(content);
+                    sw.Close();
+                    Process.Start(ficPath); // lance l'ouverture du fichier cree
+                    return true;
+                }
+                catch (IOException e)
+                {
+                    string msg = "";
 
-                if (e.HResult == -2147024864) // code si fichier deja ouvert
-                    msg = "Erreur: le fichier de destination est déjà ouvert.\nVeuillez le fermer d'abord.";
-                else
-                    msg = "IOException: erreur d'acces au fichier";
-                
-                MessageBox.Show(msg);
+                    if (e.HResult == -2147024864) // code erreur si fichier deja ouvert
+                        msg = "Erreur: le fichier de destination est déjà ouvert.\nVeuillez le fermer d'abord.";
+                    else
+                        msg = "IOException: erreur d'acces au fichier";
+
+                    MessageBox.Show(msg);
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Aucun répertoire sélectionné.");
                 return false;
             }
         }
@@ -350,9 +612,9 @@ namespace WpfApplication.ViewModel
         /// Convertie une IList en string
         /// Forme : 
         ///     {obj1, obj2, obj3} =>
-        ///     obj1.ToString()\n
-        ///     obj2.ToString()\n
-        ///     obj3.ToString()\n
+        ///     "obj1.ToString()
+        ///     obj2.ToString()
+        ///     obj3.ToString()"
         /// </summary>
         /// <param name="liste">La liste a representer en string</param>
         /// <returns>La string qui represente la liste</returns>
@@ -380,6 +642,27 @@ namespace WpfApplication.ViewModel
             }
             // Return char and concat substring.
             return char.ToUpper(s[0]) + s.Substring(1);
+        }
+
+        /// <summary>
+        /// Retourne les proprietes du type passde en parametre
+        /// </summary>
+        /// <param name="type">Le type dont on veut recuperer les props</param>
+        /// <returns>Une liste de string</returns>
+        private List<string> getHeaders(Type type)
+        {
+            List<string> h = new List<string>();
+                
+            // on rempli les headers qui sont les noms des propriete
+            foreach (MemberInfo mi in type.GetMembers())
+            {
+                if (mi.MemberType == MemberTypes.Property)
+                {
+                    h.Add( UppercaseFirst(mi.Name) );
+                }
+            }
+
+            return h;
         }
     }
 }

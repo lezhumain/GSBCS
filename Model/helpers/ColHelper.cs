@@ -50,6 +50,26 @@ namespace Model.helpers
             }
         }
 
+        public COLLABORATEUR GetOneByUsername(string username)
+        {
+            using (_db = new BDD_SIO7Entities())
+            {
+                string nom, prenom;
+                string[] uname = username.Split('.');
+
+                if (uname.Length != 2)
+                    throw new Exception("Invalid username");
+        
+                prenom = uname[0];
+                nom = uname[1];
+
+                return (from c in _db.COLLABORATEUR
+                            where c.nom_col == nom &&
+                                  c.prenom_col == prenom
+                            select c).FirstOrDefault();
+            }
+        }
+
         public void Insert(COLLABORATEUR collaborateur)
 		{
             using (_db = new BDD_SIO7Entities())

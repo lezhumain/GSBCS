@@ -36,6 +36,7 @@ namespace WpfApplication.ViewModel
                 SimpleIoc.Default.Register<IServiceClient, ServiceClient>();
 
             SimpleIoc.Default.Register<MainWindowViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
         }
 
         public MainWindowViewModel MainWindowVM
@@ -46,6 +47,11 @@ namespace WpfApplication.ViewModel
         public ListWindowViewModel ListWindowVM
         {
             get { return ServiceLocator.Current.GetInstance<ListWindowViewModel>(); }
+        }
+
+        public LoginViewModel LoginVM
+        {
+            get { return ServiceLocator.Current.GetInstance<LoginViewModel>(); }
         }
     }
 }

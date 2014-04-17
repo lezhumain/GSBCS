@@ -24,6 +24,12 @@ namespace WpfApplication.ViewModel.Trans
             return "<RapTrans>n°" + this.numero + " prat:" + this.praticien + " date:" + this.date;
         }
 
+        /// <summary>
+        /// Retourne une representation de l'instance sous forme
+        /// d'une string, ligne d'un fichier CSV.
+        /// Format: "col1;col2;col2\n"
+        /// </summary>
+        /// <returns>String, separee par des ';' et terminee par '\n'</returns>
         public string ToCsvRow()
         {
             return this.numero + ";" + this.praticien + ";" + this.date + "\n";

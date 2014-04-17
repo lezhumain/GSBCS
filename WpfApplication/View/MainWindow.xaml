@@ -6,6 +6,11 @@
         DataContext="{Binding MainWindowVM, Source={StaticResource Locator}}"
         Title="MainWindow" Height="651" Width="800">
     <Window.Resources>
+        <Style x:Key="myStyle" TargetType="Button">
+            <Setter Property="Background" Value="LightBlue" />
+            <Setter Property="Padding" Value="8,4" />
+            <Setter Property="Margin" Value="4" />
+        </Style>
         <Style TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Height" Value="35" />
@@ -130,20 +135,67 @@ Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(
         </Style>
     </Window.Resources>
     <Grid>
-        <StackPanel Width="376"  Background="LightBlue" Orientation="Vertical" Height="100" Margin="48,25,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <StackPanel Width="376"  Background="LightBlue" Orientation="Vertical" Height="100" Margin="48,25,0,0" 
+                    VerticalAlignment="Top" HorizontalAlignment="Left">
             <Label Content="Filtres :" Margin="20,10,0,0" HorizontalAlignment="Left" Width="50"/>
             <StackPanel Orientation="Horizontal">
-                <TextBox x:Name="filtreVal" Width="100" Margin="10,10,10,10"/>
-                <ComboBox x:Name="filtreType" Width="75" Height="24" Margin="10,10,10,10"/>
-                <Button x:Name="filtreBtn" Content="Filtrer" Width="100" Height="24" Margin="40,10,10,10" />
+                <TextBox x:Name="filtreVal" Width="100" Margin="10,10,10,10">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged" >
+                            <cmd:EventToCommand Command="{Binding TextChangedCommand}"
+                                        PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <ComboBox x:Name="filtreType" ItemsSource="{Binding ListeFiltres, Mode=OneWay}" 
+                          Width="75" Height="24" Margin="10,10,10,10" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged" >
+                            <cmd:EventToCommand Command="{Binding ComboSelChangedCommand}"
+                                        PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                <Button x:Name="filtreBtn" Content="Filtrer" Width="100" Height="24" Margin="40,10,10,10" Command="{Binding FiltreCommand}"/>
             </StackPanel>
         </StackPanel>
         <Button Content="Statistiques" HorizontalAlignment="Left" Margin="517,40,0,0" VerticalAlignment="Top" Width="75" />
         <Button Content="Excel" HorizontalAlignment="Left" Margin="630,40,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ExcelCommand}"/>
-        <Button Content="Nouveau" HorizontalAlignment="Left" Margin="493,87,0,0" VerticalAlignment="Top" Width="100" />
-        <Button Content="Supression" HorizontalAlignment="Left" Margin="628,87,0,0" VerticalAlignment="Top" Width="100"/>
-
+        
         <TabControl Margin="10,142,10,65" HorizontalAlignment="Stretch" Width="Auto">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="4,4,0,0" Margin="2,0">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="LightSkyBlue" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="GhostWhite" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged" >
+                    <cmd:EventToCommand Command="{Binding SelectChangedCommand}"
+                                        PassEventArgsToCommand="True" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
             <TabItem Header="Collaborateurs">
                 <DataGrid x:Name="ContentPanel" ItemsSource="{Binding ListeCol}" Margin="0" Width="auto" IsReadOnly="True" HorizontalAlignment="Left" Height="auto">
                     <i:Interaction.Triggers>

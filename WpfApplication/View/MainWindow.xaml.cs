@@ -24,5 +24,10 @@ namespace WpfApplication.View
         {
             InitializeComponent();
         }
+
+        private void filtreType_Selected_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
