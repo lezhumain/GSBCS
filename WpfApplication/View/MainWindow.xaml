@@ -203,6 +203,10 @@ Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(
                             <cmd:EventToCommand Command="{Binding SelectedItemsCommand}"
                                                 PassEventArgsToCommand="True" />
                         </i:EventTrigger>
+                        <i:EventTrigger EventName="MouseDoubleClick" >
+                            <cmd:EventToCommand Command="{Binding DoubleClickCommand}"
+                                                PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <!--
                     <DataGrid.Columns>
@@ -245,12 +249,16 @@ Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(
                     -->
                 </DataGrid>
             </TabItem>
-            <TabItem Header="Praticiens">
+            <TabItem Header="Praticiens" Margin="-3,0,3,0">
                 <DataGrid x:Name="pratPanel" ItemsSource="{Binding ListePrat}" Margin="0" Width="auto"
                           IsReadOnly="True" HorizontalAlignment="Left" Height="auto">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged" >
                             <cmd:EventToCommand Command="{Binding SelectedItemsCommand}"
+                                                PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="MouseDoubleClick" >
+                            <cmd:EventToCommand Command="{Binding DoubleClickCommand}"
                                                 PassEventArgsToCommand="True" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
@@ -262,6 +270,10 @@ Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged" >
                             <cmd:EventToCommand Command="{Binding SelectedItemsCommand}"
+                                                PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="MouseDoubleClick" >
+                            <cmd:EventToCommand Command="{Binding DoubleClickCommand}"
                                                 PassEventArgsToCommand="True" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>

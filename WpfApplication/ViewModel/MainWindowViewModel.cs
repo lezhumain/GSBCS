@@ -147,6 +147,19 @@ namespace WpfApplication.ViewModel
             }
         }
 
+        private RelayCommand<EventArgs> doubleClickCommand;
+        public ICommand DoubleClickCommand
+        {
+            get
+            {
+                if (doubleClickCommand == null)
+                    doubleClickCommand = new RelayCommand<EventArgs>(DoubleClick);
+
+                return doubleClickCommand;
+            }
+        }
+        
+
         private RelayCommand<TextChangedEventArgs> textChangedCommand;
         public ICommand TextChangedCommand
         {
@@ -273,6 +286,7 @@ namespace WpfApplication.ViewModel
             Sfiltre = new FiltreStruct();
             currentList = "Collaborateurs";
 
+
             /*SelectedItemsCommand = new RelayCommand<SelectionChangedEventArgs>(SelectedItems);
             SelectChangedCommand = new RelayCommand<SelectionChangedEventArgs>(Selected);*/
         }
@@ -364,7 +378,7 @@ namespace WpfApplication.ViewModel
                                 listeSel.Add(ct);
                             }
                             break;
-                        case "PratTrans":
+                        case "PraTrans":
                             foreach (PraTrans ct in lbi)
                             {
                                 listeSel.Add(ct);
@@ -437,56 +451,159 @@ namespace WpfApplication.ViewModel
             if( (args.Source as ComboBox).SelectedItem != null )
                 this.sfiltre.Champ = (args.Source as ComboBox).SelectedItem.ToString();
         }
+
+        private void DoubleClick(EventArgs args)
+        {
+            switch (currentList)
+            { 
+                case "Collaborateurs":
+                    break;
+                case "Praticiens":
+                    break;
+                case "Rapports":
+                    break;
+                default:
+                    break;
+            }
+            MessageBox.Show( "Double clicked biatch\n" + lToS(this.listeSel) );
+        }
         
         /// <summary>
         /// Handler pour le bouton filtrer
+        /// Algo a ameliorer
         /// </summary>
         private void Filtre()
         {
             string msg = "val: " + sfiltre.Valeur + "\nchamp: " + sfiltre.Champ;
-            int lol;
-            var req = from l in this.ListeCol select l;
+            int lol; // num de matricule si renseigne
 
-            if (sfiltre.Valeur.Count() == 0)
-                ListeCol = convertCol( ColHelper.Current.GetList() );
-            else
-                switch( this.sfiltre.Champ.ToLower() ) // pour les collabo
-                {
-                    case "matricule":
-                        if( int.TryParse(sfiltre.Valeur, out lol) )
-                        {
-                            List<ColTrans> l = ListeCol.Where(col => col.matricule == lol).ToList();
-                            if (l.Count != 0)
+            if (currentList == "Collaborateurs")
+            {
+                if (sfiltre.Valeur.Count() == 0)
+                    ListeCol = convertCol(ColHelper.Current.GetList());
+                else
+                    switch (this.sfiltre.Champ.ToLower()) // pour les collabo
+                    {
+                        case "matricule":
+                            if (int.TryParse(sfiltre.Valeur, out lol))
                             {
-                                ListeCol = l;
-                                msg = "Matricule, fait.\n" + lToS(ListeCol);
+                                List<ColTrans> l = ListeCol.Where(col => col.matricule == lol).ToList();
+                                if (l.Count != 0)
+                                {
+                                    ListeCol = l;
+                                    msg = "Matricule, fait.\n" + lToS(ListeCol);
+                                }
                             }
-                        }
-                        else
-                            msg = "Le matricule doit être un nombre";
-                        break;
-                    case "nom":
-                        List<ColTrans> ll = ListeCol.Where(col => col.nom == sfiltre.Valeur).ToList();
-                        if (ll.Count != 0)
-                        {
-                            ListeCol = ll;
-                            msg = "Nom, fait.\n" + lToS(ListeCol);
-                        }
-                        break;
-                    case "prenom":
-                        List<ColTrans> lll = ListeCol.Where(col => col.prenom == sfiltre.Valeur).ToList();
-                        if (lll.Count != 0)
-                        {
-                            ListeCol = lll;
-                            msg = "Prénom, fait.\n" + lToS(ListeCol);
-                        }
-                        break;
-                    default:
-                        msg = "Defaut, a faire.";
-                        break;
-                }
+                            else
+                                msg = "Le matricule doit être un nombre";
+                            break;
+                        case "nom":
+                            List<ColTrans> ll = ListeCol.Where(col => col.nom == sfiltre.Valeur).ToList();
+                            if (ll.Count != 0)
+                            {
+                                ListeCol = ll;
+                                msg = "Nom, fait.\n" + lToS(ListeCol);
+                            }
+                            break;
+                        case "prenom":
+                            List<ColTrans> lll = ListeCol.Where(col => col.prenom == sfiltre.Valeur).ToList();
+                            if (lll.Count != 0)
+                            {
+                                ListeCol = lll;
+                                msg = "Prénom, fait.\n" + lToS(ListeCol);
+                            }
+                            break;
+                        default:
+                            msg = "Defaut, a faire.";
+                            break;
+                    }
+            }
+            else if (currentList == "Rapports")
+            {
+                if (sfiltre.Valeur.Count() == 0)
+                    ListeRap = convertRap(RapHelper.Current.GetList());
+                else
+                    switch (this.sfiltre.Champ.ToLower()) // pour les collabo
+                    {
+                        case "numero":
+                            if (int.TryParse(sfiltre.Valeur, out lol))
+                            {
+                                List<RapTrans> l = ListeRap.Where(rap => rap.numero == lol).ToList();
+                                if (l.Count != 0)
+                                {
+                                    ListeRap = l;
+                                    msg = "Matricule, fait.\n" + lToS(ListeRap);
+                                }
+                            }
+                            else
+                                msg = "Le numéro doit être un nombre";
+                            break;
+                        case "praticien":
+                            List<RapTrans> ll = ListeRap.Where(rap => rap.praticien == sfiltre.Valeur).ToList();
+                            if (ll.Count != 0)
+                            {
+                                ListeRap = ll;
+                                msg = "Nom fait.\n" + lToS(ListeRap);
+                            }
+                            break;
+                        case "date":
+                            List<RapTrans> lll = ListeRap.Where(rap => rap.date == sfiltre.Valeur).ToList();
+                            if (lll.Count != 0)
+                            {
+                                ListeRap = lll;
+                                msg = "Prénom fait.\n" + lToS(ListeRap);
+                            }
+                            break;
+                        default:
+                            msg = "Defaut, a faire.";
+                            break;
+                    }
+            }
+            else if (currentList == "Praticiens")
+            {
+                if (sfiltre.Valeur.Count() == 0)
+                    ListePrat = convertPrat(PraHelper.Current.GetList());
+                else
+                    switch (this.sfiltre.Champ.ToLower())
+                    {
+                        case "matricule":
+                            if (int.TryParse(sfiltre.Valeur, out lol))
+                            {
+                                List<PraTrans> l = ListePrat.Where(pra => pra.matricule == lol).ToList();
+                                if (l.Count != 0)
+                                {
+                                    ListePrat = l;
+                                    msg = "Matricule, fait.\n" + lToS(ListePrat);
+                                }
+                            }
+                            else
+                                msg = "Le matricule doit être un nombre";
+                            break;
+                        case "nom":
+                            List<PraTrans> ll = ListePrat.Where(pra => pra.nom == sfiltre.Valeur).ToList();
+                            if (ll.Count != 0)
+                            {
+                                ListePrat = ll;
+                                msg = "Nom, fait.\n" + lToS(ListePrat);
+                            }
+                            break;
+                        case "prenom":
+                            List<PraTrans> lll = ListePrat.Where(pra => pra.prenom == sfiltre.Valeur).ToList();
+                            if (lll.Count != 0)
+                            {
+                                ListePrat = lll;
+                                msg = "Prénom, fait.\n" + lToS(ListeCol);
+                            }
+                            break;
+                        default:
+                            msg = "Defaut, a faire.";
+                            break;
+                    }
+            }
+            else
+                msg = "Erreur de valeur...";
 
-            MessageBox.Show( msg );
+            //MessageBox.Show( msg );
         }
 
         /// <summary>

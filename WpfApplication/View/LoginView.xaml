@@ -28,7 +28,15 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </PasswordBox>
-        <Button Height="23" Margin="91,0,89,45" Name="SignInButton" VerticalAlignment="Bottom" Command="{Binding SignInCommand}">
+        <Button Height="23" Margin="91,0,89,45" Name="SignInButton" VerticalAlignment="Bottom" Command="{Binding SignInCommand}" FontFamily="Helvetica LT Std" BorderThickness="0">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#BF0489F7" Offset="0"/>
+                    <GradientStop Color="#BF007AF3" Offset="0.5"/>
+                    <GradientStop Color="#BF0247DC" Offset="0.5"/>
+                    <GradientStop Color="#BF0243D1" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
             Sign In
         </Button>
     </Grid>
