@@ -7,3 +7,12 @@ C:\Users\dju\documents\visual studio 2012\Projects\PPE\PPE3\Model\bin\Debug\fr\E
 C:\Users\dju\documents\visual studio 2012\Projects\PPE\PPE3\Model\obj\Debug\Model.dll
 C:\Users\dju\documents\visual studio 2012\Projects\PPE\PPE3\Model\obj\Debug\Model.pdb
 C:\Users\dju\documents\visual studio 2012\Projects\PPE\PPE3\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+D:\Documents\GitHub\GSBCS\Model\bin\Debug\Model.dll.config
+D:\Documents\GitHub\GSBCS\Model\bin\Debug\Model.dll
+D:\Documents\GitHub\GSBCS\Model\bin\Debug\Model.pdb
+D:\Documents\GitHub\GSBCS\Model\bin\Debug\EntityFramework.dll
+D:\Documents\GitHub\GSBCS\Model\bin\Debug\EntityFramework.xml
+D:\Documents\GitHub\GSBCS\Model\bin\Debug\fr\EntityFramework.resources.dll
+D:\Documents\GitHub\GSBCS\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+D:\Documents\GitHub\GSBCS\Model\obj\Debug\Model.dll
+D:\Documents\GitHub\GSBCS\Model\obj\Debug\Model.pdb
