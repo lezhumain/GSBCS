@@ -1,0 +1,7 @@
+PPE3.v11.suo
+
+Model/bin/Debug/*
+Model/obj/Debug/*
+
+WpfApplication/bin/Debug/*
+WpfApplication/obj/Debug/*
