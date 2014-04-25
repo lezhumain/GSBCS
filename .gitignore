@@ -5,3 +5,5 @@ Model/obj/Debug/*
 
 WpfApplication/bin/Debug/*
 WpfApplication/obj/Debug/*
+
+*.csproj
