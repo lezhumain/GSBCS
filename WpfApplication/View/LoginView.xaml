@@ -6,13 +6,9 @@
         DataContext="{Binding LoginVM, Source={StaticResource Locator}}"
         Title="LoginView" Height="340" Width="300">
     <Grid>
-        <Label Height="28" Margin="91,63,89,0" Name="LoginLabel" VerticalAlignment="Top">
-            Login
-        </Label>
-        <Label Margin="91,143,89,129" Name="PasswordLabel">
-            Password
-        </Label>
-        <TextBox Height="23" Margin="91,97,89,0" Name="LoginTextBox" VerticalAlignment="Top">
+        <Label Height="28" Margin="91,83,89,0" x:Name="LoginLabel" VerticalAlignment="Top" Content="Identifiant"/>
+        <Label Margin="91,154,89,123" x:Name="PasswordLabel" Content="Mot de passe"/>
+        <TextBox Height="23" Margin="91,111,89,0" Name="LoginTextBox" VerticalAlignment="Top" RenderTransformOrigin="0.473,0.739">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="TextChanged" >
                     <cmd:EventToCommand Command="{Binding LoginTextChangedCommand}"
@@ -28,7 +24,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </PasswordBox>
-        <Button Height="23" Margin="91,0,89,45" Name="SignInButton" VerticalAlignment="Bottom" Command="{Binding SignInCommand}" FontFamily="Helvetica LT Std" BorderThickness="0">
+        <Button Height="23" Margin="91,0,89,45" x:Name="SignInButton" VerticalAlignment="Bottom" Command="{Binding SignInCommand}" FontFamily="Helvetica LT Std" BorderThickness="0" Content="Connexion">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#BF0489F7" Offset="0"/>
@@ -37,7 +33,7 @@
                     <GradientStop Color="#BF0243D1" Offset="1"/>
                 </LinearGradientBrush>
             </Button.Background>
-            Sign In
         </Button>
+        <Image Margin="104,10,104,238" Source="/WpfApplication;component/gsb.png" Stretch="Fill"/>
     </Grid>
 </Window>
