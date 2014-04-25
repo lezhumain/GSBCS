@@ -4,7 +4,8 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF45"
         DataContext="{Binding MainWindowVM, Source={StaticResource Locator}}"
-        Title="MainWindow" Height="650" Width="800">
+        Title="MainWindow" Height="591" Width="800">
+    <!--
     <Window.Resources>
         <Style x:Key="myStyle" TargetType="Button">
             <Setter Property="Background" Value="LightBlue" />
@@ -117,14 +118,14 @@ Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Normal_Selected">
-                                        <Storyboard>
+                                        <Storyboard> -->
                                             <!-- ColorAnimation here same as Normal_AlternatingRow state -->
-                                        </Storyboard>
+                                        <!-- </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="MouseOver">
-                                        <Storyboard>
+                                        <Storyboard> -->
                                             <!-- ColorAnimation here same as Normal_AlternatingRow state -->
-                                        </Storyboard>
+                                        <!-- </Storyboard>
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
@@ -134,35 +135,42 @@ Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(
             </Setter>
         </Style>
     </Window.Resources>
+    -->
     <Grid>
-        <StackPanel Width="376"  Background="LightBlue" Orientation="Vertical" Height="100" Margin="48,25,0,0" 
-                    VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Label Content="Filtres :" Margin="20,10,0,0" HorizontalAlignment="Left" Width="50"/>
-            <StackPanel Orientation="Horizontal">
-                <TextBox x:Name="filtreVal" Width="100" Margin="10,10,10,10">
+        <StackPanel Width="792"  Background="LightBlue" Orientation="Horizontal" Height="35" 
+                    VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Label Content="Filtres :" Margin="20,5,0,0" HorizontalAlignment="Left" Width="50"/>
+                <TextBox x:Name="filtreVal" Width="100" Margin="10,5,10,5">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="TextChanged" >
                             <cmd:EventToCommand Command="{Binding TextChangedCommand}"
-                                        PassEventArgsToCommand="True" />
+            					PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="KeyDown" >
+                            <cmd:EventToCommand Command="{Binding KeyDownCommand}"
+            					PassEventArgsToCommand="True" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBox>
                 <ComboBox x:Name="filtreType" ItemsSource="{Binding ListeFiltres, Mode=OneWay}" 
-                          Width="75" Height="24" Margin="10,10,10,10" >
+            		Width="75" Height="24" Margin="10,5,10,5" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged" >
                             <cmd:EventToCommand Command="{Binding ComboSelChangedCommand}"
-                                        PassEventArgsToCommand="True" />
+            					PassEventArgsToCommand="True" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
-                <Button x:Name="filtreBtn" Content="Filtrer" Width="100" Height="24" Margin="40,10,10,10" Command="{Binding FiltreCommand}"/>
+                <Button x:Name="filtreBtn" Content="Filtrer" Width="100" Margin="40,6,10,6" Command="{Binding FiltreCommand}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Statistiques" Width="75" Height="23"/>
+                <Button Content="Excel" Width="75" Height="23" Command="{Binding ExcelCommand}"/>
             </StackPanel>
         </StackPanel>
-        <Button Content="Statistiques" HorizontalAlignment="Left" Margin="517,40,0,0" VerticalAlignment="Top" Width="75" />
-        <Button Content="Excel" HorizontalAlignment="Left" Margin="630,40,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ExcelCommand}"/>
-        
-        <TabControl Margin="10,142,10,65" HorizontalAlignment="Stretch" Width="Auto">
+
+        <TabControl Margin="0,35,0,52" HorizontalAlignment="Stretch" Width="Auto">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -208,45 +216,6 @@ Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(
                                                 PassEventArgsToCommand="True" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <!--
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Matricule" Width="auto" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding matricule}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Prénom" Width="auto" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding prenom}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Nom" Width="auto" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding nom}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                
-                    </DataGrid.Columns>
-                    -->
-                    <!--
-                    <DataGrid.Columns>
-                        <DataGridTextColumn >
-                            <DataGridTextColumn.HeaderTemplate>
-                                <DataTemplate Resources="{Binding Headers}">
-                                    <TextBlock Text="{Binding ''}"/>
-                                </DataTemplate>
-                            </DataGridTextColumn.HeaderTemplate>
-                        </DataGridTextColumn>
-                    </DataGrid.Columns>
-                    -->
                 </DataGrid>
             </TabItem>
             <TabItem Header="Praticiens" Margin="-3,0,3,0">

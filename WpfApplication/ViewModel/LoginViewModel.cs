@@ -130,23 +130,31 @@ namespace WpfApplication.ViewModel
 
         #region Commands methodes
             /// <summary>
-            /// Handler pour le clic sur le btn Quit
+            /// Handler pour le clic sur le btn SignIn
             /// </summary>
             private void SignIn()
             {
                 string msg = "";
-                COLLABORATEUR col = ColHelper.Current.GetOneByUsername(sInfos.Username);
 
-                if (col == null)
-                    msg = "Aucun collabo";
+                if (sInfos.Username.Count() == 0)
+                    msg = "Entrez votre nom d'utilisateur (\"Prenom.Nom\")";
                 else
                 {
-                    if (sInfos.Mdp != col.mdp_col)
-                        msg = "login: " + sInfos.Username + "\nmdp: " + sInfos.Mdp + "\n\nMot de passe erroné.";
+                    COLLABORATEUR col = ColHelper.Current.GetOneByUsername(sInfos.Username);
+
+                    if (col == null)
+                        msg = "Aucun collabo";
                     else
-                        msg = "Bienvenue";
+                    {
+                        if (sInfos.Mdp != col.mdp_col)
+                            msg = "login: " + sInfos.Username + "\nmdp: " + sInfos.Mdp + "\n\nMot de passe erroné.";
+                        else
+                            msg = "Bienvenue";
+                    }
                 }
+
                 MessageBox.Show(msg);
+                
                 /*
                 string mdp = "fEPMcDj4cOneuOgSR/KDcni4xD14MY4NJuRcIhk9KUuiDH8EtE0u+qsTRBThX8S0fQtt9cpmrln5emyrBt2Hqg==";
                 string salt_col = "0d360b479f16a1a2a93c22603354e09e2";

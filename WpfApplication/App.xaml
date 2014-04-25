@@ -8,6 +8,13 @@
                 StartupUri="View\MainWindow.xaml">
                 <!-- StartupUri="View\MainWindow.xaml"> -->
     <Application.Resources>
-        <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="View\Theme\BureauBlue.xaml"/>
+                <ResourceDictionary>
+                    <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -13,11 +13,6 @@ namespace WpfApplication
     /// </summary>
     public partial class App : Application
     {
-  /*      private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            View.MainWindow view = new View.MainWindow();
-//            view.DataContext = new ViewModel.MainWindowViewModel();
-            view.Show();
-        }*/
+        
     }
 }

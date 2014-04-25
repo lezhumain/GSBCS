@@ -64,7 +64,8 @@ namespace WpfApplication.ViewModel
         public FiltreStruct Sfiltre
         {
             get{ return sfiltre; }
-            set{ sfiltre = value; }
+            set
+{ sfiltre = value; }
         }
         
         #region commandes
@@ -121,6 +122,18 @@ namespace WpfApplication.ViewModel
 
         #endregion
         #region evenements
+
+        private RelayCommand<KeyEventArgs> keyDownCommand;
+        public ICommand KeyDownCommand
+        {
+            get
+            {
+                if (keyDownCommand == null)
+                    keyDownCommand = new RelayCommand<KeyEventArgs>(KeyDown);
+
+                return keyDownCommand;
+            }
+        }
 
         // lien de commande pour selectionChanged
         private RelayCommand<SelectionChangedEventArgs> selectedItemsCommand;
@@ -335,6 +348,14 @@ namespace WpfApplication.ViewModel
                 return ""; 
         }
 
+        private void KeyDown(KeyEventArgs args)
+        {
+            int i = 0;
+
+            if (args.Key.ToString() == "Return")
+                Filtre();
+        }
+
         /// <summary>
         /// Handler pour la selection de ligne dans la datagrid
         /// Copie les SelectedItems de la grid dans ListeSel
@@ -344,16 +365,14 @@ namespace WpfApplication.ViewModel
         {
             string msg;
 
-            if (args == null)
+            if (args == null || (args.Source as DataGrid) == null)
                 MessageBox.Show("args null");
             else
             {
                 var lbi = ((args.Source as DataGrid).SelectedItems);
 
                 if (lbi == null || lbi.Count == 0)
-                {
                     msg = "listeSel nule ou vide";
-                }
                 else
                 {
                     // on recup la classe des donnees selectionnees
@@ -479,7 +498,7 @@ namespace WpfApplication.ViewModel
 
             if (currentList == "Collaborateurs")
             {
-                if (sfiltre.Valeur.Count() == 0)
+                if (sfiltre.Valeur == null || sfiltre.Valeur.Count() == 0)
                     ListeCol = convertCol(ColHelper.Current.GetList());
                 else
                     switch (this.sfiltre.Champ.ToLower()) // pour les collabo
