@@ -162,11 +162,11 @@ Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
-                <Button x:Name="filtreBtn" Content="Filtrer" Width="100" Margin="40,6,10,6" Command="{Binding FiltreCommand}"/>
+                <Button x:Name="filtreBtn" Content="Filtrer" Width="75" Margin="40,6,10,6" Command="{Binding FiltreCommand}" Foreground="#FF042271"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Statistiques" Width="75" Height="23"/>
-                <Button Content="Excel" Width="75" Height="23" Command="{Binding ExcelCommand}"/>
+                <Button Content="Statistiques" Width="75" Height="23" Margin="0,6"/>
+                <Button Content="Excel" Width="75" Height="23" Command="{Binding ExcelCommand}" Margin="0,6"/>
             </StackPanel>
         </StackPanel>
 

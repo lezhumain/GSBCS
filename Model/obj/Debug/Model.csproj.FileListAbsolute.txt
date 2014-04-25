@@ -16,3 +16,12 @@ D:\Documents\GitHub\GSBCS\Model\bin\Debug\fr\EntityFramework.resources.dll
 D:\Documents\GitHub\GSBCS\Model\obj\Debug\Model.dll
 D:\Documents\GitHub\GSBCS\Model\obj\Debug\Model.pdb
 D:\Documents\GitHub\GSBCS\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+E:\Documents\GitHub\GSBCS\Model\bin\Debug\Model.dll.config
+E:\Documents\GitHub\GSBCS\Model\bin\Debug\Model.dll
+E:\Documents\GitHub\GSBCS\Model\bin\Debug\Model.pdb
+E:\Documents\GitHub\GSBCS\Model\bin\Debug\EntityFramework.dll
+E:\Documents\GitHub\GSBCS\Model\bin\Debug\EntityFramework.xml
+E:\Documents\GitHub\GSBCS\Model\bin\Debug\fr\EntityFramework.resources.dll
+E:\Documents\GitHub\GSBCS\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+E:\Documents\GitHub\GSBCS\Model\obj\Debug\Model.dll
+E:\Documents\GitHub\GSBCS\Model\obj\Debug\Model.pdb

@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="WpfApplication.LoginControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Label Height="28" Margin="91,77,89,0" x:Name="LoginLabel" VerticalAlignment="Top" Content="Identifiant"/>
+        <Label Margin="91,147,89,125" x:Name="PasswordLabel" Content="Mot de passe"/>
+        <TextBox Height="23" Margin="91,105,89,0" Name="LoginTextBox" VerticalAlignment="Top" />
+        <PasswordBox Height="23" Margin="91,0,89,102" Name="PasswordTextBox" VerticalAlignment="Bottom" />
+        <Button Height="23" Margin="91,0,89,61" x:Name="SignInButton" VerticalAlignment="Bottom" Content="Connexion"/>
+        <Image Margin="105,10,109,235" Source="/WpfApplication;component/gsb.png" Stretch="Fill" Panel.ZIndex="-1"/>
+    </Grid>
+</UserControl>
