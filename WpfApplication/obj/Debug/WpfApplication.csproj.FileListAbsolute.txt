@@ -35,11 +35,9 @@ C:\Users\dju\documents\visual studio 2012\Projects\PPE\PPE3\WpfApplication\obj\D
 C:\Users\dju\documents\visual studio 2012\Projects\PPE\PPE3\WpfApplication\obj\Debug\WpfApplication.exe
 C:\Users\dju\documents\visual studio 2012\Projects\PPE\PPE3\WpfApplication\obj\Debug\WpfApplication.pdb
 D:\Documents\GitHub\GSBCS\WpfApplication\obj\Debug\WpfApplication.csprojResolveAssemblyReference.cache
-D:\Documents\GitHub\GSBCS\WpfApplication\obj\Debug\View\LoginControl.baml
 D:\Documents\GitHub\GSBCS\WpfApplication\obj\Debug\View\ListWindow.baml
 D:\Documents\GitHub\GSBCS\WpfApplication\obj\Debug\View\LoginView.baml
 D:\Documents\GitHub\GSBCS\WpfApplication\obj\Debug\View\MainWindow.baml
-D:\Documents\GitHub\GSBCS\WpfApplication\obj\Debug\View\LoginControl.g.cs
 D:\Documents\GitHub\GSBCS\WpfApplication\obj\Debug\View\ListWindow.g.cs
 D:\Documents\GitHub\GSBCS\WpfApplication\obj\Debug\View\LoginView.g.cs
 D:\Documents\GitHub\GSBCS\WpfApplication\obj\Debug\View\MainWindow.g.cs
