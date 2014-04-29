@@ -50,6 +50,8 @@ namespace WpfApplication.ViewModel
                 champ = value;
             }
         }
+
+
     }
     
 
@@ -64,8 +66,7 @@ namespace WpfApplication.ViewModel
         public FiltreStruct Sfiltre
         {
             get{ return sfiltre; }
-            set
-{ sfiltre = value; }
+            set { sfiltre = value; }
         }
         
         #region commandes
@@ -200,6 +201,14 @@ namespace WpfApplication.ViewModel
         #endregion
         #region Entites
 
+        //attribut du formPrat
+        private PRATICIEN objPratForm;
+        public PRATICIEN ObjPratForm
+        {
+            get { return objPratForm; }
+            set { NotifyPropertyChanged(ref objPratForm, value); }
+        }
+
         private List<object> listeSel;
         public List<object> ListeSel
         {
@@ -272,6 +281,8 @@ namespace WpfApplication.ViewModel
 
         #endregion
 
+
+
         private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
         {
             if (object.Equals(variable, valeur)) return false;
@@ -298,6 +309,11 @@ namespace WpfApplication.ViewModel
             ListeFiltres = getHeaders(typeof(ColTrans));
             Sfiltre = new FiltreStruct();
             currentList = "Collaborateurs";
+
+            //Details prat
+            ObjPratForm = new PRATICIEN();
+
+
 
 
             /*SelectedItemsCommand = new RelayCommand<SelectionChangedEventArgs>(SelectedItems);
@@ -476,15 +492,33 @@ namespace WpfApplication.ViewModel
             switch (currentList)
             { 
                 case "Collaborateurs":
+                    COLLABORATEUR SelectCol = new COLLABORATEUR();
+                    ColTrans SelectColTrans = (ColTrans)this.listeSel[0];
+                    SelectCol = ColHelper.Current.GetOneById(SelectColTrans.matricule);
+                    //Console.WriteLine(SelectCol.prenom_col);
                     break;
                 case "Praticiens":
+                    if (this.listeSel[0] as PraTrans == null)
+                        MessageBox.Show("Null sisi");
+
+                    //Init attribut detail prat => objPratForm
+                    PraTrans SelectPratTrans = this.listeSel[0] as PraTrans;
+                    ObjPratForm = PraHelper.Current.getById(SelectPratTrans.matricule);
+
+                    //List<RAPPORT_DE_VISITE> sisi = SelectPrat.RAPPORT_DE_VISITE.ToList();
+                    //MessageBox.Show(lToS(sisi));
+                    //Console.WriteLine(SelectPrat.nom_praticien);
                     break;
                 case "Rapports":
                     break;
                 default:
                     break;
+                //MessageBox.Show( "Double clicked biatch\n" + lToS(this.listeSel) );
+
             }
-            MessageBox.Show( "Double clicked biatch\n" + lToS(this.listeSel) );
+
+
+            //MessageBox.Show( ColHelper.GetOneByUsername(this.listeSel.));
         }
         
         /// <summary>

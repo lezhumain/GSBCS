@@ -70,6 +70,17 @@ namespace Model.helpers
             }
         }
 
+        public COLLABORATEUR GetOneById(int id)
+        {
+            using (_db = new BDD_SIO7Entities())
+            {
+                return (from c in _db.COLLABORATEUR
+                        where c.matricule_col == id
+                        select c).FirstOrDefault();
+            }
+
+        }
+
         public void Insert(COLLABORATEUR collaborateur)
 		{
             using (_db = new BDD_SIO7Entities())

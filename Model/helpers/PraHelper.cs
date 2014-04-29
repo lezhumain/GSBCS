@@ -111,7 +111,6 @@ namespace Model.helpers
 				        select prat).FirstOrDefault(); 
 	        }
         }
-        
 
 
         // endregion
