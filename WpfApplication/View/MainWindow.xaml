@@ -381,7 +381,7 @@
                 <Button x:Name="filtreBtn" Content="Filtrer" Width="75" Margin="40,6,10,6" Command="{Binding FiltreCommand}" Foreground="#FF042271"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Statistiques" Width="75" Height="23" Margin="0,6"/>
+                <Button Content="Statistiques" Width="75" Height="23" Margin="0,6" Command="{Binding StatCommand}"/>
                 <Button Content="Excel" Width="75" Height="23" Command="{Binding ExcelCommand}" Margin="0,6"/>
             </StackPanel>
         </StackPanel>
@@ -417,7 +417,7 @@
                                         PassEventArgsToCommand="True" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <TabItem Header="Collaborateurs">
+            <TabItem Header="Visiteurs">
                 <DataGrid x:Name="ContentPanel" AlternationCount="2" ItemsSource="{Binding ListeCol}" Margin="0" Width="auto" IsReadOnly="True" HorizontalAlignment="Left" Height="auto">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged" >
@@ -478,8 +478,17 @@
         <!-- 
         <DataGrid x:Name="MaGrid" AlternationCount="2" VerticalAlignment="Top" MaxHeight="396" Margin="0,151,0,0" ItemsSource="{Binding ListeCol}"/>
         -->
-        <DockPanel Height="30" Margin="0,0,0,10" VerticalAlignment="Bottom">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"/>
+        <DockPanel Height="30" Margin="10,0,10,10" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <ComboBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" ItemsSource="{Binding ListeRegions}" Visibility="{Binding CbVisible}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged" >
+                            <cmd:EventToCommand Command="{Binding ComboSelChangedRegCommand}"
+            					PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                 <Button x:Name="btrefresh" Content="Refresh" Width="90" Command="{Binding TestCommand}" />
                 <Button x:Name="btquit" Content="Quitter" Width="90" Command="{Binding ExitCommand}"/>

@@ -20,6 +20,9 @@ using System.Reflection;
 using System.IO;
 using System.Diagnostics;
 using WPFFolderBrowser;
+using GalaSoft.MvvmLight.Messaging;
+using System.Data.Objects.DataClasses;
+using WpfApplication.View;
 
 namespace WpfApplication.ViewModel
 {
@@ -56,18 +59,31 @@ namespace WpfApplication.ViewModel
     public class MainWindowViewModel : MainViewModel
     {
         private COLLABORATEUR sessionCol;
+        public COLLABORATEUR SessionCol
+        {
+            get { return sessionCol; }
+            set { NotifyPropertyChanged(ref sessionCol, value); }
+        }
 
         private readonly IServiceClient serviceClient;
         private string currentList;
+
+        private List<string> listeRegions;
+        public List<string> ListeRegions
+        {
+            get { return listeRegions; }
+            set { NotifyPropertyChanged(ref listeRegions, value); }
+        }
         
         private FiltreStruct sfiltre;
         public FiltreStruct Sfiltre
         {
             get{ return sfiltre; }
-            set
-{ sfiltre = value; }
+            set{ sfiltre = value; }
         }
-        
+
+        public Visibility CbVisible { get; set; }
+
         #region commandes
 
         // attribut binde au clic sur btn exit
@@ -105,6 +121,18 @@ namespace WpfApplication.ViewModel
                     excelCommand = new DelegateCommand(Excel);
 
                 return excelCommand;
+            }
+        }
+
+        private DelegateCommand statCommand;
+        public ICommand StatCommand
+        {
+            get
+            {
+                if (statCommand == null)
+                    statCommand = new DelegateCommand(Stat);
+
+                return statCommand;
             }
         }
 
@@ -197,6 +225,18 @@ namespace WpfApplication.ViewModel
             }
         }
 
+        private RelayCommand<SelectionChangedEventArgs> comboSelChangedRegCommand;
+        public ICommand ComboSelChangedRegCommand
+        {
+            get
+            {
+                if (comboSelChangedRegCommand == null)
+                    comboSelChangedRegCommand = new RelayCommand<SelectionChangedEventArgs>(ComboSelChangedReg);
+
+                return comboSelChangedRegCommand;
+            }
+        }
+
         #endregion
         #region Entites
 
@@ -250,10 +290,12 @@ namespace WpfApplication.ViewModel
             List<RapTrans> l = new List<RapTrans>();
             foreach (RAPPORT_DE_VISITE c in list)
             {
+
                 PRATICIEN p = PraHelper.Current.getById( (int)c.matricule_praticien );
                 l.Add(new RapTrans( c.num_rapport,
                                     p.prenom_praticien + " " + p.nom_praticien,
-                                    c.date_rapport.ToString("dd/mm/yyyy") ));
+                                    c.date_rapport.ToString("dd/mm/yyyy"),
+                                    c.COLLABORATEUR.prenom_col + " " + c.COLLABORATEUR.nom_col));
             }    
             return l;
         }
@@ -289,19 +331,67 @@ namespace WpfApplication.ViewModel
         {
             serviceClient = service;
 
-            //sessionCol = new COLLABORATEUR();
-
-            ListeCol = convertCol( ColHelper.Current.GetList() );            
-            ListeRap = convertRap( RapHelper.Current.GetList() );
-            ListePrat = convertPrat(PraHelper.Current.GetList());
+            ListeRegions = new List<string>();
             ListeSel = new List<object>();
             ListeFiltres = getHeaders(typeof(ColTrans));
             Sfiltre = new FiltreStruct();
-            currentList = "Collaborateurs";
+            currentList = "Visiteurs";
 
+            //Messenger.Default.Register<COLLABORATEUR>(this, chargListes);
+            chargListes( ColHelper.Current.GetOneByUsername("Prenomrds.Nomrds") );
 
-            /*SelectedItemsCommand = new RelayCommand<SelectionChangedEventArgs>(SelectedItems);
-            SelectChangedCommand = new RelayCommand<SelectionChangedEventArgs>(Selected);*/
+            
+        }
+
+        private void chargListes(COLLABORATEUR col)
+        {
+            List<String> lCodeReg = new List<string>();
+            // on met le collab recup en "session"
+            SessionCol = col;
+            if (SessionCol.DIRECTEUR_REGIONAL != null)  // DIRECTEUR_REGIONAL
+            {
+                lCodeReg.Add( col.GERE.First<GERE>().code_region );
+                chargListesForRegion(lCodeReg.First());
+                CbVisible = Visibility.Hidden;
+            }
+            else                                        // Responsable de Secteur
+            {
+                // on recup la liste des regions a gerer
+                ETRE_RESPONSABLE er = col.ETRE_RESPONSABLE.ToList<ETRE_RESPONSABLE>().First();
+                List<REGION> query = (from q in er.SECTEUR.REGION
+                                        select q).ToList<REGION>();
+
+                // on met la liste dans celle bindee a la combo box
+                ListeRegions = (from q in query select q.nom_region).ToList<string>();
+                
+                // puis on charge la premiere region par defaut
+                chargListesForRegion( query.First() );
+                CbVisible = Visibility.Visible;
+            }
+
+            // enfin on charge tous les praticiens
+            ListePrat = convertPrat(PraHelper.Current.GetList());
+        }
+
+        private void chargListesForRegion(string regCode)
+        {
+            // On charge la liste des visiteurs de la region
+            List<VISITEUR> lv = VisHelper.Current.getListByRegion(regCode);
+            // on recup les COL associes
+            List<COLLABORATEUR> lc = (from v in lv
+                                      select v.COLLABORATEUR).ToList<COLLABORATEUR>();
+            // puis on la met dans la liste affichee
+            ListeCol = convertCol(lc);
+
+            // charge la liste des rapports de la region
+            List<RAPPORT_DE_VISITE> lr = RapHelper.Current.getListByRegion(regCode);
+            // puis on la met dans la liste affichee
+            ListeRap = convertRap(lr);
+        }
+
+        private void chargListesForRegion(REGION reg)
+        {
+            chargListesForRegion(reg.code_region);
         }
 
         /// <summary>
@@ -323,12 +413,9 @@ namespace WpfApplication.ViewModel
             ListeRap.Clear();
             ListePrat.Clear();
 
-            ListeCol = convertCol(ColHelper.Current.GetList());
-            ListeRap = convertRap(RapHelper.Current.GetList());
-            ListePrat = convertPrat(PraHelper.Current.GetList());
+            chargListes(SessionCol);
 
             MessageBox.Show("Reloaded");
-            //MessageBox.Show("Fichier: " + chooseFolder());
         }
 
         /// <summary>
@@ -348,6 +435,11 @@ namespace WpfApplication.ViewModel
                 return ""; 
         }
 
+        /// <summary>
+        /// Handler pour l'appuie sur une touche.
+        /// L'appuie sur la touche "Entree" lance le filtre
+        /// </summary>
+        /// <param name="args">Arguments de l'evnmt</param>
         private void KeyDown(KeyEventArgs args)
         {
             int i = 0;
@@ -442,8 +534,8 @@ namespace WpfApplication.ViewModel
                 switch (name)
                 {
                     // on recup les header de la classe corresp
-                    case "Collaborateurs":
-                        this.currentList = "Collaborateurs";
+                    case "Visiteurs":
+                        this.currentList = "Visiteurs";
                         this.ListeFiltres = getHeaders(typeof(ColTrans));
                         break;
                     case "Rapports":
@@ -467,15 +559,33 @@ namespace WpfApplication.ViewModel
         /// <param name="args"></param>
         private void ComboSelChanged(SelectionChangedEventArgs args)
         {
-            if( (args.Source as ComboBox).SelectedItem != null )
-                this.sfiltre.Champ = (args.Source as ComboBox).SelectedItem.ToString();
+            if (args.Source as ComboBox == null || (args.Source as ComboBox).SelectedItem == null)
+                return;
+            
+            this.sfiltre.Champ = (args.Source as ComboBox).SelectedItem.ToString();
+        }
+
+        private void ComboSelChangedReg(SelectionChangedEventArgs args)
+        {
+            string regName = "";
+
+            if (args.Source as ComboBox == null || (args.Source as ComboBox).SelectedItem == null)
+                return;
+            
+            regName = (args.Source as ComboBox).SelectedItem.ToString();
+            chargListesForRegion(RegHelper.Current.GetOneByName(regName));
         }
 
         private void DoubleClick(EventArgs args)
         {
+            MouseButtonEventArgs mbea = args as MouseButtonEventArgs;
+
+            if (mbea == null)
+                return;
+
             switch (currentList)
             { 
-                case "Collaborateurs":
+                case "Visiteurs":
                     break;
                 case "Praticiens":
                     break;
@@ -484,7 +594,8 @@ namespace WpfApplication.ViewModel
                 default:
                     break;
             }
-            MessageBox.Show( "Double clicked biatch\n" + lToS(this.listeSel) );
+
+            MessageBox.Show( mbea.Source.GetType() + "\nDouble clicked biatch\n" + lToS(this.listeSel) );
         }
         
         /// <summary>
@@ -496,10 +607,21 @@ namespace WpfApplication.ViewModel
             string msg = "val: " + sfiltre.Valeur + "\nchamp: " + sfiltre.Champ;
             int lol; // num de matricule si renseigne
 
-            if (currentList == "Collaborateurs")
+            if (currentList == "Visiteurs")
             {
                 if (sfiltre.Valeur == null || sfiltre.Valeur.Count() == 0)
-                    ListeCol = convertCol(ColHelper.Current.GetList());
+                {
+                    /*
+                    // On charge la liste des visiteurs de la region du RdS
+                    List<VISITEUR> lv = VisHelper.Current.getListByRegion(SessionCol.GERE.First<GERE>().code_region);
+                    // on recup les COL associes
+                    List<COLLABORATEUR> lc = (from v in lv
+                                              select v.COLLABORATEUR).ToList<COLLABORATEUR>();
+                    // puis on la met dans la liste affichee
+                    ListeCol = convertCol(lc);
+                     */
+                    return;
+                }
                 else
                     switch (this.sfiltre.Champ.ToLower()) // pour les collabo
                     {
@@ -537,7 +659,7 @@ namespace WpfApplication.ViewModel
                             break;
                     }
             }
-            else if (currentList == "Rapports")
+            else if (currentList == "Rapports") // pour les rapports
             {
                 if (sfiltre.Valeur.Count() == 0)
                     ListeRap = convertRap(RapHelper.Current.GetList());
@@ -578,7 +700,7 @@ namespace WpfApplication.ViewModel
                             break;
                     }
             }
-            else if (currentList == "Praticiens")
+            else if (currentList == "Praticiens") // pour les praticiens
             {
                 if (sfiltre.Valeur.Count() == 0)
                     ListePrat = convertPrat(PraHelper.Current.GetList());
@@ -687,6 +809,18 @@ namespace WpfApplication.ViewModel
                 else
                     MessageBox.Show("Rien n'a été fait.");
             }
+        }
+
+        private void Stat()
+        {
+            string content = "";
+
+            barChartView bc = new barChartView(); // fenetre
+
+            // envoie du COL
+            //Messenger.Default.Send<COLLABORATEUR, MainWindowViewModel>(col);
+
+            bc.Show();
         }
 
         /// <summary>

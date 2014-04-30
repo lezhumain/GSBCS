@@ -11,12 +11,14 @@ namespace WpfApplication.ViewModel.Trans
         public int numero { get; set; }
         public string praticien { get; set; }
         public string date { get; set; }
+        public string visiteur { get; set; }
 
-        public RapTrans(int mat, string prat, string date)
+        public RapTrans(int mat, string prat, string date, string visiteur)
         {
             this.numero = mat;
             this.praticien = prat;
             this.date = date;
+            this.visiteur = visiteur;
         }
 
         public override string ToString()
@@ -32,7 +34,7 @@ namespace WpfApplication.ViewModel.Trans
         /// <returns>String, separee par des ';' et terminee par '\n'</returns>
         public string ToCsvRow()
         {
-            return this.numero + ";" + this.praticien + ";" + this.date + "\n";
+            return this.numero + ";" + this.praticien + ";" + this.date + ";" + this.visiteur + "\n";
         }
 
         public override string getClass()

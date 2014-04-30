@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Model;
 using Model.helpers;
 using System;
@@ -11,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using WpfApplication.Helpers;
 using WpfApplication.Model;
+using WpfApplication.View;
 
 namespace WpfApplication.ViewModel
 {
@@ -115,13 +117,13 @@ namespace WpfApplication.ViewModel
         
         #region Commands
             // attribut binde au clic sur btn exit
-            private DelegateCommand signInCommand;
+            private RelayCommand<Window> signInCommand;
             public ICommand SignInCommand
             {
                 get
                 {
                     if (signInCommand == null)
-                        signInCommand = new DelegateCommand(SignIn);
+                        signInCommand = new RelayCommand<Window>(SignIn);
 
                     return signInCommand;
                 }
@@ -131,8 +133,9 @@ namespace WpfApplication.ViewModel
         #region Commands methodes
             /// <summary>
             /// Handler pour le clic sur le btn SignIn
+            /// 
             /// </summary>
-            private void SignIn()
+            private void SignIn(Window win)
             {
                 string msg = "";
 
@@ -142,18 +145,34 @@ namespace WpfApplication.ViewModel
                 {
                     COLLABORATEUR col = ColHelper.Current.GetOneByUsername(sInfos.Username);
 
-                    if (col == null)
+                    if (col == null) // inexistant
                         msg = "Aucun collabo";
-                    else
+                    else //est un collab
                     {
-                        if (sInfos.Mdp != col.mdp_col)
+                        if (sInfos.Mdp != col.mdp_col) // infos incorrectes
                             msg = "login: " + sInfos.Username + "\nmdp: " + sInfos.Mdp + "\n\nMot de passe erroné.";
-                        else
-                            msg = "Bienvenue";
+                        else // infos correctes
+                        {
+                            // On test si DR ou RdS
+                            if ( !DRHelper.Current.isDR(col.matricule_col) && !RdSHelper.Current.isRdS(col.matricule_col) ) // refuse
+                                msg = "Refusé";
+                            else // autorise
+                            {
+                                MainWindow mw = new MainWindow(); // fenetre
+
+                                // envoie du COL
+                                Messenger.Default.Send<COLLABORATEUR, MainWindowViewModel>(col);
+
+                                mw.Show();
+                                win.Close();
+                            }
+                        }
+
                     }
+                    MessageBox.Show(msg);
                 }
 
-                MessageBox.Show(msg);
+                //msg);
                 
                 /*
                 string mdp = "fEPMcDj4cOneuOgSR/KDcni4xD14MY4NJuRcIhk9KUuiDH8EtE0u+qsTRBThX8S0fQtt9cpmrln5emyrBt2Hqg==";

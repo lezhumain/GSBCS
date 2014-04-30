@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model.helpers
 {
-    public class ColHelper
+    public class VisHelper
     {
         // region Fields
         private BDD_SIO7Entities _db;
@@ -18,7 +18,7 @@ namespace Model.helpers
         /// http://www.yoda.arachsys.com/csharp/singleton.html
         /// for more details about its implementation.
         /// </summary>
-        public static ColHelper Current
+        public static VisHelper Current
         {
             get{ return Nested.Helper1; }
         }
@@ -30,27 +30,27 @@ namespace Model.helpers
             static Nested()
             {
             }
-            internal static readonly ColHelper Helper1 = new ColHelper();
+            internal static readonly VisHelper Helper1 = new VisHelper();
         }
         // endregion
         
         // region Constructeur
-        public ColHelper()
+        public VisHelper()
         {
                
         }
 
         // endregion
         // region Fonctions publiques utiles
-        public List<COLLABORATEUR> GetList()
+        public List<VISITEUR> GetList()
 		{
             using (_db =  new BDD_SIO7Entities())
 		    {
-                return _db.COLLABORATEUR.ToList();
+                return _db.VISITEUR.ToList();
             }
         }
-
-        public COLLABORATEUR GetOneByUsername(string username)
+        /*
+        public VISITEUR GetOneByUsername(string username)
         {
             using (_db = new BDD_SIO7Entities())
             {
@@ -63,32 +63,15 @@ namespace Model.helpers
                 prenom = uname[0];
                 nom = uname[1];
 
-                return (from c in _db.COLLABORATEUR
-                                .Include("DIRECTEUR_REGIONAL")
-                                .Include("RESPONSABLE_DE_SECTEUR")
-                                .Include("GERE")
-                                .Include("ETRE_RESPONSABLE")
-                                .Include("ETRE_RESPONSABLE.SECTEUR.REGION")
-                                .Include("GERE.REGION")
-                                .Include("GERE.REGION.VISITEUR")
-                            where c.nom_col == nom &&
-                                  c.prenom_col == prenom
-                            select c).FirstOrDefault();
+                return (from c in _db.VISITEUR
+                                .Include("COLLABORATEUR")
+                        where c.nom_col == nom &&
+                              c.prenom_col == prenom
+                        select c).FirstOrDefault();
             }
         }
 
-        public List<COLLABORATEUR> GetListForChart()
-        {
-            using (_db = new BDD_SIO7Entities())
-            {
-                return (from c in _db.COLLABORATEUR
-                            .Include("RAPPORT_DE_VISITE")
-                        orderby c.RAPPORT_DE_VISITE.Count
-                        select c).Take(5).ToList<COLLABORATEUR>();
-            }
-        }
-
-        public COLLABORATEUR GetOneByUsername1(string username)
+        public VISITEUR GetOneByUsername1(string username)
         {
             using (_db = new BDD_SIO7Entities())
             {
@@ -101,28 +84,28 @@ namespace Model.helpers
                 prenom = uname[0];
                 nom = uname[1];
 
-                return (from c in _db.COLLABORATEUR
+                return (from c in _db.VISITEUR
                         join od in _db.VISITEUR on c.matricule_col equals od.matricule_col_vis
                         where c.nom_col == nom &&
                               c.prenom_col == prenom
                         select c).FirstOrDefault();
             }
         }
-
-        public void Insert(COLLABORATEUR collaborateur)
+        */
+        public void Insert(VISITEUR collaborateur)
 		{
             using (_db = new BDD_SIO7Entities())
     		{
-                _db.AddToCOLLABORATEUR(collaborateur);
+                _db.AddToVISITEUR(collaborateur);
                 _db.SaveChanges();
             }
         }
 
-        public void Update(COLLABORATEUR collaborateur)
+        public void Update(VISITEUR collaborateur)
 		{
             using (_db = new BDD_SIO7Entities())
             {
-                _db.COLLABORATEUR.Attach(collaborateur);
+                _db.VISITEUR.Attach(collaborateur);
                 _db.ObjectStateManager.ChangeObjectState(collaborateur, System.Data.EntityState.Modified);
                 _db.SaveChanges();
             }
@@ -135,7 +118,7 @@ namespace Model.helpers
             */
         }
 
-        public void Delete(COLLABORATEUR collaborateur)
+        public void Delete(VISITEUR collaborateur)
 		{
             using (_db = new BDD_SIO7Entities())
 		    {
@@ -144,15 +127,15 @@ namespace Model.helpers
             }
         }
         /*
-        public void DeleteCascade(COLLABORATEUR collaborateur)
+        public void DeleteCascade(VISITEUR collaborateur)
         {
             using (_db = new BDD_SIO7Entities())
 	        {
-		        _db.COLLABORATEUR.Attach(collaborateur);
+		        _db.VISITEUR.Attach(collaborateur);
 
 		        //cascade
-                List<COLLABORATEURCertifies> pc = collaborateur.COLLABORATEURCertifie.ToList();
-		        foreach(COLLABORATEURCertifie pp in pc)
+                List<VISITEURCertifies> pc = collaborateur.VISITEURCertifie.ToList();
+		        foreach(VISITEURCertifie pp in pc)
 		        {
 			        _db.DeleteObject(pp)
 		        }
@@ -161,19 +144,26 @@ namespace Model.helpers
 		        _db.SaveChanges();
 	        }
         }
-        
-        public getItemFromId(int id)
-        {
-	        using(_db = new BDDContext())
-	        {
-		        return 	(from profils in _db.Profil
-				        where profils.id == id
-				        select profils).FirstOnDefault(); 
-	        }
-        }
         */
 
+        public List<VISITEUR> getListByRegion(string codeReg)
+        {
+            using (_db = new BDD_SIO7Entities())
+	        {
+		        return 	(from vis in _db.VISITEUR
+                            .Include("COLLABORATEUR")
+                            .Include("REGION")
+                            .Include("COLLABORATEUR.RAPPORT_DE_VISITE")
+				        where vis.code_region == codeReg
+				        select vis).ToList<VISITEUR>(); 
+	        }
+        }
 
+        public List<VISITEUR> getListByRegion(REGION reg)
+        {
+            return getListByRegion(reg.code_region);
+        }
+        
         // endregion
       }
 }
