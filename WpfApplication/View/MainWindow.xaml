@@ -349,9 +349,9 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
-    
-    
+
+
+
     <Grid>
         <StackPanel Width="792"  Background="LightBlue" Orientation="Horizontal" Height="35" 
                     VerticalAlignment="Top">
@@ -477,26 +477,30 @@
                     </i:Interaction.Triggers>
                 </DataGrid>
             </TabItem>
-            <Label Content="Détails Praticien" Width="100" Margin="554,39,128,385"/>
+
+
         </TabControl>
         <!-- 
             Details praticien  stackPanel est un block lié a un objet praticien
             Pour cacher tu click sur stackpanel et dans les propriété a droite ta un attribut visibily 
         -->
-        <StackPanel DataContext="{ Binding ObjPratForm }">
-            <!-- Pour lier un champ a une valeur de l'objet regarde l'attribut text -->
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="400,100,0,0" TextWrapping="Wrap" Text="{Binding prenom_praticien}" VerticalAlignment="Top" Width="120"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="600,50,0,0" TextWrapping="Wrap" Text="{Binding nom_praticien}" VerticalAlignment="Top" Width="120"  />
+        <!-- Pour lier un champ a une valeur de l'objet regarde l'attribut text -->
+        <StackPanel DataContext="{ Binding ObjPratForm }" Orientation="Horizontal">
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="407,110,0,0" TextWrapping="Wrap" Text="{Binding prenom_praticien}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Right" Height="23" Margin="70,110,0,0" TextWrapping="Wrap" Text="{Binding nom_praticien}" VerticalAlignment="Top" Width="120"  />
         </StackPanel>
 
-        <StackPanel DataContext="{ Binding ObjRapForm }">
-            <!-- Pour lier un champ a une valeur de l'objet regarde l'attribut text -->
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="600,120,0,0" TextWrapping="Wrap" Text="{Binding num_rapport}" VerticalAlignment="Top" Width="120"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="600,-50,0,0" TextWrapping="Wrap" Text="{Binding MOTIF.libelle_motif}" VerticalAlignment="Top" Width="120"  />
+
+        <!-- Pour lier un champ a une valeur de l'objet regarde l'attribut text -->
+        <StackPanel DataContext="{ Binding ObjRapForm }" Orientation="Horizontal">
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="407,158,0,0" TextWrapping="Wrap" Text="{Binding num_rapport}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="70,158,0,0" TextWrapping="Wrap" Text="{Binding MOTIF.libelle_motif}" VerticalAlignment="Top" Width="120"  />
         </StackPanel>
 
         <!-- DatafGrid sera affiché avec la liste des rapport relié au praticien et au visiteur -->
         <DataGrid Margin="407,201,10,114" Height="246" ItemsSource="{Binding ListeRapToBind}"/>
+        <Label Content="Prénom :" Width="100" Margin="407,88,285,451"/>
+        <Label Content="Nom :" Width="100" Margin="600,88,92,451"/>
 
     </Grid>
 </Window>
