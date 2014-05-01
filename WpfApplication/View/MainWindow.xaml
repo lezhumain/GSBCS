@@ -478,11 +478,10 @@
             <Label Content="Détails Praticien" Width="100" Margin="554,39,128,385"/>
         </TabControl>
 
-        <!--        <DataGrid x:Name="ContentPanel" Margin="15,160,0,70" Width="auto" ItemsSource="{Binding ListeCol}"
-                  IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Left">
--->
         <!-- 
-        <DataGrid x:Name="MaGrid" AlternationCount="2" VerticalAlignment="Top" MaxHeight="396" Margin="0,151,0,0" ItemsSource="{Binding ListeCol}"/>
+            Details praticien  stackPanel est un block lié a un objet praticien
+            Pour cacher tu click sur stackpanel et dans les propriété a droite ta un attribut visibily.
+            Donc avec MVVM, tu bind l'attribut Visibility du StackPanel a un attribut de type Visibility du ViewModel ;)
         -->
         <DockPanel Height="30" Margin="10,0,10,10" VerticalAlignment="Bottom">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -502,9 +501,18 @@
         </DockPanel>
 
         <StackPanel DataContext="{ Binding ObjPratForm }">
-            <TextBox x:Name="nom_prat" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding nom_praticien}" VerticalAlignment="Top" Width="120" Margin="474,82,0,0" RenderTransformOrigin="0.85,0.13"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="474,140,0,0" TextWrapping="Wrap" Text="{Binding prenom_praticien}" VerticalAlignment="Top" Width="120"/>
+            <!-- Pour lier un champ a une valeur de l'objet regarde l'attribut text -->
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="400,100,0,0" TextWrapping="Wrap" Text="{Binding prenom_praticien}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="600,50,0,0" TextWrapping="Wrap" Text="{Binding nom_praticien}" VerticalAlignment="Top" Width="120"  />
         </StackPanel>
 
+        <StackPanel DataContext="{ Binding ObjRapForm }">
+            <!-- Pour lier un champ a une valeur de l'objet regarde l'attribut text -->
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="600,120,0,0" TextWrapping="Wrap" Text="{Binding num_rapport}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="600,-50,0,0" TextWrapping="Wrap" Text="{Binding MOTIF.libelle_motif}" VerticalAlignment="Top" Width="120"  />
+        </StackPanel>
+
+        <!-- DatafGrid sera affiché avec la liste des rapport relié au praticien et au visiteur -->
+        <DataGrid Margin="407,201,10,114" Height="246" ItemsSource="{Binding ListeRapToBind}"/>
     </Grid>
 </Window>

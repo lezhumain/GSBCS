@@ -77,7 +77,7 @@ namespace Model.helpers
             }
         }
 
-        public List<COLLABORATEUR> GetListForChart()
+		public List<COLLABORATEUR> GetListForChart()
         {
         using (_db = new BDD_SIO7Entities())
         {
@@ -88,7 +88,7 @@ namespace Model.helpers
             }
         }
 
-        public COLLABORATEUR GetOneById(int id)
+		public COLLABORATEUR GetOneById(int id)
         {
             using (_db = new BDD_SIO7Entities())
             {
@@ -96,7 +96,7 @@ namespace Model.helpers
                         where c.matricule_col == id
                         select c).FirstOrDefault();
             }
-        }
+       }
                             
 
         public COLLABORATEUR GetOneByUsername1(string username)
@@ -118,7 +118,7 @@ namespace Model.helpers
                               c.prenom_col == prenom
                         select c).FirstOrDefault();
             }
-        }
+		}
 
         public void Insert(COLLABORATEUR collaborateur)
 		{

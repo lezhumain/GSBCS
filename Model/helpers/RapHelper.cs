@@ -97,6 +97,33 @@ namespace Model.helpers
                 _db.SaveChanges();
             }
         }
+
+        public List<RAPPORT_DE_VISITE> GetRpByPraId(int id)
+        {
+            using(_db = new BDD_SIO7Entities())
+	        {
+		        return 	(from rp in _db.RAPPORT_DE_VISITE
+				        where rp.matricule_praticien == id
+                         select rp).ToList();
+ 
+	        }
+        }
+
+        public RAPPORT_DE_VISITE getById(int id)
+        {
+            using (_db = new BDD_SIO7Entities())
+            {
+                return (from rap in _db.RAPPORT_DE_VISITE 
+                        .Include("MOTIF")
+                        .Include("COLLABORATEUR")
+                        .Include("PRATICIEN")
+                        .Include("PRESENTE")
+                        .Include("OFFRE")
+                        where rap.num_rapport == id
+                        select rap).FirstOrDefault();
+
+            }
+        }
         /*
         public void DeleteCascade(COLLABORATEUR rapport)
         {
