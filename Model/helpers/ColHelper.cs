@@ -79,14 +79,25 @@ namespace Model.helpers
 
         public List<COLLABORATEUR> GetListForChart()
         {
+        using (_db = new BDD_SIO7Entities())
+        {
+            return (from c in _db.COLLABORATEUR
+                        .Include("RAPPORT_DE_VISITE")
+                    orderby c.RAPPORT_DE_VISITE.Count
+                    select c).Take(5).ToList<COLLABORATEUR>();
+            }
+        }
+
+        public COLLABORATEUR GetOneById(int id)
+        {
             using (_db = new BDD_SIO7Entities())
             {
                 return (from c in _db.COLLABORATEUR
-                            .Include("RAPPORT_DE_VISITE")
-                        orderby c.RAPPORT_DE_VISITE.Count
-                        select c).Take(5).ToList<COLLABORATEUR>();
+                        where c.matricule_col == id
+                        select c).FirstOrDefault();
             }
         }
+                            
 
         public COLLABORATEUR GetOneByUsername1(string username)
         {

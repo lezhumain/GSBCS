@@ -53,6 +53,8 @@ namespace WpfApplication.ViewModel
                 champ = value;
             }
         }
+
+
     }
     
 
@@ -240,6 +242,14 @@ namespace WpfApplication.ViewModel
         #endregion
         #region Entites
 
+        //attribut du formPrat
+        private PRATICIEN objPratForm;
+        public PRATICIEN ObjPratForm
+        {
+            get { return objPratForm; }
+            set { NotifyPropertyChanged(ref objPratForm, value); }
+        }
+
         private List<object> listeSel;
         public List<object> ListeSel
         {
@@ -314,6 +324,8 @@ namespace WpfApplication.ViewModel
 
         #endregion
 
+
+
         private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
         {
             if (object.Equals(variable, valeur)) return false;
@@ -368,6 +380,9 @@ namespace WpfApplication.ViewModel
                 chargListesForRegion( query.First() );
                 CbVisible = Visibility.Visible;
             }
+
+            //Details prat
+            ObjPratForm = new PRATICIEN();
 
             // enfin on charge tous les praticiens
             ListePrat = convertPrat(PraHelper.Current.GetList());
@@ -584,18 +599,34 @@ namespace WpfApplication.ViewModel
                 return;
 
             switch (currentList)
-            { 
+            {
                 case "Visiteurs":
+                    COLLABORATEUR SelectCol = new COLLABORATEUR();
+                    ColTrans SelectColTrans = (ColTrans)this.listeSel[0];
+                    SelectCol = ColHelper.Current.GetOneById(SelectColTrans.matricule);
+                    //Console.WriteLine(SelectCol.prenom_col);
                     break;
                 case "Praticiens":
+                    if (this.listeSel[0] as PraTrans == null)
+                        MessageBox.Show("Null sisi");
+
+                    //Init attribut detail prat => objPratForm
+                    PraTrans SelectPratTrans = this.listeSel[0] as PraTrans;
+                    ObjPratForm = PraHelper.Current.getById(SelectPratTrans.matricule);
+
+                    //List<RAPPORT_DE_VISITE> sisi = SelectPrat.RAPPORT_DE_VISITE.ToList();
+                    //MessageBox.Show(lToS(sisi));
+                    //Console.WriteLine(SelectPrat.nom_praticien);
                     break;
                 case "Rapports":
                     break;
                 default:
                     break;
+                //MessageBox.Show( "Double clicked biatch\n" + lToS(this.listeSel) );
             }
 
             MessageBox.Show( mbea.Source.GetType() + "\nDouble clicked biatch\n" + lToS(this.listeSel) );
+            //MessageBox.Show( ColHelper.GetOneByUsername(this.listeSel.));
         }
         
         /// <summary>
@@ -607,139 +638,123 @@ namespace WpfApplication.ViewModel
             string msg = "val: " + sfiltre.Valeur + "\nchamp: " + sfiltre.Champ;
             int lol; // num de matricule si renseigne
 
+            if (sfiltre.Valeur == null || sfiltre.Valeur.Count() == 0)
+                return;
+                
+
             if (currentList == "Visiteurs")
             {
-                if (sfiltre.Valeur == null || sfiltre.Valeur.Count() == 0)
+                switch (this.sfiltre.Champ.ToLower()) // pour les collabo
                 {
-                    /*
-                    // On charge la liste des visiteurs de la region du RdS
-                    List<VISITEUR> lv = VisHelper.Current.getListByRegion(SessionCol.GERE.First<GERE>().code_region);
-                    // on recup les COL associes
-                    List<COLLABORATEUR> lc = (from v in lv
-                                              select v.COLLABORATEUR).ToList<COLLABORATEUR>();
-                    // puis on la met dans la liste affichee
-                    ListeCol = convertCol(lc);
-                     */
-                    return;
+                    case "matricule":
+                        if (int.TryParse(sfiltre.Valeur, out lol))
+                        {
+                            List<ColTrans> l = ListeCol.Where(col => col.matricule == lol).ToList();
+                            if (l.Count != 0)
+                            {
+                                ListeCol = l;
+                                msg = "Matricule, fait.\n" + lToS(ListeCol);
+                            }
+                        }
+                        else
+                            msg = "Le matricule doit être un nombre";
+                        break;
+                    case "nom":
+                        List<ColTrans> ll = ListeCol.Where(col => col.nom == sfiltre.Valeur).ToList();
+                        if (ll.Count != 0)
+                        {
+                            ListeCol = ll;
+                            msg = "Nom, fait.\n" + lToS(ListeCol);
+                        }
+                        break;
+                    case "prenom":
+                        List<ColTrans> lll = ListeCol.Where(col => col.prenom == sfiltre.Valeur).ToList();
+                        if (lll.Count != 0)
+                        {
+                            ListeCol = lll;
+                            msg = "Prénom, fait.\n" + lToS(ListeCol);
+                        }
+                        break;
+                    default:
+                        msg = "Defaut, a faire.";
+                        break;
                 }
-                else
-                    switch (this.sfiltre.Champ.ToLower()) // pour les collabo
-                    {
-                        case "matricule":
-                            if (int.TryParse(sfiltre.Valeur, out lol))
-                            {
-                                List<ColTrans> l = ListeCol.Where(col => col.matricule == lol).ToList();
-                                if (l.Count != 0)
-                                {
-                                    ListeCol = l;
-                                    msg = "Matricule, fait.\n" + lToS(ListeCol);
-                                }
-                            }
-                            else
-                                msg = "Le matricule doit être un nombre";
-                            break;
-                        case "nom":
-                            List<ColTrans> ll = ListeCol.Where(col => col.nom == sfiltre.Valeur).ToList();
-                            if (ll.Count != 0)
-                            {
-                                ListeCol = ll;
-                                msg = "Nom, fait.\n" + lToS(ListeCol);
-                            }
-                            break;
-                        case "prenom":
-                            List<ColTrans> lll = ListeCol.Where(col => col.prenom == sfiltre.Valeur).ToList();
-                            if (lll.Count != 0)
-                            {
-                                ListeCol = lll;
-                                msg = "Prénom, fait.\n" + lToS(ListeCol);
-                            }
-                            break;
-                        default:
-                            msg = "Defaut, a faire.";
-                            break;
-                    }
             }
             else if (currentList == "Rapports") // pour les rapports
             {
-                if (sfiltre.Valeur.Count() == 0)
-                    ListeRap = convertRap(RapHelper.Current.GetList());
-                else
-                    switch (this.sfiltre.Champ.ToLower()) // pour les collabo
-                    {
-                        case "numero":
-                            if (int.TryParse(sfiltre.Valeur, out lol))
+                switch (this.sfiltre.Champ.ToLower()) // pour les collabo
+                {
+                    case "numero":
+                        if (int.TryParse(sfiltre.Valeur, out lol))
+                        {
+                            List<RapTrans> l = ListeRap.Where(rap => rap.numero == lol).ToList();
+                            if (l.Count != 0)
                             {
-                                List<RapTrans> l = ListeRap.Where(rap => rap.numero == lol).ToList();
-                                if (l.Count != 0)
-                                {
-                                    ListeRap = l;
-                                    msg = "Matricule, fait.\n" + lToS(ListeRap);
-                                }
+                                ListeRap = l;
+                                msg = "Matricule, fait.\n" + lToS(ListeRap);
                             }
-                            else
-                                msg = "Le numéro doit être un nombre";
-                            break;
-                        case "praticien":
-                            List<RapTrans> ll = ListeRap.Where(rap => rap.praticien == sfiltre.Valeur).ToList();
-                            if (ll.Count != 0)
-                            {
-                                ListeRap = ll;
-                                msg = "Nom fait.\n" + lToS(ListeRap);
-                            }
-                            break;
-                        case "date":
-                            List<RapTrans> lll = ListeRap.Where(rap => rap.date == sfiltre.Valeur).ToList();
-                            if (lll.Count != 0)
-                            {
-                                ListeRap = lll;
-                                msg = "Prénom fait.\n" + lToS(ListeRap);
-                            }
-                            break;
-                        default:
-                            msg = "Defaut, a faire.";
-                            break;
-                    }
+                        }
+                        else
+                            msg = "Le numéro doit être un nombre";
+                        break;
+                    case "praticien":
+                        List<RapTrans> ll = ListeRap.Where(rap => rap.praticien == sfiltre.Valeur).ToList();
+                        if (ll.Count != 0)
+                        {
+                            ListeRap = ll;
+                            msg = "Nom fait.\n" + lToS(ListeRap);
+                        }
+                        break;
+                    case "date":
+                        List<RapTrans> lll = ListeRap.Where(rap => rap.date == sfiltre.Valeur).ToList();
+                        if (lll.Count != 0)
+                        {
+                            ListeRap = lll;
+                            msg = "Prénom fait.\n" + lToS(ListeRap);
+                        }
+                        break;
+                    default:
+                        msg = "Defaut, a faire.";
+                        break;
+                }
             }
             else if (currentList == "Praticiens") // pour les praticiens
             {
-                if (sfiltre.Valeur.Count() == 0)
-                    ListePrat = convertPrat(PraHelper.Current.GetList());
-                else
-                    switch (this.sfiltre.Champ.ToLower())
-                    {
-                        case "matricule":
-                            if (int.TryParse(sfiltre.Valeur, out lol))
+                switch (this.sfiltre.Champ.ToLower())
+                {
+                    case "matricule":
+                        if (int.TryParse(sfiltre.Valeur, out lol))
+                        {
+                            List<PraTrans> l = ListePrat.Where(pra => pra.matricule == lol).ToList();
+                            if (l.Count != 0)
                             {
-                                List<PraTrans> l = ListePrat.Where(pra => pra.matricule == lol).ToList();
-                                if (l.Count != 0)
-                                {
-                                    ListePrat = l;
-                                    msg = "Matricule, fait.\n" + lToS(ListePrat);
-                                }
+                                ListePrat = l;
+                                msg = "Matricule, fait.\n" + lToS(ListePrat);
                             }
-                            else
-                                msg = "Le matricule doit être un nombre";
-                            break;
-                        case "nom":
-                            List<PraTrans> ll = ListePrat.Where(pra => pra.nom == sfiltre.Valeur).ToList();
-                            if (ll.Count != 0)
-                            {
-                                ListePrat = ll;
-                                msg = "Nom, fait.\n" + lToS(ListePrat);
-                            }
-                            break;
-                        case "prenom":
-                            List<PraTrans> lll = ListePrat.Where(pra => pra.prenom == sfiltre.Valeur).ToList();
-                            if (lll.Count != 0)
-                            {
-                                ListePrat = lll;
-                                msg = "Prénom, fait.\n" + lToS(ListeCol);
-                            }
-                            break;
-                        default:
-                            msg = "Defaut, a faire.";
-                            break;
-                    }
+                        }
+                        else
+                            msg = "Le matricule doit être un nombre";
+                        break;
+                    case "nom":
+                        List<PraTrans> ll = ListePrat.Where(pra => pra.nom == sfiltre.Valeur).ToList();
+                        if (ll.Count != 0)
+                        {
+                            ListePrat = ll;
+                            msg = "Nom, fait.\n" + lToS(ListePrat);
+                        }
+                        break;
+                    case "prenom":
+                        List<PraTrans> lll = ListePrat.Where(pra => pra.prenom == sfiltre.Valeur).ToList();
+                        if (lll.Count != 0)
+                        {
+                            ListePrat = lll;
+                            msg = "Prénom, fait.\n" + lToS(ListeCol);
+                        }
+                        break;
+                    default:
+                        msg = "Defaut, a faire.";
+                        break;
+                }
             }
             else
                 msg = "Erreur de valeur...";

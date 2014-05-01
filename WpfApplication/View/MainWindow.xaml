@@ -350,8 +350,6 @@
         </Style>
     </Window.Resources>
     
-    
-    
     <Grid>
         <StackPanel Width="792"  Background="LightBlue" Orientation="Horizontal" Height="35" 
                     VerticalAlignment="Top">
@@ -385,18 +383,31 @@
                 <Button Content="Excel" Width="75" Height="23" Command="{Binding ExcelCommand}" Margin="0,6"/>
             </StackPanel>
         </StackPanel>
+        <!--        <DataGrid x:Name="ContentPanel" Margin="15,160,0,70" Width="auto" ItemsSource="{Binding ListeCol}"
+                  IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Left">
+-->
+        <!-- 
+        <DataGrid x:Name="MaGrid" AlternationCount="2" VerticalAlignment="Top" MaxHeight="396" Margin="0,151,0,0" ItemsSource="{Binding ListeCol}"/>
+        -->
+        <DockPanel Height="30" Margin="0,0,0,10" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                <Button x:Name="btrefresh" Content="Refresh" Width="90" Command="{Binding TestCommand}" />
+                <Button x:Name="btquit" Content="Quitter" Width="90" Command="{Binding ExitCommand}"/>
+            </StackPanel>
+        </DockPanel>
         <TabControl Margin="0,35,0,52" HorizontalAlignment="Stretch" Width="Auto">
             <TabControl.Resources>
-                <Style TargetType="TabItem">
+                <Style TargetType="{x:Type TabItem}">
                     <Setter Property="Template">
                         <Setter.Value>
-                            <ControlTemplate TargetType="TabItem">
-                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="4,4,0,0" Margin="2,0">
+                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                <Border x:Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="4,4,0,0" Margin="2,0">
                                     <ContentPresenter x:Name="ContentSite"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"
-                                        ContentSource="Header"
-                                        Margin="10,2"/>
+            							VerticalAlignment="Center"
+            							HorizontalAlignment="Center"
+            							ContentSource="Header"
+            							Margin="10,2"/>
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
@@ -412,53 +423,38 @@
                 </Style>
             </TabControl.Resources>
             <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged" >
-                    <cmd:EventToCommand Command="{Binding SelectChangedCommand}"
-                                        PassEventArgsToCommand="True" />
+                <i:EventTrigger EventName="SelectionChanged">
+                    <cmd:EventToCommand Command="{Binding SelectChangedCommand}" PassEventArgsToCommand="True"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <TabItem Header="Visiteurs">
                 <DataGrid x:Name="ContentPanel" AlternationCount="2" ItemsSource="{Binding ListeCol}" Margin="0" Width="auto" IsReadOnly="True" HorizontalAlignment="Left" Height="auto">
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged" >
-                            <cmd:EventToCommand Command="{Binding SelectedItemsCommand}"
-                                                PassEventArgsToCommand="True" />
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <cmd:EventToCommand Command="{Binding SelectedItemsCommand}" PassEventArgsToCommand="True"/>
                         </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseDoubleClick" >
-                            <cmd:EventToCommand Command="{Binding DoubleClickCommand}"
-                                                PassEventArgsToCommand="True" />
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <cmd:EventToCommand Command="{Binding DoubleClickCommand}" PassEventArgsToCommand="True"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </DataGrid>
             </TabItem>
             <TabItem Header="Praticiens" Margin="-3,0,3,0">
                 <DataGrid x:Name="pratPanel" ItemsSource="{Binding ListePrat}" Margin="0" Width="auto"
-                          IsReadOnly="True" HorizontalAlignment="Left" Height="auto">
+        			IsReadOnly="True" HorizontalAlignment="Left" Height="auto">
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged" >
-                            <cmd:EventToCommand Command="{Binding SelectedItemsCommand}"
-                                                PassEventArgsToCommand="True" />
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <cmd:EventToCommand Command="{Binding SelectedItemsCommand}" PassEventArgsToCommand="True"/>
                         </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseDoubleClick" >
-                            <cmd:EventToCommand Command="{Binding DoubleClickCommand}"
-                                                PassEventArgsToCommand="True" />
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <cmd:EventToCommand Command="{Binding DoubleClickCommand}" PassEventArgsToCommand="True"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </DataGrid>
             </TabItem>
             <TabItem Header="Rapports">
                 <DataGrid x:Name="rapPanel" ItemsSource="{Binding ListeRap}" Margin="0" Width="auto"
-                          IsReadOnly="True" HorizontalAlignment="Left" Height="auto">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged" >
-                            <cmd:EventToCommand Command="{Binding SelectedItemsCommand}"
-                                                PassEventArgsToCommand="True" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseDoubleClick" >
-                            <cmd:EventToCommand Command="{Binding DoubleClickCommand}"
-                                                PassEventArgsToCommand="True" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
+        			IsReadOnly="True" HorizontalAlignment="Left" Height="auto">
                     <!--
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="N°" Width="auto" IsReadOnly="True">
@@ -469,9 +465,19 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                 </DataGrid.Columns> -->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <cmd:EventToCommand Command="{Binding SelectedItemsCommand}" PassEventArgsToCommand="True"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <cmd:EventToCommand Command="{Binding DoubleClickCommand}" PassEventArgsToCommand="True"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </DataGrid>
             </TabItem>
+            <Label Content="Détails Praticien" Width="100" Margin="554,39,128,385"/>
         </TabControl>
+
         <!--        <DataGrid x:Name="ContentPanel" Margin="15,160,0,70" Width="auto" ItemsSource="{Binding ListeCol}"
                   IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Left">
 -->
@@ -490,9 +496,15 @@
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                <Button x:Name="btrefresh" Content="Refresh" Width="90" Command="{Binding TestCommand}" />
-                <Button x:Name="btquit" Content="Quitter" Width="90" Command="{Binding ExitCommand}"/>
+                <Button Content="Refresh" Width="90" Command="{Binding TestCommand}" />
+                <Button Content="Quitter" Width="90" Command="{Binding ExitCommand}"/>
             </StackPanel>
         </DockPanel>
+
+        <StackPanel DataContext="{ Binding ObjPratForm }">
+            <TextBox x:Name="nom_prat" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding nom_praticien}" VerticalAlignment="Top" Width="120" Margin="474,82,0,0" RenderTransformOrigin="0.85,0.13"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="474,140,0,0" TextWrapping="Wrap" Text="{Binding prenom_praticien}" VerticalAlignment="Top" Width="120"/>
+        </StackPanel>
+
     </Grid>
 </Window>
