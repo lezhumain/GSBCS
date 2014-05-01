@@ -1,0 +1,15 @@
+﻿<Window x:Class="WpfApplication.View.barChartView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        DataContext="{Binding BarChartVM, Source={StaticResource Locator}}"
+        Title="barChartView" Height="440" Width="390">
+    <Grid>
+        <chartingToolkit:Chart DataContext="{Binding Context}" HorizontalAlignment="Left" Margin="10,10,0,61" Title="Chart Title" Width="359">
+            <chartingToolkit:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}"/>
+        </chartingToolkit:Chart>
+        <Button x:Name="bouton" Content="Quitter" Margin="0,0,15,15" HorizontalAlignment="Right" Width="96" Height="25" VerticalAlignment="Bottom"
+                Command="{Binding QuitCommand}" 
+                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+    </Grid>
+</Window>

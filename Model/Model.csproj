@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="helpers\RegHelper.cs" />
+    <Compile Include="helpers\VisHelper.cs" />
+    <Compile Include="PartialVis.cs" />
+    <Compile Include="helpers\RdSHelper.cs" />
+    <Compile Include="helpers\DRHelper.cs" />
     <Compile Include="PartialRdS.cs" />
     <Compile Include="PartialPrat.cs" />
     <Compile Include="ServiceBdd.cs" />

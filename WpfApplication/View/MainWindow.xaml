@@ -349,15 +349,12 @@
             </Setter>
         </Style>
     </Window.Resources>
-
-
-
     <Grid>
-        <StackPanel Width="792"  Background="LightBlue" Orientation="Horizontal" Height="35" 
+        <DockPanel Width="792"  Background="LightBlue" Height="35" 
                     VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Label Content="Filtres :" Margin="20,5,0,0" HorizontalAlignment="Left" Width="50"/>
-                <TextBox x:Name="filtreVal" Width="100" Margin="10,5,10,5">
+                <Label Content="Filtres :" Margin="20,9,10,6" HorizontalAlignment="Left" Width="50"/>
+                <TextBox x:Name="filtreVal" Width="100" Margin="5,6,5,6">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="TextChanged" >
                             <cmd:EventToCommand Command="{Binding TextChangedCommand}"
@@ -370,7 +367,7 @@
                     </i:Interaction.Triggers>
                 </TextBox>
                 <ComboBox x:Name="filtreType" ItemsSource="{Binding ListeFiltres, Mode=OneWay}" 
-            		Width="75" Height="24" Margin="10,5,10,5" >
+            		Width="75" Height="24" Margin="5,6,5,6" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged" >
                             <cmd:EventToCommand Command="{Binding ComboSelChangedCommand}"
@@ -378,13 +375,13 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
-                <Button x:Name="filtreBtn" Content="Filtrer" Width="75" Margin="40,6,10,6" Command="{Binding FiltreCommand}" Foreground="#FF042271"/>
+                <Button x:Name="filtreBtn" Content="Filtrer" Width="75" Margin="20,6,5,6" Command="{Binding FiltreCommand}" Foreground="#FF042271"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Statistiques" Width="75" Height="23" Margin="0,6"/>
-                <Button Content="Excel" Width="75" Height="23" Command="{Binding ExcelCommand}" Margin="0,6"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
+                <Button Content="Statistiques" Width="75" Height="23" Margin="5,6" Command="{Binding StatCommand}"/>
+                <Button Content="Excel" Width="75" Height="23" Command="{Binding ExcelCommand}"/>
             </StackPanel>
-        </StackPanel>
+        </DockPanel>
         <!--        <DataGrid x:Name="ContentPanel" Margin="15,160,0,70" Width="auto" ItemsSource="{Binding ListeCol}"
                   IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Left">
 -->
@@ -429,7 +426,7 @@
                     <cmd:EventToCommand Command="{Binding SelectChangedCommand}" PassEventArgsToCommand="True"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <TabItem Header="Collaborateurs">
+            <TabItem Header="Visiteurs">
                 <DataGrid x:Name="ContentPanel" AlternationCount="2" ItemsSource="{Binding ListeCol}" Margin="0" Width="auto" IsReadOnly="True" HorizontalAlignment="Left" Height="auto">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
@@ -480,16 +477,34 @@
 
 
         </TabControl>
+
         <!-- 
             Details praticien  stackPanel est un block lié a un objet praticien
-            Pour cacher tu click sur stackpanel et dans les propriété a droite ta un attribut visibily 
+            Pour cacher tu click sur stackpanel et dans les propriété a droite ta un attribut visibily.
+            Donc avec MVVM, tu bind l'attribut Visibility du StackPanel a un attribut de type Visibility du ViewModel ;)
         -->
         <!-- Pour lier un champ a une valeur de l'objet regarde l'attribut text -->
         <StackPanel DataContext="{ Binding ObjPratForm }" Orientation="Horizontal">
             <TextBox HorizontalAlignment="Left" Height="23" Margin="407,110,0,0" TextWrapping="Wrap" Text="{Binding prenom_praticien}" VerticalAlignment="Top" Width="120"/>
             <TextBox HorizontalAlignment="Right" Height="23" Margin="70,110,0,0" TextWrapping="Wrap" Text="{Binding nom_praticien}" VerticalAlignment="Top" Width="120"  />
-        </StackPanel>
-
+         </StackPanel>
+        
+         <DockPanel Height="30" Margin="10,0,10,10" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <ComboBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" ItemsSource="{Binding ListeRegions}" Visibility="{Binding CbVisible}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged" >
+                            <cmd:EventToCommand Command="{Binding ComboSelChangedRegCommand}"
+            					PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                <Button Content="Refresh" Width="90" Command="{Binding TestCommand}" />
+                <Button Content="Quitter" Width="90" Command="{Binding ExitCommand}"/>
+            </StackPanel>
+        </DockPanel>
 
         <!-- Pour lier un champ a une valeur de l'objet regarde l'attribut text -->
         <StackPanel DataContext="{ Binding ObjRapForm }" Orientation="Horizontal">
@@ -501,6 +516,5 @@
         <DataGrid Margin="407,201,10,114" Height="246" ItemsSource="{Binding ListeRapToBind}"/>
         <Label Content="Prénom :" Width="100" Margin="407,88,285,451"/>
         <Label Content="Nom :" Width="100" Margin="600,88,92,451"/>
-
     </Grid>
 </Window>

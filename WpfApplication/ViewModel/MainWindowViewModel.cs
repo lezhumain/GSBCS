@@ -20,6 +20,9 @@ using System.Reflection;
 using System.IO;
 using System.Diagnostics;
 using WPFFolderBrowser;
+using GalaSoft.MvvmLight.Messaging;
+using System.Data.Objects.DataClasses;
+using WpfApplication.View;
 
 namespace WpfApplication.ViewModel
 {
@@ -58,9 +61,21 @@ namespace WpfApplication.ViewModel
     public class MainWindowViewModel : MainViewModel
     {
         private COLLABORATEUR sessionCol;
+        public COLLABORATEUR SessionCol
+        {
+            get { return sessionCol; }
+            set { NotifyPropertyChanged(ref sessionCol, value); }
+        }
 
         private readonly IServiceClient serviceClient;
         private string currentList;
+
+        private List<string> listeRegions;
+        public List<string> ListeRegions
+        {
+            get { return listeRegions; }
+            set { NotifyPropertyChanged(ref listeRegions, value); }
+        }
         
         private FiltreStruct sfiltre;
         public FiltreStruct Sfiltre
@@ -68,7 +83,9 @@ namespace WpfApplication.ViewModel
             get{ return sfiltre; }
             set { sfiltre = value; }
         }
-        
+
+        public Visibility CbVisible { get; set; }
+
         #region commandes
 
         // attribut binde au clic sur btn exit
@@ -106,6 +123,18 @@ namespace WpfApplication.ViewModel
                     excelCommand = new DelegateCommand(Excel);
 
                 return excelCommand;
+            }
+        }
+
+        private DelegateCommand statCommand;
+        public ICommand StatCommand
+        {
+            get
+            {
+                if (statCommand == null)
+                    statCommand = new DelegateCommand(Stat);
+
+                return statCommand;
             }
         }
 
@@ -198,6 +227,18 @@ namespace WpfApplication.ViewModel
             }
         }
 
+        private RelayCommand<SelectionChangedEventArgs> comboSelChangedRegCommand;
+        public ICommand ComboSelChangedRegCommand
+        {
+            get
+            {
+                if (comboSelChangedRegCommand == null)
+                    comboSelChangedRegCommand = new RelayCommand<SelectionChangedEventArgs>(ComboSelChangedReg);
+
+                return comboSelChangedRegCommand;
+            }
+        }
+
         #endregion
         #region Entites
 
@@ -208,7 +249,6 @@ namespace WpfApplication.ViewModel
             get { return objPratForm; }
             set { NotifyPropertyChanged(ref objPratForm, value); }
         }
-
 
         private List<RapTrans> listeRapToBind;
         public List<RapTrans> ListeRapToBind
@@ -224,7 +264,6 @@ namespace WpfApplication.ViewModel
             get { return objRapForm; }
             set { NotifyPropertyChanged(ref objRapForm, value); }
         }
-
 
         private List<object> listeSel;
         public List<object> ListeSel
@@ -276,10 +315,12 @@ namespace WpfApplication.ViewModel
             List<RapTrans> l = new List<RapTrans>();
             foreach (RAPPORT_DE_VISITE c in list)
             {
+
                 PRATICIEN p = PraHelper.Current.getById( (int)c.matricule_praticien );
                 l.Add(new RapTrans( c.num_rapport,
                                     p.prenom_praticien + " " + p.nom_praticien,
-                                    c.date_rapport.ToString("dd/mm/yyyy") ));
+                                    c.date_rapport.ToString("dd/mm/yyyy"),
+                                    c.COLLABORATEUR.prenom_col + " " + c.COLLABORATEUR.nom_col));
             }    
             return l;
         }
@@ -317,24 +358,71 @@ namespace WpfApplication.ViewModel
         {
             serviceClient = service;
 
-            //sessionCol = new COLLABORATEUR();
-
-            ListeCol = convertCol( ColHelper.Current.GetList() );            
-            ListeRap = convertRap( RapHelper.Current.GetList() );
-            ListePrat = convertPrat(PraHelper.Current.GetList());
+            ListeRegions = new List<string>();
             ListeSel = new List<object>();
             ListeFiltres = getHeaders(typeof(ColTrans));
             Sfiltre = new FiltreStruct();
-            currentList = "Collaborateurs";
+            currentList = "Visiteurs";
+
+            //Messenger.Default.Register<COLLABORATEUR>(this, chargListes);
+            chargListes( ColHelper.Current.GetOneByUsername("Prenomrds.Nomrds") );
+
+            //Details prat
+            ObjPratForm = new PRATICIEN();
+        }
+
+        private void chargListes(COLLABORATEUR col)
+        {
+            List<String> lCodeReg = new List<string>();
+            // on met le collab recup en "session"
+            SessionCol = col;
+            if (SessionCol.DIRECTEUR_REGIONAL != null)  // DIRECTEUR_REGIONAL
+            {
+                lCodeReg.Add( col.GERE.First<GERE>().code_region );
+                chargListesForRegion(lCodeReg.First());
+                CbVisible = Visibility.Hidden;
+            }
+            else                                        // Responsable de Secteur
+            {
+                // on recup la liste des regions a gerer
+                ETRE_RESPONSABLE er = col.ETRE_RESPONSABLE.ToList<ETRE_RESPONSABLE>().First();
+                List<REGION> query = (from q in er.SECTEUR.REGION
+                                        select q).ToList<REGION>();
+
+                // on met la liste dans celle bindee a la combo box
+                ListeRegions = (from q in query select q.nom_region).ToList<string>();
+                
+                // puis on charge la premiere region par defaut
+                chargListesForRegion( query.First() );
+                CbVisible = Visibility.Visible;
+            }
 
             //Details prat
             ObjPratForm = new PRATICIEN();
 
+            // enfin on charge tous les praticiens
+            ListePrat = convertPrat(PraHelper.Current.GetList());
+        }
 
+        private void chargListesForRegion(string regCode)
+        {
+            // On charge la liste des visiteurs de la region
+            List<VISITEUR> lv = VisHelper.Current.getListByRegion(regCode);
+            // on recup les COL associes
+            List<COLLABORATEUR> lc = (from v in lv
+                                      select v.COLLABORATEUR).ToList<COLLABORATEUR>();
+            // puis on la met dans la liste affichee
+            ListeCol = convertCol(lc);
 
+            // charge la liste des rapports de la region
+            List<RAPPORT_DE_VISITE> lr = RapHelper.Current.getListByRegion(regCode);
+            // puis on la met dans la liste affichee
+            ListeRap = convertRap(lr);
+        }
 
-            /*SelectedItemsCommand = new RelayCommand<SelectionChangedEventArgs>(SelectedItems);
-            SelectChangedCommand = new RelayCommand<SelectionChangedEventArgs>(Selected);*/
+        private void chargListesForRegion(REGION reg)
+        {
+            chargListesForRegion(reg.code_region);
         }
 
         /// <summary>
@@ -356,12 +444,9 @@ namespace WpfApplication.ViewModel
             ListeRap.Clear();
             ListePrat.Clear();
 
-            ListeCol = convertCol(ColHelper.Current.GetList());
-            ListeRap = convertRap(RapHelper.Current.GetList());
-            ListePrat = convertPrat(PraHelper.Current.GetList());
+            chargListes(SessionCol);
 
             MessageBox.Show("Reloaded");
-            //MessageBox.Show("Fichier: " + chooseFolder());
         }
 
         /// <summary>
@@ -381,6 +466,11 @@ namespace WpfApplication.ViewModel
                 return ""; 
         }
 
+        /// <summary>
+        /// Handler pour l'appuie sur une touche.
+        /// L'appuie sur la touche "Entree" lance le filtre
+        /// </summary>
+        /// <param name="args">Arguments de l'evnmt</param>
         private void KeyDown(KeyEventArgs args)
         {
             int i = 0;
@@ -475,8 +565,8 @@ namespace WpfApplication.ViewModel
                 switch (name)
                 {
                     // on recup les header de la classe corresp
-                    case "Collaborateurs":
-                        this.currentList = "Collaborateurs";
+                    case "Visiteurs":
+                        this.currentList = "Visiteurs";
                         this.ListeFiltres = getHeaders(typeof(ColTrans));
                         break;
                     case "Rapports":
@@ -500,15 +590,37 @@ namespace WpfApplication.ViewModel
         /// <param name="args"></param>
         private void ComboSelChanged(SelectionChangedEventArgs args)
         {
-            if( (args.Source as ComboBox).SelectedItem != null )
-                this.sfiltre.Champ = (args.Source as ComboBox).SelectedItem.ToString();
+            if (args.Source as ComboBox == null || (args.Source as ComboBox).SelectedItem == null)
+                return;
+            
+            this.sfiltre.Champ = (args.Source as ComboBox).SelectedItem.ToString();
+        }
+
+        private void ComboSelChangedReg(SelectionChangedEventArgs args)
+        {
+            string regName = "";
+
+            if (args.Source as ComboBox == null || (args.Source as ComboBox).SelectedItem == null)
+                return;
+            
+            regName = (args.Source as ComboBox).SelectedItem.ToString();
+            chargListesForRegion(RegHelper.Current.GetOneByName(regName));
         }
 
         private void DoubleClick(EventArgs args)
         {
+            MouseButtonEventArgs mbea = args as MouseButtonEventArgs;
+
+            if (mbea == null)
+                return;
+
             switch (currentList)
-            { 
-                case "Collaborateurs":
+            {
+                case "Visiteurs":
+                    COLLABORATEUR SelectCol = new COLLABORATEUR();
+                    ColTrans SelectColTrans = (ColTrans)this.listeSel[0];
+                    SelectCol = ColHelper.Current.GetOneById(SelectColTrans.matricule);
+                    //Console.WriteLine(SelectCol.prenom_col);
                     break;
                 case "Praticiens":
                     if (this.listeSel[0] as PraTrans == null)
@@ -517,8 +629,8 @@ namespace WpfApplication.ViewModel
                     //Init attribut detail prat => objPratForm
                     PraTrans SelectPratTrans = this.listeSel[0] as PraTrans;
                     ObjPratForm = PraHelper.Current.getById(SelectPratTrans.matricule);
-                    ListeRapToBind = convertRap(ObjPratForm.RAPPORT_DE_VISITE.ToList());
 
+                    ListeRapToBind = convertRap(ObjPratForm.RAPPORT_DE_VISITE.ToList());
                     break;
                 case "Rapports":
                     if (this.listeSel[0] as PraTrans != null)
@@ -533,10 +645,9 @@ namespace WpfApplication.ViewModel
                 default:
                     break;
                 //MessageBox.Show( "Double clicked biatch\n" + lToS(this.listeSel) );
-
             }
 
-
+            MessageBox.Show( mbea.Source.GetType() + "\nDouble clicked biatch\n" + lToS(this.listeSel) );
             //MessageBox.Show( ColHelper.GetOneByUsername(this.listeSel.));
         }
         
@@ -549,128 +660,123 @@ namespace WpfApplication.ViewModel
             string msg = "val: " + sfiltre.Valeur + "\nchamp: " + sfiltre.Champ;
             int lol; // num de matricule si renseigne
 
-            if (currentList == "Collaborateurs")
+            if (sfiltre.Valeur == null || sfiltre.Valeur.Count() == 0)
+                return;
+                
+
+            if (currentList == "Visiteurs")
             {
-                if (sfiltre.Valeur == null || sfiltre.Valeur.Count() == 0)
-                    ListeCol = convertCol(ColHelper.Current.GetList());
-                else
-                    switch (this.sfiltre.Champ.ToLower()) // pour les collabo
-                    {
-                        case "matricule":
-                            if (int.TryParse(sfiltre.Valeur, out lol))
+                switch (this.sfiltre.Champ.ToLower()) // pour les collabo
+                {
+                    case "matricule":
+                        if (int.TryParse(sfiltre.Valeur, out lol))
+                        {
+                            List<ColTrans> l = ListeCol.Where(col => col.matricule == lol).ToList();
+                            if (l.Count != 0)
                             {
-                                List<ColTrans> l = ListeCol.Where(col => col.matricule == lol).ToList();
-                                if (l.Count != 0)
-                                {
-                                    ListeCol = l;
-                                    msg = "Matricule, fait.\n" + lToS(ListeCol);
-                                }
+                                ListeCol = l;
+                                msg = "Matricule, fait.\n" + lToS(ListeCol);
                             }
-                            else
-                                msg = "Le matricule doit être un nombre";
-                            break;
-                        case "nom":
-                            List<ColTrans> ll = ListeCol.Where(col => col.nom == sfiltre.Valeur).ToList();
-                            if (ll.Count != 0)
-                            {
-                                ListeCol = ll;
-                                msg = "Nom, fait.\n" + lToS(ListeCol);
-                            }
-                            break;
-                        case "prenom":
-                            List<ColTrans> lll = ListeCol.Where(col => col.prenom == sfiltre.Valeur).ToList();
-                            if (lll.Count != 0)
-                            {
-                                ListeCol = lll;
-                                msg = "Prénom, fait.\n" + lToS(ListeCol);
-                            }
-                            break;
-                        default:
-                            msg = "Defaut, a faire.";
-                            break;
-                    }
+                        }
+                        else
+                            msg = "Le matricule doit être un nombre";
+                        break;
+                    case "nom":
+                        List<ColTrans> ll = ListeCol.Where(col => col.nom == sfiltre.Valeur).ToList();
+                        if (ll.Count != 0)
+                        {
+                            ListeCol = ll;
+                            msg = "Nom, fait.\n" + lToS(ListeCol);
+                        }
+                        break;
+                    case "prenom":
+                        List<ColTrans> lll = ListeCol.Where(col => col.prenom == sfiltre.Valeur).ToList();
+                        if (lll.Count != 0)
+                        {
+                            ListeCol = lll;
+                            msg = "Prénom, fait.\n" + lToS(ListeCol);
+                        }
+                        break;
+                    default:
+                        msg = "Defaut, a faire.";
+                        break;
+                }
             }
-            else if (currentList == "Rapports")
+            else if (currentList == "Rapports") // pour les rapports
             {
-                if (sfiltre.Valeur.Count() == 0)
-                    ListeRap = convertRap(RapHelper.Current.GetList());
-                else
-                    switch (this.sfiltre.Champ.ToLower()) // pour les collabo
-                    {
-                        case "numero":
-                            if (int.TryParse(sfiltre.Valeur, out lol))
+                switch (this.sfiltre.Champ.ToLower()) // pour les collabo
+                {
+                    case "numero":
+                        if (int.TryParse(sfiltre.Valeur, out lol))
+                        {
+                            List<RapTrans> l = ListeRap.Where(rap => rap.numero == lol).ToList();
+                            if (l.Count != 0)
                             {
-                                List<RapTrans> l = ListeRap.Where(rap => rap.numero == lol).ToList();
-                                if (l.Count != 0)
-                                {
-                                    ListeRap = l;
-                                    msg = "Matricule, fait.\n" + lToS(ListeRap);
-                                }
+                                ListeRap = l;
+                                msg = "Matricule, fait.\n" + lToS(ListeRap);
                             }
-                            else
-                                msg = "Le numéro doit être un nombre";
-                            break;
-                        case "praticien":
-                            List<RapTrans> ll = ListeRap.Where(rap => rap.praticien == sfiltre.Valeur).ToList();
-                            if (ll.Count != 0)
-                            {
-                                ListeRap = ll;
-                                msg = "Nom fait.\n" + lToS(ListeRap);
-                            }
-                            break;
-                        case "date":
-                            List<RapTrans> lll = ListeRap.Where(rap => rap.date == sfiltre.Valeur).ToList();
-                            if (lll.Count != 0)
-                            {
-                                ListeRap = lll;
-                                msg = "Prénom fait.\n" + lToS(ListeRap);
-                            }
-                            break;
-                        default:
-                            msg = "Defaut, a faire.";
-                            break;
-                    }
+                        }
+                        else
+                            msg = "Le numéro doit être un nombre";
+                        break;
+                    case "praticien":
+                        List<RapTrans> ll = ListeRap.Where(rap => rap.praticien == sfiltre.Valeur).ToList();
+                        if (ll.Count != 0)
+                        {
+                            ListeRap = ll;
+                            msg = "Nom fait.\n" + lToS(ListeRap);
+                        }
+                        break;
+                    case "date":
+                        List<RapTrans> lll = ListeRap.Where(rap => rap.date == sfiltre.Valeur).ToList();
+                        if (lll.Count != 0)
+                        {
+                            ListeRap = lll;
+                            msg = "Prénom fait.\n" + lToS(ListeRap);
+                        }
+                        break;
+                    default:
+                        msg = "Defaut, a faire.";
+                        break;
+                }
             }
-            else if (currentList == "Praticiens")
+            else if (currentList == "Praticiens") // pour les praticiens
             {
-                if (sfiltre.Valeur.Count() == 0)
-                    ListePrat = convertPrat(PraHelper.Current.GetList());
-                else
-                    switch (this.sfiltre.Champ.ToLower())
-                    {
-                        case "matricule":
-                            if (int.TryParse(sfiltre.Valeur, out lol))
+                switch (this.sfiltre.Champ.ToLower())
+                {
+                    case "matricule":
+                        if (int.TryParse(sfiltre.Valeur, out lol))
+                        {
+                            List<PraTrans> l = ListePrat.Where(pra => pra.matricule == lol).ToList();
+                            if (l.Count != 0)
                             {
-                                List<PraTrans> l = ListePrat.Where(pra => pra.matricule == lol).ToList();
-                                if (l.Count != 0)
-                                {
-                                    ListePrat = l;
-                                    msg = "Matricule, fait.\n" + lToS(ListePrat);
-                                }
+                                ListePrat = l;
+                                msg = "Matricule, fait.\n" + lToS(ListePrat);
                             }
-                            else
-                                msg = "Le matricule doit être un nombre";
-                            break;
-                        case "nom":
-                            List<PraTrans> ll = ListePrat.Where(pra => pra.nom == sfiltre.Valeur).ToList();
-                            if (ll.Count != 0)
-                            {
-                                ListePrat = ll;
-                                msg = "Nom, fait.\n" + lToS(ListePrat);
-                            }
-                            break;
-                        case "prenom":
-                            List<PraTrans> lll = ListePrat.Where(pra => pra.prenom == sfiltre.Valeur).ToList();
-                            if (lll.Count != 0)
-                            {
-                                ListePrat = lll;
-                                msg = "Prénom, fait.\n" + lToS(ListeCol);
-                            }
-                            break;
-                        default:
-                            msg = "Defaut, a faire.";
-                            break;
-                    }
+                        }
+                        else
+                            msg = "Le matricule doit être un nombre";
+                        break;
+                    case "nom":
+                        List<PraTrans> ll = ListePrat.Where(pra => pra.nom == sfiltre.Valeur).ToList();
+                        if (ll.Count != 0)
+                        {
+                            ListePrat = ll;
+                            msg = "Nom, fait.\n" + lToS(ListePrat);
+                        }
+                        break;
+                    case "prenom":
+                        List<PraTrans> lll = ListePrat.Where(pra => pra.prenom == sfiltre.Valeur).ToList();
+                        if (lll.Count != 0)
+                        {
+                            ListePrat = lll;
+                            msg = "Prénom, fait.\n" + lToS(ListeCol);
+                        }
+                        break;
+                    default:
+                        msg = "Defaut, a faire.";
+                        break;
+                }
             }
             else
                 msg = "Erreur de valeur...";
@@ -740,6 +846,18 @@ namespace WpfApplication.ViewModel
                 else
                     MessageBox.Show("Rien n'a été fait.");
             }
+        }
+
+        private void Stat()
+        {
+            string content = "";
+
+            barChartView bc = new barChartView(); // fenetre
+
+            // envoie du COL
+            //Messenger.Default.Send<COLLABORATEUR, MainWindowViewModel>(col);
+
+            bc.Show();
         }
 
         /// <summary>

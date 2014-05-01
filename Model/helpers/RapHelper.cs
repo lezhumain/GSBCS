@@ -142,17 +142,25 @@ namespace Model.helpers
 		        _db.SaveChanges();
 	        }
         }
-        
-        public getItemFromId(int id)
+        */
+        public List<RAPPORT_DE_VISITE> getListByRegion(string codeReg)
         {
-	        using(_db = new BDDContext())
+            using (_db = new BDD_SIO7Entities())
 	        {
-		        return 	(from profils in _db.Profil
-				        where profils.id == id
-				        select profils).FirstOnDefault(); 
+		        return 	(from rap in _db.RAPPORT_DE_VISITE
+                            .Include("COLLABORATEUR")
+                            .Include("PRATICIEN")
+                            .Include("COLLABORATEUR.VISITEUR")
+                            .Include("MOTIF")
+				        where rap.COLLABORATEUR.VISITEUR.code_region == codeReg
+				        select rap).ToList<RAPPORT_DE_VISITE>(); 
 	        }
         }
-        */
+
+        public List<RAPPORT_DE_VISITE> getListByRegion(REGION reg)
+        {
+            return getListByRegion(reg.code_region);
+        }
 
 
         // endregion

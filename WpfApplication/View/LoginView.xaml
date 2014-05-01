@@ -24,7 +24,10 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </PasswordBox>
-        <Button Height="23" Margin="91,0,89,45" x:Name="SignInButton" VerticalAlignment="Bottom" Command="{Binding SignInCommand}" FontFamily="Helvetica LT Std" BorderThickness="0" Content="Connexion">
+        <Button Height="23" Margin="91,0,89,45" x:Name="SignInButton" VerticalAlignment="Bottom" 
+                Command="{Binding SignInCommand}" 
+                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                FontFamily="Helvetica LT Std" BorderThickness="0" Content="Connexion">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#BF0489F7" Offset="0"/>

@@ -37,6 +37,7 @@ namespace WpfApplication.ViewModel
 
             SimpleIoc.Default.Register<MainWindowViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<BarChartViewModel>();
         }
 
         public MainWindowViewModel MainWindowVM
@@ -52,6 +53,12 @@ namespace WpfApplication.ViewModel
         public LoginViewModel LoginVM
         {
             get { return ServiceLocator.Current.GetInstance<LoginViewModel>(); }
+        }
+
+
+        public BarChartViewModel BarChartVM
+        {
+            get { return ServiceLocator.Current.GetInstance<BarChartViewModel>(); }
         }
     }
 }
