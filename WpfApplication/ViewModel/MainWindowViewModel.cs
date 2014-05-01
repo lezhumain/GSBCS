@@ -640,15 +640,12 @@ namespace WpfApplication.ViewModel
                     RapTrans SelectRapTrans = this.listeSel[0] as RapTrans;
                     ObjRapForm = RapHelper.Current.getById(SelectRapTrans.numero);
 
-                    //MessageBox.Show(ObjRapForm.MOTIF.libelle_motif);
                     break;
                 default:
                     break;
-                //MessageBox.Show( "Double clicked biatch\n" + lToS(this.listeSel) );
             }
 
-            MessageBox.Show( mbea.Source.GetType() + "\nDouble clicked biatch\n" + lToS(this.listeSel) );
-            //MessageBox.Show( ColHelper.GetOneByUsername(this.listeSel.));
+            //MessageBox.Show( mbea.Source.GetType() + "\nDouble clicked biatch\n" + lToS(this.listeSel) );
         }
         
         /// <summary>
