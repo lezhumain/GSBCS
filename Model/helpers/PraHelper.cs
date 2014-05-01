@@ -107,8 +107,10 @@ namespace Model.helpers
 	        using(_db = new BDD_SIO7Entities())
 	        {
 		        return 	(from prat in _db.PRATICIEN
+                        .Include("RAPPORT_DE_VISITE")
 				        where prat.matricule_praticien == id
-				        select prat).FirstOrDefault(); 
+				        select prat).FirstOrDefault();
+ 
 	        }
         }
 

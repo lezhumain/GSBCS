@@ -209,6 +209,23 @@ namespace WpfApplication.ViewModel
             set { NotifyPropertyChanged(ref objPratForm, value); }
         }
 
+
+        private List<RapTrans> listeRapToBind;
+        public List<RapTrans> ListeRapToBind
+        {
+            get { return listeRapToBind; }
+            set { NotifyPropertyChanged(ref listeRapToBind, value); }
+        }
+
+        //attribut du formPrat
+        private RAPPORT_DE_VISITE  objRapForm;
+        public RAPPORT_DE_VISITE ObjRapForm
+        {
+            get { return objRapForm; }
+            set { NotifyPropertyChanged(ref objRapForm, value); }
+        }
+
+
         private List<object> listeSel;
         public List<object> ListeSel
         {
@@ -492,24 +509,24 @@ namespace WpfApplication.ViewModel
             switch (currentList)
             { 
                 case "Collaborateurs":
-                    COLLABORATEUR SelectCol = new COLLABORATEUR();
-                    ColTrans SelectColTrans = (ColTrans)this.listeSel[0];
-                    SelectCol = ColHelper.Current.GetOneById(SelectColTrans.matricule);
-                    //Console.WriteLine(SelectCol.prenom_col);
                     break;
                 case "Praticiens":
                     if (this.listeSel[0] as PraTrans == null)
-                        MessageBox.Show("Null sisi");
+                        throw new System.ArgumentException("Parameter cannot be null", "original");
 
                     //Init attribut detail prat => objPratForm
                     PraTrans SelectPratTrans = this.listeSel[0] as PraTrans;
                     ObjPratForm = PraHelper.Current.getById(SelectPratTrans.matricule);
+                    ListeRapToBind = convertRap(ObjPratForm.RAPPORT_DE_VISITE.ToList());
 
-                    //List<RAPPORT_DE_VISITE> sisi = SelectPrat.RAPPORT_DE_VISITE.ToList();
-                    //MessageBox.Show(lToS(sisi));
-                    //Console.WriteLine(SelectPrat.nom_praticien);
                     break;
                 case "Rapports":
+                    if (this.listeSel[0] as PraTrans != null)
+                        throw new System.ArgumentException("Parameter cannot be null", "original");
+                    
+                    //Init attribut detail prat => objPratForm
+                    RapTrans SelectRapTrans = this.listeSel[0] as RapTrans;
+                    ObjRapForm = RapHelper.Current.getById(SelectRapTrans.numero);
                     break;
                 default:
                     break;

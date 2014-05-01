@@ -479,9 +479,12 @@
             </TabItem>
             <Label Content="Détails Praticien" Width="100" Margin="554,39,128,385"/>
         </TabControl>
+        <!-- Details praticien -->
         <StackPanel DataContext="{ Binding ObjPratForm }">
-            <TextBox x:Name="nom_prat" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding nom_praticien}" VerticalAlignment="Top" Width="120" Margin="474,82,0,0" RenderTransformOrigin="0.85,0.13"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="474,140,0,0" TextWrapping="Wrap" Text="{Binding prenom_praticien}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="400,100,0,0" TextWrapping="Wrap" Text="{Binding prenom_praticien}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="600,0,0,0" TextWrapping="Wrap" Text="{Binding nom_praticien}" VerticalAlignment="Top" Width="120"  />
         </StackPanel>
+        <DataGrid Margin="407,201,10,114" Height="246" ItemsSource="{Binding ListeRapToBind}"/>
+
     </Grid>
 </Window>
