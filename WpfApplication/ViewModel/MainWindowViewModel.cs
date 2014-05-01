@@ -527,6 +527,8 @@ namespace WpfApplication.ViewModel
                     //Init attribut detail prat => objPratForm
                     RapTrans SelectRapTrans = this.listeSel[0] as RapTrans;
                     ObjRapForm = RapHelper.Current.getById(SelectRapTrans.numero);
+
+                    //MessageBox.Show(ObjRapForm.MOTIF.libelle_motif);
                     break;
                 default:
                     break;

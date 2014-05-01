@@ -113,7 +113,12 @@ namespace Model.helpers
         {
             using (_db = new BDD_SIO7Entities())
             {
-                return (from rap in _db.RAPPORT_DE_VISITE
+                return (from rap in _db.RAPPORT_DE_VISITE 
+                        .Include("MOTIF")
+                        .Include("COLLABORATEUR")
+                        .Include("PRATICIEN")
+                        .Include("PRESENTE")
+                        .Include("OFFRE")
                         where rap.num_rapport == id
                         select rap).FirstOrDefault();
 
