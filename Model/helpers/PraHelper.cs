@@ -108,6 +108,7 @@ namespace Model.helpers
 	        {
 		        return 	(from prat in _db.PRATICIEN
                         .Include("RAPPORT_DE_VISITE")
+                        .Include("RAPPORT_DE_VISITE.COLLABORATEUR")
 				        where prat.matricule_praticien == id
 				        select prat).FirstOrDefault();
  

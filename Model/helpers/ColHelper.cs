@@ -71,6 +71,7 @@ namespace Model.helpers
                                 .Include("ETRE_RESPONSABLE.SECTEUR.REGION")
                                 .Include("GERE.REGION")
                                 .Include("GERE.REGION.VISITEUR")
+                                .Include("RAPPORT_DE_VISITE")
                             where c.nom_col == nom &&
                                   c.prenom_col == prenom
                             select c).FirstOrDefault();
@@ -83,7 +84,7 @@ namespace Model.helpers
         {
             return (from c in _db.COLLABORATEUR
                         .Include("RAPPORT_DE_VISITE")
-                    orderby c.RAPPORT_DE_VISITE.Count
+                    orderby c.RAPPORT_DE_VISITE.Count descending
                     select c).Take(5).ToList<COLLABORATEUR>();
             }
         }

@@ -47,7 +47,9 @@ namespace WpfApplication.ViewModel
             Context = new List<KeyValuePair<string, int>>();
 
             List<COLLABORATEUR> lc = ColHelper.Current.GetListForChart();
-            showColumnChart( lc );
+            showColumnChart(lc);
+            //List<VISITEUR> lc = VisHelper.Current.GetListForChart();
+            //showColumnChart( (from c in lc select c.COLLABORATEUR).ToList<COLLABORATEUR>() );
         }
 
         /// 
@@ -94,9 +96,14 @@ namespace WpfApplication.ViewModel
         /// 
         private void showColumnChart(List<COLLABORATEUR> collabs)
         {
+            /*COLLABORATEUR col = ColHelper.Current.GetOneByUsername("Louis.Villechalane");
+            int nb = col.RAPPORT_DE_VISITE.Count();
+            */
+
+            
             List<string> keys = new List<string>();
             List<int> values = new List<int>();
-
+            
             foreach (COLLABORATEUR cols in collabs)
             {
                 keys.Add(cols.nom_col);
@@ -104,15 +111,12 @@ namespace WpfApplication.ViewModel
             }
 
             /*
-            values = new List<int>(new int[]
-	                {
-	                    20,
-	                    30,     // River 2
-	                    4,    // River 3
-	                    100,
-	                    15
-	                });
+            values = new List<int>( new int[]{20, 30, 4, 100, 15} );
              */
+            /*
+            keys.Add(col.nom_col);
+            values.Add(nb);
+            */
             showColumnChart(keys, values);
         }
 

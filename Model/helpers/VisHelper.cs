@@ -146,6 +146,18 @@ namespace Model.helpers
         }
         */
 
+        public List<VISITEUR> GetListForChart()
+        {
+            using (_db = new BDD_SIO7Entities())
+            {
+                return (from c in _db.VISITEUR
+                            .Include("COLLABORATEUR")
+                            .Include("COLLABORATEUR.RAPPORT_DE_VISITE")
+                        orderby c.COLLABORATEUR.RAPPORT_DE_VISITE.Count()
+                        select c).Take(5).ToList<VISITEUR>();
+            }
+        }
+
         public List<VISITEUR> getListByRegion(string codeReg)
         {
             using (_db = new BDD_SIO7Entities())
