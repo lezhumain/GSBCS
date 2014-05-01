@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using GalaSoft.MvvmLight.Command;
+using Model;
 using Model.helpers;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace WpfApplication.ViewModel
 {
@@ -16,6 +19,18 @@ namespace WpfApplication.ViewModel
         {
             get { return context; }
             set { NotifyPropertyChanged(ref context, value); }
+        }
+
+        private RelayCommand<Window> quitCommand;
+        public ICommand QuitCommand
+        {
+            get
+            {
+                if (quitCommand == null)
+                    quitCommand = new RelayCommand<Window>(Quit);
+
+                return quitCommand;
+            }
         }
 
         private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
@@ -88,7 +103,22 @@ namespace WpfApplication.ViewModel
                 values.Add(cols.RAPPORT_DE_VISITE.Count());
             }
 
+            /*
+            values = new List<int>(new int[]
+	                {
+	                    20,
+	                    30,     // River 2
+	                    4,    // River 3
+	                    100,
+	                    15
+	                });
+             */
             showColumnChart(keys, values);
+        }
+
+        private void Quit(Window win)
+        {
+            win.Close();
         }
     }
 }

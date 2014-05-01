@@ -351,11 +351,11 @@
     </Window.Resources>
     
     <Grid>
-        <StackPanel Width="792"  Background="LightBlue" Orientation="Horizontal" Height="35" 
+        <DockPanel Width="792"  Background="LightBlue" Height="35" 
                     VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Label Content="Filtres :" Margin="20,5,0,0" HorizontalAlignment="Left" Width="50"/>
-                <TextBox x:Name="filtreVal" Width="100" Margin="10,5,10,5">
+                <Label Content="Filtres :" Margin="20,9,10,6" HorizontalAlignment="Left" Width="50"/>
+                <TextBox x:Name="filtreVal" Width="100" Margin="5,6,5,6">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="TextChanged" >
                             <cmd:EventToCommand Command="{Binding TextChangedCommand}"
@@ -368,7 +368,7 @@
                     </i:Interaction.Triggers>
                 </TextBox>
                 <ComboBox x:Name="filtreType" ItemsSource="{Binding ListeFiltres, Mode=OneWay}" 
-            		Width="75" Height="24" Margin="10,5,10,5" >
+            		Width="75" Height="24" Margin="5,6,5,6" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged" >
                             <cmd:EventToCommand Command="{Binding ComboSelChangedCommand}"
@@ -376,13 +376,13 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
-                <Button x:Name="filtreBtn" Content="Filtrer" Width="75" Margin="40,6,10,6" Command="{Binding FiltreCommand}" Foreground="#FF042271"/>
+                <Button x:Name="filtreBtn" Content="Filtrer" Width="75" Margin="20,6,5,6" Command="{Binding FiltreCommand}" Foreground="#FF042271"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Statistiques" Width="75" Height="23" Margin="0,6" Command="{Binding StatCommand}"/>
-                <Button Content="Excel" Width="75" Height="23" Command="{Binding ExcelCommand}" Margin="0,6"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
+                <Button Content="Statistiques" Width="75" Height="23" Margin="5,6" Command="{Binding StatCommand}"/>
+                <Button Content="Excel" Width="75" Height="23" Command="{Binding ExcelCommand}"/>
             </StackPanel>
-        </StackPanel>
+        </DockPanel>
         <!--        <DataGrid x:Name="ContentPanel" Margin="15,160,0,70" Width="auto" ItemsSource="{Binding ListeCol}"
                   IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Left">
 -->
