@@ -474,6 +474,7 @@
                     </i:Interaction.Triggers>
                 </DataGrid>
             </TabItem>
+            
 
 
         </TabControl>
@@ -484,12 +485,19 @@
             Donc avec MVVM, tu bind l'attribut Visibility du StackPanel a un attribut de type Visibility du ViewModel ;)
         -->
         <!-- Pour lier un champ a une valeur de l'objet regarde l'attribut text -->
-        <StackPanel DataContext="{ Binding ObjPratForm }" Orientation="Horizontal">
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="407,110,0,0" TextWrapping="Wrap" Text="{Binding prenom_praticien}" VerticalAlignment="Top" Width="120"/>
-            <TextBox HorizontalAlignment="Right" Height="23" Margin="70,110,0,0" TextWrapping="Wrap" Text="{Binding nom_praticien}" VerticalAlignment="Top" Width="120"  />
-         </StackPanel>
-        
-         <DockPanel Height="30" Margin="10,0,10,10" VerticalAlignment="Bottom">
+        <StackPanel DataContext="{ Binding ObjPratForm }" Orientation="Horizontal" Visibility="Collapsed">
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="407,80,0,0" TextWrapping="Wrap" Text="{Binding prenom_praticien}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Right" Height="23" Margin="70,80,0,0" TextWrapping="Wrap" Text="{Binding nom_praticien}" VerticalAlignment="Top" Width="120"  />
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,120,0,0" TextWrapping="Wrap" Text="{Binding adresse_praticien}" VerticalAlignment="Top" Width="240"/>
+            <TextBox HorizontalAlignment="Right" Height="23" Margin="-50,120,0,0" TextWrapping="Wrap" Text="{Binding cp_praticien}" VerticalAlignment="Top" Width="50"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,160,0,0" TextWrapping="Wrap" Text="{Binding ville_praticien}" VerticalAlignment="Top" Width="160"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,200,0,0" TextWrapping="Wrap" Text="{Binding tel_praticien}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Right" Height="23" Margin="-120,200,0,0" TextWrapping="Wrap" Text="{Binding prenom_praticien}" VerticalAlignment="Top" Width="77"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,240,0,0" TextWrapping="Wrap" Text="{Binding coeffnotoriete_praticien}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Right" Height="23" Margin="-120,240,0,0" TextWrapping="Wrap" Text="{Binding praticien.codetype.typelieu}" VerticalAlignment="Top" Width="120"/>
+        </StackPanel>
+
+        <DockPanel Height="30" Margin="10,0,10,10" VerticalAlignment="Bottom">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <ComboBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" ItemsSource="{Binding ListeRegions}" Visibility="{Binding CbVisible}">
                     <i:Interaction.Triggers>
@@ -500,7 +508,7 @@
                     </i:Interaction.Triggers>
                 </ComboBox>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Refresh" Width="90" Command="{Binding TestCommand}" />
                 <Button Content="Quitter" Width="90" Command="{Binding ExitCommand}"/>
             </StackPanel>
@@ -508,13 +516,30 @@
 
         <!-- Pour lier un champ a une valeur de l'objet regarde l'attribut text -->
         <StackPanel DataContext="{ Binding ObjRapForm }" Orientation="Horizontal">
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="407,158,0,0" TextWrapping="Wrap" Text="{Binding num_rapport}" VerticalAlignment="Top" Width="120"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="70,158,0,0" TextWrapping="Wrap" Text="{Binding MOTIF.libelle_motif}" VerticalAlignment="Top" Width="120"  />
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="407,110,0,0" TextWrapping="Wrap" Text="{Binding date_rapport}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="70,110,0,0" TextWrapping="Wrap" Text="{Binding date_visite}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,150,0,0" TextWrapping="Wrap" Text="{Binding MOTIF.libelle_motif}" VerticalAlignment="Top" Width="120"  />
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="-120,150,0,0" TextWrapping="Wrap" Text="{Binding PRATICIEN.nom_praticien}" VerticalAlignment="Top" Width="120"  />
+            <TextBox HorizontalAlignment="Left" Height="80" Margin="-310,-90,0,0" TextWrapping="Wrap" Text="{Binding bilan_visite}" Width="310"/>
         </StackPanel>
 
         <!-- DatafGrid sera affiché avec la liste des rapport relié au praticien et au visiteur -->
-        <DataGrid Margin="407,201,10,114" Height="246" ItemsSource="{Binding ListeRapToBind}"/>
-        <Label Content="Prénom :" Width="100" Margin="407,88,285,451"/>
-        <Label Content="Nom :" Width="100" Margin="600,88,92,451"/>
+        <DataGrid Margin="407,291,10,52" ItemsSource="{Binding ListeRapToBind}"/>
+        <Grid Visibility="Hidden">
+            <Label Content="Prénom :" Margin="354,82,384,457"/>
+            <Label Content="Nom :" Margin="559,82,198,457"/>
+            <Label Content="Adresse :&#xD;&#xA;" Margin="354,121,384,418"/>
+            <Label Content="Ville :&#xA;" Margin="354,160,384,379"/>
+            <Label Content="Tel :&#xA;" Margin="354,201,384,338"/>
+            <Label Content="Titulaire ?&#xA;" Margin="585,201,153,338"/>
+            <Label Content="Coef&#xD;&#xA;Notoriete&#xA;" Margin="354,227,384,299"/>
+        </Grid>
+        <Grid>
+            <Label Content="Date rapport" Margin="410,87,306,452"/>
+            <Label Content="Date visite" Margin="598,87,108,452"/>
+            <Label Content="Motif" Margin="410,132,296,407"/>
+            <Label Content="Praticien" Margin="598,132,108,407"/>
+            <Label Content="Bilan" Margin="410,174,296,365"/>
+        </Grid>
     </Grid>
 </Window>
