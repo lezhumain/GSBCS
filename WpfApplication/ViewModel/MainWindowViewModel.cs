@@ -67,6 +67,35 @@ namespace WpfApplication.ViewModel
             set { NotifyPropertyChanged(ref sessionCol, value); }
         }
 
+        private string visibleFormPrat;
+        public string VisibleFormPrat
+        {
+            get { return visibleFormPrat; }
+            set { NotifyPropertyChanged(ref visibleFormPrat, value); }
+        }
+
+        private string visibleFormRap;
+        public string VisibleFormRap
+        {
+            get { return visibleFormRap; }
+            set { NotifyPropertyChanged(ref visibleFormRap, value); }
+        }
+
+        private string visibleFormVis;
+        public string VisibleFormVis
+        {
+            get { return visibleFormVis; }
+            set { NotifyPropertyChanged(ref visibleFormVis, value); }
+        }
+
+        private string visibleDataGridRP;
+        public string VisibleDataGridRP
+        {
+            get { return visibleDataGridRP; }
+            set { NotifyPropertyChanged(ref visibleDataGridRP, value); }
+        }
+
+
         private readonly IServiceClient serviceClient;
         private string currentList;
 
@@ -368,7 +397,10 @@ namespace WpfApplication.ViewModel
             chargListes( ColHelper.Current.GetOneByUsername("Prenomrds.Nomrds") );
 
             //Details prat
-            ObjPratForm = new PRATICIEN();
+            VisibleFormPrat     =   "Hidden";
+            VisibleFormRap      =   "Hidden";
+            VisibleFormVis      =   "Hidden";
+            VisibleDataGridRP   =   "Hidden";
         }
 
         private void chargListes(COLLABORATEUR col)
@@ -621,6 +653,12 @@ namespace WpfApplication.ViewModel
                     ColTrans SelectColTrans = (ColTrans)this.listeSel[0];
                     SelectCol = ColHelper.Current.GetOneById(SelectColTrans.matricule);
                     //Console.WriteLine(SelectCol.prenom_col);
+
+                    VisibleFormPrat     =   "Hidden";
+                    VisibleFormRap      =   "Hidden";
+                    VisibleFormVis      =   "Visible";
+                    VisibleDataGridRP   =   "Visible";
+
                     break;
                 case "Praticiens":
                     if (this.listeSel[0] as PraTrans == null)
@@ -631,6 +669,10 @@ namespace WpfApplication.ViewModel
                     ObjPratForm = PraHelper.Current.getById(SelectPratTrans.matricule);
 
                     ListeRapToBind = convertRap(ObjPratForm.RAPPORT_DE_VISITE.ToList());
+                    VisibleFormPrat     =   "Visible";
+                    VisibleFormRap      =   "Hidden";
+                    VisibleFormVis      =   "Hidden";
+                    VisibleDataGridRP   =   "Visible";
                     break;
                 case "Rapports":
                     if (this.listeSel[0] as PraTrans != null)
@@ -640,6 +682,10 @@ namespace WpfApplication.ViewModel
                     RapTrans SelectRapTrans = this.listeSel[0] as RapTrans;
                     ObjRapForm = RapHelper.Current.getById(SelectRapTrans.numero);
 
+                    VisibleFormPrat     =   "Hidden";
+                    VisibleFormRap      =   "Visible";
+                    VisibleFormVis      =   "Hidden";
+                    VisibleDataGridRP   =   "Hidden";
                     break;
                 default:
                     break;

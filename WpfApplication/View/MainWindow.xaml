@@ -7,6 +7,7 @@
         DataContext="{Binding MainWindowVM, Source={StaticResource Locator}}"
         Title="MainWindow" Height="591" Width="800">
     <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="visibilityConverter" />
         <!-- Datagrid style from http://www.c-sharpcorner.com/uploadfile/nipuntomar/wpf-datagrid-style/ -->
         <!--Style and template for the resize control on the DataGridColumnHeader.-->
         <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
@@ -484,17 +485,17 @@
             Pour cacher tu click sur stackpanel et dans les propriété a droite ta un attribut visibily.
             Donc avec MVVM, tu bind l'attribut Visibility du StackPanel a un attribut de type Visibility du ViewModel ;)
         -->
-        <!-- Pour lier un champ a une valeur de l'objet regarde l'attribut text -->
-        <StackPanel DataContext="{ Binding ObjPratForm }" Orientation="Horizontal" Visibility="Collapsed">
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="407,80,0,0" TextWrapping="Wrap" Text="{Binding prenom_praticien}" VerticalAlignment="Top" Width="120"/>
-            <TextBox HorizontalAlignment="Right" Height="23" Margin="70,80,0,0" TextWrapping="Wrap" Text="{Binding nom_praticien}" VerticalAlignment="Top" Width="120"  />
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,120,0,0" TextWrapping="Wrap" Text="{Binding adresse_praticien}" VerticalAlignment="Top" Width="240"/>
-            <TextBox HorizontalAlignment="Right" Height="23" Margin="-50,120,0,0" TextWrapping="Wrap" Text="{Binding cp_praticien}" VerticalAlignment="Top" Width="50"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,160,0,0" TextWrapping="Wrap" Text="{Binding ville_praticien}" VerticalAlignment="Top" Width="160"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,200,0,0" TextWrapping="Wrap" Text="{Binding tel_praticien}" VerticalAlignment="Top" Width="120"/>
-            <TextBox HorizontalAlignment="Right" Height="23" Margin="-120,200,0,0" TextWrapping="Wrap" Text="{Binding prenom_praticien}" VerticalAlignment="Top" Width="77"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,240,0,0" TextWrapping="Wrap" Text="{Binding coeffnotoriete_praticien}" VerticalAlignment="Top" Width="120"/>
-            <TextBox HorizontalAlignment="Right" Height="23" Margin="-120,240,0,0" TextWrapping="Wrap" Text="{Binding praticien.codetype.typelieu}" VerticalAlignment="Top" Width="120"/>
+        <!-- Pour lier un champ a une valeur de l'objet regarde l'attribut text ObjPratForm -->
+        <StackPanel  Orientation="Horizontal" Visibility="{Binding VisibleFormPrat}">
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="407,80,0,0" TextWrapping="Wrap" Text="{Binding ObjPratForm.prenom_praticien}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Right" Height="23" Margin="70,80,0,0" TextWrapping="Wrap" Text="{Binding ObjPratForm.nom_praticien}" VerticalAlignment="Top" Width="120"  />
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,120,0,0" TextWrapping="Wrap" Text="{Binding ObjPratForm.adresse_praticien}" VerticalAlignment="Top" Width="240"/>
+            <TextBox HorizontalAlignment="Right" Height="23" Margin="-50,120,0,0" TextWrapping="Wrap" Text="{Binding ObjPratForm.cp_praticien}" VerticalAlignment="Top" Width="50"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,160,0,0" TextWrapping="Wrap" Text="{Binding ObjPratForm.ville_praticien}" VerticalAlignment="Top" Width="160"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,200,0,0" TextWrapping="Wrap" Text="{Binding ObjPratForm.tel_praticien}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Right" Height="23" Margin="-120,200,0,0" TextWrapping="Wrap" Text="{Binding ObjPratForm.prenom_praticien}" VerticalAlignment="Top" Width="77"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,240,0,0" TextWrapping="Wrap" Text="{Binding ObjPratForm.coeffnotoriete_praticien}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Right" Height="23" Margin="-120,240,0,0" TextWrapping="Wrap" Text="{Binding ObjPratForm.praticien.codetype.typelieu}" VerticalAlignment="Top" Width="120"/>
         </StackPanel>
 
         <DockPanel Height="30" Margin="10,0,10,10" VerticalAlignment="Bottom">
@@ -515,17 +516,17 @@
         </DockPanel>
 
         <!-- Pour lier un champ a une valeur de l'objet regarde l'attribut text -->
-        <StackPanel DataContext="{ Binding ObjRapForm }" Orientation="Horizontal">
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="407,110,0,0" TextWrapping="Wrap" Text="{Binding date_rapport}" VerticalAlignment="Top" Width="120"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="70,110,0,0" TextWrapping="Wrap" Text="{Binding date_visite}" VerticalAlignment="Top" Width="120"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,150,0,0" TextWrapping="Wrap" Text="{Binding MOTIF.libelle_motif}" VerticalAlignment="Top" Width="120"  />
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="-120,150,0,0" TextWrapping="Wrap" Text="{Binding PRATICIEN.nom_praticien}" VerticalAlignment="Top" Width="120"  />
-            <TextBox HorizontalAlignment="Left" Height="80" Margin="-310,-90,0,0" TextWrapping="Wrap" Text="{Binding bilan_visite}" Width="310"/>
+        <StackPanel Orientation="Horizontal"  Visibility="{Binding VisibleFormRap}">
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="407,110,0,0" TextWrapping="Wrap" Text="{Binding ObjRapForm.date_rapport}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="70,110,0,0" TextWrapping="Wrap" Text="{Binding ObjRapForm.date_visite}" VerticalAlignment="Top" Width="120"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="-310,150,0,0" TextWrapping="Wrap" Text="{Binding ObjRapForm.MOTIF.libelle_motif}" VerticalAlignment="Top" Width="120"  />
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="-120,150,0,0" TextWrapping="Wrap" Text="{Binding ObjRapForm.PRATICIEN.nom_praticien}" VerticalAlignment="Top" Width="120"  />
+            <TextBox HorizontalAlignment="Left" Height="80" Margin="-310,-90,0,0" TextWrapping="Wrap" Text="{Binding ObjRapForm.bilan_visite}" Width="310"/>
         </StackPanel>
 
         <!-- DatafGrid sera affiché avec la liste des rapport relié au praticien et au visiteur -->
-        <DataGrid Margin="407,291,10,52" ItemsSource="{Binding ListeRapToBind}"/>
-        <Grid Visibility="Hidden">
+        <DataGrid Margin="407,291,10,52" ItemsSource="{Binding ListeRapToBind}" Visibility="{Binding VisibleDataGridRP}"/>
+        <Grid Visibility="{Binding VisibleFormPrat}">
             <Label Content="Prénom :" Margin="354,82,384,457"/>
             <Label Content="Nom :" Margin="559,82,198,457"/>
             <Label Content="Adresse :&#xD;&#xA;" Margin="354,121,384,418"/>
@@ -534,7 +535,7 @@
             <Label Content="Titulaire ?&#xA;" Margin="585,201,153,338"/>
             <Label Content="Coef&#xD;&#xA;Notoriete&#xA;" Margin="354,227,384,299"/>
         </Grid>
-        <Grid>
+        <Grid Visibility="{Binding VisibleFormRap}" IsEnabled="False">
             <Label Content="Date rapport" Margin="410,87,306,452"/>
             <Label Content="Date visite" Margin="598,87,108,452"/>
             <Label Content="Motif" Margin="410,132,296,407"/>
@@ -542,4 +543,6 @@
             <Label Content="Bilan" Margin="410,174,296,365"/>
         </Grid>
     </Grid>
+    
+    
 </Window>
