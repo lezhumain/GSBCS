@@ -364,8 +364,8 @@ namespace WpfApplication.ViewModel
             Sfiltre = new FiltreStruct();
             currentList = "Visiteurs";
 
-            //Messenger.Default.Register<COLLABORATEUR>(this, chargListes);
-            chargListes( ColHelper.Current.GetOneByUsername("Prenomrds.Nomrds") );
+            Messenger.Default.Register<COLLABORATEUR>(this, chargListes);
+            //chargListes( ColHelper.Current.GetOneByUsername("Prenomrds.Nomrds") );
 
             //Details prat
             ObjPratForm = new PRATICIEN();

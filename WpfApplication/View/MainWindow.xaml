@@ -513,7 +513,7 @@
         </StackPanel>
 
         <!-- DatafGrid sera affiché avec la liste des rapport relié au praticien et au visiteur -->
-        <DataGrid Margin="407,201,10,114" Height="246" ItemsSource="{Binding ListeRapToBind}"/>
+        <DataGrid Margin="0,201,10,0" MaxHeight="246" Height="auto" ItemsSource="{Binding ListeRapToBind}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="375"/>
         <Label Content="Prénom :" Width="100" Margin="407,88,285,451"/>
         <Label Content="Nom :" Width="100" Margin="600,88,92,451"/>
     </Grid>
