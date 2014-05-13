@@ -94,6 +94,7 @@ namespace Model.helpers
             using (_db = new BDD_SIO7Entities())
             {
                 return (from c in _db.COLLABORATEUR
+                            .Include("RAPPORT_DE_VISITE")
                         where c.matricule_col == id
                         select c).FirstOrDefault();
             }

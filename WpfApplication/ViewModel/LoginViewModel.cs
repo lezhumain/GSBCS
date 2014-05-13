@@ -4,6 +4,7 @@ using Model;
 using Model.helpers;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -143,7 +144,16 @@ namespace WpfApplication.ViewModel
                     msg = "Entrez votre nom d'utilisateur (\"Prenom.Nom\")";
                 else
                 {
-                    COLLABORATEUR col = ColHelper.Current.GetOneByUsername(sInfos.Username);
+                    UIServices.SetBusyState();
+                    COLLABORATEUR col = null;
+                    try
+                    {
+                        col = ColHelper.Current.GetOneByUsername(sInfos.Username);
+                    }
+                    catch (EntityException e)
+                    {
+                        MessageBox.Show("Erreur:\n" + e.Message);
+                    }
 
                     if (col == null) // inexistant
                         msg = "Aucun collabo";

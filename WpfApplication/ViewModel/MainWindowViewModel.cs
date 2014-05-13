@@ -279,6 +279,14 @@ namespace WpfApplication.ViewModel
             set { NotifyPropertyChanged(ref objPratForm, value); }
         }
 
+        //attribut du colPrat
+        private COLLABORATEUR objColForm;
+        public COLLABORATEUR ObjColForm
+        {
+            get { return objColForm; }
+            set { NotifyPropertyChanged(ref objColForm, value); }
+        }
+
         private List<RapTrans> listeRapToBind;
         public List<RapTrans> ListeRapToBind
         {
@@ -430,7 +438,7 @@ namespace WpfApplication.ViewModel
             }
 
             //Details prat
-            ObjPratForm = new PRATICIEN();
+            //ObjPratForm = new PRATICIEN();
 
             // enfin on charge tous les praticiens
             ListePrat = convertPrat(PraHelper.Current.GetList());
@@ -472,13 +480,14 @@ namespace WpfApplication.ViewModel
         /// </summary>
         private void RefreshLists()
         {
+            UIServices.SetBusyState();
             ListeCol.Clear();
             ListeRap.Clear();
             ListePrat.Clear();
 
             chargListes(SessionCol);
-
-            MessageBox.Show("Reloaded");
+            
+            //MessageBox.Show("Reloaded");
         }
 
         /// <summary>
@@ -649,6 +658,21 @@ namespace WpfApplication.ViewModel
             switch (currentList)
             {
                 case "Visiteurs":
+                    UIServices.SetBusyState();
+                    if (this.listeSel[0] as ColTrans == null)
+                        throw new System.ArgumentException("Erreur l663 : Parameter cannot be null", "original");
+
+                    //Init attribut detail col => objColForm
+                    ColTrans SelectColTrans = this.listeSel[0] as ColTrans;
+                    ObjColForm = ColHelper.Current.GetOneById(SelectColTrans.matricule);
+
+                    ListeRapToBind = convertRap(ObjColForm.RAPPORT_DE_VISITE.ToList());
+                    VisibleFormPrat     =   "Hidden";
+                    VisibleFormRap      =   "Hidden";
+                    VisibleFormVis      =   "Visible";
+                    VisibleDataGridRP   =   "Visible";
+
+                    /*
                     COLLABORATEUR SelectCol = new COLLABORATEUR();
                     ColTrans SelectColTrans = (ColTrans)this.listeSel[0];
                     SelectCol = ColHelper.Current.GetOneById(SelectColTrans.matricule);
@@ -658,9 +682,11 @@ namespace WpfApplication.ViewModel
                     VisibleFormRap      =   "Hidden";
                     VisibleFormVis      =   "Visible";
                     VisibleDataGridRP   =   "Visible";
+                     */
 
                     break;
                 case "Praticiens":
+                    UIServices.SetBusyState();
                     if (this.listeSel[0] as PraTrans == null)
                         throw new System.ArgumentException("Parameter cannot be null", "original");
 
@@ -675,6 +701,7 @@ namespace WpfApplication.ViewModel
                     VisibleDataGridRP   =   "Visible";
                     break;
                 case "Rapports":
+                    UIServices.SetBusyState();
                     if (this.listeSel[0] as PraTrans != null)
                         throw new System.ArgumentException("Parameter cannot be null", "original");
                     
@@ -705,8 +732,8 @@ namespace WpfApplication.ViewModel
 
             if (sfiltre.Valeur == null || sfiltre.Valeur.Count() == 0)
                 return;
-                
 
+            UIServices.SetBusyState();
             if (currentList == "Visiteurs")
             {
                 switch (this.sfiltre.Champ.ToLower()) // pour les collabo
@@ -725,15 +752,16 @@ namespace WpfApplication.ViewModel
                             msg = "Le matricule doit être un nombre";
                         break;
                     case "nom":
-                        List<ColTrans> ll = ListeCol.Where(col => col.nom == sfiltre.Valeur).ToList();
+                        List<ColTrans> ll = ListeCol.Where(col => col.nom.ToLower().Contains( sfiltre.Valeur.ToLower() ) ).ToList();
                         if (ll.Count != 0)
                         {
                             ListeCol = ll;
                             msg = "Nom, fait.\n" + lToS(ListeCol);
                         }
+
                         break;
                     case "prenom":
-                        List<ColTrans> lll = ListeCol.Where(col => col.prenom == sfiltre.Valeur).ToList();
+                        List<ColTrans> lll = ListeCol.Where( col => col.prenom.ToLower().Contains(sfiltre.Valeur.ToLower()) ).ToList();
                         if (lll.Count != 0)
                         {
                             ListeCol = lll;
@@ -763,7 +791,7 @@ namespace WpfApplication.ViewModel
                             msg = "Le numéro doit être un nombre";
                         break;
                     case "praticien":
-                        List<RapTrans> ll = ListeRap.Where(rap => rap.praticien == sfiltre.Valeur).ToList();
+                        List<RapTrans> ll = ListeRap.Where( rap => rap.praticien.ToLower().Contains(sfiltre.Valeur.ToLower()) ).ToList();
                         if (ll.Count != 0)
                         {
                             ListeRap = ll;
@@ -801,7 +829,7 @@ namespace WpfApplication.ViewModel
                             msg = "Le matricule doit être un nombre";
                         break;
                     case "nom":
-                        List<PraTrans> ll = ListePrat.Where(pra => pra.nom == sfiltre.Valeur).ToList();
+                        List<PraTrans> ll = ListePrat.Where( pra => pra.nom.ToLower().Contains(sfiltre.Valeur.ToLower()) ).ToList();
                         if (ll.Count != 0)
                         {
                             ListePrat = ll;
@@ -809,7 +837,7 @@ namespace WpfApplication.ViewModel
                         }
                         break;
                     case "prenom":
-                        List<PraTrans> lll = ListePrat.Where(pra => pra.prenom == sfiltre.Valeur).ToList();
+                        List<PraTrans> lll = ListePrat.Where( pra => pra.prenom.ToLower().Contains(sfiltre.Valeur.ToLower()) ).ToList();
                         if (lll.Count != 0)
                         {
                             ListePrat = lll;
